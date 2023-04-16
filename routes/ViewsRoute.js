@@ -1,7 +1,6 @@
 import express from "express";
 import {adminOnly, verifyUser,requireLogin,AtchUser} from "../middleware/AuthUser.js";
 import {AdminView, UserView,RegisterView,LoginView,ErrorView,prueba,EquipmentView} from "../controllers/Views.js";
-import ejs from  "ejs";
 const router = express.Router();
 router.get('/admin',verifyUser,adminOnly,AdminView);
 router.get('/user',verifyUser,UserView);

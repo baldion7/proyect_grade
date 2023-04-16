@@ -11,9 +11,10 @@ var totapa;
 var array_users_update = [];
 var indextemp;
 var input_new_users_email;
-
+var cargar=1;
 $(document).ready(function() {
   consult_extra_new()
+  setTimeout(function() {
   var intervalinicial = setInterval(function() {
     chageuser();
     if (arrar_temp_users.length > 0) {
@@ -45,7 +46,7 @@ $(document).ready(function() {
 
     }
   }, 100);
-
+}, 1000);
   $("#cogs").click(function() {
     if (cD == 0) {
       cD++;
@@ -436,21 +437,9 @@ $(document).ready(function() {
     });
   })
 
-
-
-  $("#btn_menu_Equipment").clik(function () {
-    $.ajax({
-      url: "/equipment",
-      type: "get",
-      success: function(response) {
-        arrar_temp_users = response;
-      },
-      error: function(xhr, status, error) {
-
-      }
-    });
+  $("#btn_menu_Equipment").click(function () {
+    window.location.replace('/equipment')
   })
-
 });
 
 function template_flags(country_flags) {
@@ -547,6 +536,9 @@ function chageuser() {
   $.ajax({
     url: "/api/users",
     type: "get",
+    beforeSend: function(xhr) {
+      carga()
+    },
     success: function(response) {
       arrar_temp_users = response;
     },
@@ -665,6 +657,7 @@ function consult_extra_update() {
 
 
 }
+
 function consult_extra_new() {
   var imprimi
   var roles=[];
@@ -703,4 +696,27 @@ function consult_extra_new() {
     error: function(xhr, status, error) {
     }
   });
+}
+
+function carga() {
+  if (cargar==1){
+    console.log("hola")
+    $("#cards_content_users").html(`<div style="display:flex;justify-content:center;align-items:center">
+                            <div style="height:100%;width:auto; display:flex;">
+                                <div class="sk-cube-grid">
+                                    <div class="sk-cube sk-cube1"></div>
+                                    <div class="sk-cube sk-cube2"></div>
+                                    <div class="sk-cube sk-cube3"></div>
+                                    <div class="sk-cube sk-cube4"></div>
+                                    <div class="sk-cube sk-cube5"></div>
+                                    <div class="sk-cube sk-cube6"></div>
+                                    <div class="sk-cube sk-cube7"></div>
+                                    <div class="sk-cube sk-cube8"></div>
+                                    <div class="sk-cube sk-cube9"></div>
+                                </div>
+                            </div>
+                        </div>`)
+    cargar=12;
+  }
+
 }

@@ -119,7 +119,7 @@ export const GetEquimentById =async(req, res)=>{
         let response;
             response = await Equipment.findOne({
                 where:{
-                    Id: product.id
+                    Id: product.Id
                 },
                 include: [
                     {

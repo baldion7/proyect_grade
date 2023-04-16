@@ -36,6 +36,7 @@ export const GetUserByid = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 };
+
 export const GetUserByemail = async (req, res) => {
     const {email} = req.body;
     try {
@@ -50,6 +51,7 @@ export const GetUserByemail = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 };
+
 export const Postsearchuser = async (req, res) => {
     const {search} = req.body;
     try {
@@ -63,6 +65,7 @@ export const Postsearchuser = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 };
+
 export const CreateUser = async (req, res) => {
     const {name, lastname, document_type,ducument,country, phone_number,email,charge,campus, rol,password} = req.body;
     const hashPassword = await argon2.hash(password);
@@ -86,6 +89,7 @@ export const CreateUser = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 };
+
 export const UpdateUser = async (req, res) => {
 
     const user = await User.findOne({
@@ -116,6 +120,7 @@ export const UpdateUser = async (req, res) => {
         res.status(500).json({msg: error.message + "none"});
     }
 };
+
 export const DeleteUser = async (req, res) => {
     const user = await User.findOne({
         where: {
@@ -134,6 +139,7 @@ export const DeleteUser = async (req, res) => {
         res.status(400).json({msg: error.message});
     }
 };
+
 export const ResetPasswordToken = (req, res) => {
     const {token} = req.params;
 
@@ -145,6 +151,7 @@ export const ResetPasswordToken = (req, res) => {
         res.render('pages/reset-password', {token});
     });
 }
+
 export const ResetPassword=async (req, res) => {
     const { token, password, passwordConfirm } = req.body;
 

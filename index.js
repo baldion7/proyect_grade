@@ -9,6 +9,7 @@ import AuthRoute from "./routes/AuthRoute.js";
 import BuildingRoute from "./routes/BuildingRoute.js";
 import CampusRoute from "./routes/CampusRoute.js";
 import ClassificationRoute from "./routes/ClassificationRoute.js";
+import AllowsClassifications from "./routes/AllowsClassificationsRoute.js";
 import EmailsRoute from "./routes/EmailsRoute.js";
 import EquipmentRoute from "./routes/EquipmentRoute.js";
 import FloorRoute from "./routes/FloorRoute.js";
@@ -18,7 +19,7 @@ import SpaceRoute from "./routes/SpaceRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 import ViewsRoute from "./routes/ViewsRoute.js";
 import bodyParser from 'body-parser';
-import ServicesRoute from "./routes/EmailsRoute.js";
+
 
 
 dotenv.config();
@@ -54,6 +55,7 @@ app.use(AuthRoute);
 app.use(BuildingRoute);
 app.use(CampusRoute);
 app.use(ClassificationRoute);
+app.use(AllowsClassifications);
 app.use(EmailsRoute);
 app.use(EquipmentRoute);
 app.use(FloorRoute);

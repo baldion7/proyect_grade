@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import { AllowsClassifications } from "../models/AllowsClassifications.js"
 import { Area } from "../models/AreaModel.js";
 import { Building } from "../models/BuildingModel.js";
 import { Campus } from "../models/CampusModel.js";
@@ -16,7 +17,7 @@ const db = new Sequelize("auth_db", "root", "", {
     dialect: "mysql",
     freezeTableName: true
 });
-
+db.AllowsClassificationsModel = AllowsClassifications.init(db,Sequelize);
 db.Area = Area.init(db, Sequelize);
 db.Building = Building.init(db, Sequelize);
 db.Campus = Campus.init(db, Sequelize);
@@ -62,6 +63,10 @@ db.Users.belongsTo(db.Campus);
 db.Role.hasMany(db.Users);
 db.Users.belongsTo(db.Role);
 
+db.Space.hasMany(db.AllowsClassificationsModel);
+db.AllowsClassificationsModel.belongsTo(db.Space);
 
+db.Classification.hasMany(db.AllowsClassificationsModel);
+db.AllowsClassificationsModel.belongsTo(db.Classification);
 
 export default db;

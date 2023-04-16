@@ -20,5 +20,5 @@ export const ResetPasswordView=(req,res)=>{
     res.render('pages/forgot-password');
 }
 export const EquipmentView=(req,res)=>{
-    res.render('pages/ViewEquipment');
+    res.render('pages/ViewEquipment',{ title: 'Mi aplicación Node.js', perfil:req.session.name});
 }

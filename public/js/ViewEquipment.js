@@ -8,13 +8,14 @@ var stopInterval = false;
 var cD = 0;
 var intervalcontinua;
 var totapa;
-var array_users_update = [];
+var array_equipment_update = [];
 var indextemp;
 var modal_img;
 var img_base64;
 $(document).ready(function () {
 
     consult_extra_new()
+    setTimeout(function() {
 
     var intervalinicial = setInterval(function () {
         chageequiment();
@@ -48,6 +49,8 @@ $(document).ready(function () {
 
         }
     }, 1000);
+
+}, 1000);
 
     $("#cogs").click(function () {
         if (cD == 0) {
@@ -92,31 +95,15 @@ $(document).ready(function () {
         validPassword: "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.",
     });
 
-    $(".btn-back-to").click(function () {
-        $("#display_update_users").hide();
-        $("#display_new_users").hide();
+    $(".btn-back-to-equipment").click(function () {
+        $("#display_update_equipment").hide();
+        $("#display_new_equipment").hide();
         $("#display_traceability").hide();
         $("#display_user_view").hide();
-        $("#content_users").show();
+        $("#content_equipment").show();
         $("#form_update_users").trigger("reset");
         $("#form_new_users").trigger("reset");
-    });
-
-    $(".btn-view-user").click(function () {
-        $("#display_user_view").hide();
-    });
-
-    $(document).on("click", ".ps-delete-btn-equipment", function (e) {
-        indextemp = $(e.currentTarget).attr("data-index");
-        $("#delete_display").modal("show");
-    });
-
-    $(document).on("click", ".btn-view-equipment", function (e) {
-        indextemp = $(e.currentTarget).attr("data-index");
-        $("#content_users").hide();
-        $("#display_user_view").show();
-        let action = "view"
-        consult_user(action)
+        $("#user_img_profile_icon-new").html(` <i class="fas fa-file-image fa-1x"></i>`)
     });
 
     $("#btn_new_equiment").click(function () {
@@ -124,12 +111,25 @@ $(document).ready(function () {
         $("#content_equipment").hide();
     });
 
+    $(document).on("click", ".ps-delete-btn-equipment", function (e) {
+        indextemp = $(e.currentTarget).attr("data-index");
+        $("#delete_display_equipment").modal("show");
+    });
+
+    $(document).on("click", ".btn-view-equipment", function (e) {
+        indextemp = $(e.currentTarget).attr("data-index");
+        $("#content_users").hide();
+        $("#display_user_view").show();
+        let action = "view"
+        consult_equipment(action)
+    });
+
     $(document).on("click", ".btn-edit-equipment", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
-        $("#display_update_users").show();
-        $("#content_users").hide();
+        $("#display_update_equipment").show();
+        $("#content_equipment").hide();
         let action = "update"
-        consult_user(action)
+        consult_equipment(action)
 
     });
 
@@ -211,12 +211,13 @@ $(document).ready(function () {
         }, errorElement: "span",
 
         submitHandler: function () {
-            $("#modal_new_user").modal("show");
+            $("#modal_new_equipment").modal("show");
         },
 
     });
 
-    $("#modal_create_user").click(function () {
+    $("#modal_create_equipment").click(function () {
+        console.log("hola")
         let Named = $("#input_new_equipment_name").val();
         let Marker = $("#input_new_equipment_Maker").val();
         let classificationId = $("#input_new_equipment_classification").val();
@@ -228,8 +229,6 @@ $(document).ready(function () {
         let Functionn = $("#fuction_new_equipment").val();
         let ImgEquipment = img_base64;
         var file = $('#imgInput')[0].files[0];
-
-
         $.ajax({
             url: "/api/equipment", type: "post", data: {
                name:Named,
@@ -250,7 +249,8 @@ $(document).ready(function () {
             }
 
         });
-        $(".btn-back-to").click()
+        $(".btn-back-to-equipment").click()
+        $("#user_img_profile_icon-new").html(` <i class="fas fa-file-image fa-1x"></i>`)
     });
 
     $("#modal-edit").click(function () {
@@ -265,7 +265,7 @@ $(document).ready(function () {
         let rol = $('input[name="rol_update_user"]:checked').val();
 
         $.ajax({
-            url: "/api/users/" + array_users_update.id, type: "patch", data: {
+            url: "/api/users/" + array_equipment_update.id, type: "patch", data: {
                 name: name_user,
                 lastname: lastname,
                 document_type: document_type,
@@ -302,7 +302,7 @@ $(document).ready(function () {
         }
     })
 
-    $("#modal_delete_user").click(function () {
+    $("#modal_delete_equipment").click(function () {
         deleteuser()
     })
 
@@ -314,21 +314,19 @@ $(document).ready(function () {
         });
     })
 
-
-    $("#btn_activate_modal_new_equipment_img").click(function (){
+    $("#btn_activate_modal_new_equipment_img").click(function () {
       modal_img="nuevo";
     })
-    $("#btn_save_img_user").click(function (){
+
+    $("#btn_save_img_user").click(function () {
         var url_img = $("#imgInput").val();
         console.log($("#imgInput"));
         $("#input_img_new_equipment").val(url_img);
 
     });
 
-// Escuchar cambios en el input
-    $("#imgInput").change(function (){
+    $("#imgInput").change(function () {
         var $inputImagen = $('#imgInput');
-        console.log("hola")
         // Verificar si se seleccionó una imagen
         if ($inputImagen[0].files && $inputImagen[0].files[0]) {
             // Crear objeto FileReader
@@ -361,7 +359,6 @@ $(document).ready(function () {
         lector.onloadend = function() {
             var base64 = btoa(lector.result);
             img_base64=base64
-            console.log(img_base64)
         };
         lector.readAsBinaryString(imagen);
     });
@@ -379,6 +376,7 @@ $(document).ready(function () {
                 });
                 $("#input_new_equipment_building").html(`<option value="1" id="input_new_users_rol" selected disabled></option>`);
                 $("#input_new_equipment_building").append(imprimi)
+
             }, error: function (error) {
                 console.log(error)
             }
@@ -386,6 +384,7 @@ $(document).ready(function () {
     })
 
     $("#input_new_equipment_building").change(function () {
+        console.log("funciono?")
         let id=$("#input_new_equipment_building").val()
         $.ajax({
             url: "/api/floor/"+id,
@@ -403,6 +402,7 @@ $(document).ready(function () {
             }
         });
     })
+
     $("#input_new_equipment_floor").change(function () {
         let id=$("#input_new_equipment_floor").val()
         $.ajax({
@@ -421,6 +421,7 @@ $(document).ready(function () {
             }
         });
     })
+
     $("#input_new_equipment_area").change(function () {
         let id=$("#input_new_equipment_area").val()
         $.ajax({
@@ -440,6 +441,88 @@ $(document).ready(function () {
         });
     })
 
+   $("#input_update_equipment_campus").change(function () {
+        let id=$("#input_update_equipment_campus").val()
+        $.ajax({
+            url: "/api/building/"+id,
+            type: "post",
+            success: function (response) {
+                let imprimi;
+                response.forEach(function(opcion) {
+                    console.log(opcion)
+                    imprimi+=`<option value="${opcion.Id}">${opcion.Name}</option>`;
+                });
+                $("#input_update_equipment_building").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_building").append(imprimi)
+                $("#input_update_equipment_building").val(array_equipment_update.space.area.floor.building.Id);
+                $('#input_update_equipment_building').trigger('change');
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_update_equipment_building").change(function () {
+        let id=$("#input_update_equipment_building").val()
+        $.ajax({
+            url: "/api/floor/"+id,
+            type: "post",
+            success: function (response) {
+                let imprimi;
+                response.forEach(function(opcion) {
+                    console.log(opcion)
+                    imprimi+=`<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
+                });
+                $("#input_update_equipment_floor").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_floor").append(imprimi)
+                $("#input_update_equipment_floor").val(array_equipment_update.space.area.floor.Id);
+                $('#input_update_equipment_floor').trigger('change');
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_update_equipment_floor").change(function () {
+        let id=$("#input_update_equipment_floor").val()
+        $.ajax({
+            url: "/api/area/"+id,
+            type: "post",
+            success: function (response) {
+                let imprimi;
+                response.forEach(function(opcion) {
+                    console.log(opcion)
+                    imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
+                });
+                $("#input_update_equipment_area").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_area").append(imprimi)
+                $("#input_update_equipment_area").val(array_equipment_update.space.area.Id);
+                $('#input_update_equipment_area').trigger('change');
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_update_equipment_area").change(function () {
+        let id=$("#input_update_equipment_area").val()
+        $.ajax({
+            url: "/api/space/"+id,
+            type: "post",
+            success: function (response) {
+                let imprimi;
+                response.forEach(function(opcion) {
+                    console.log(opcion)
+                    imprimi+=`<option value=${opcion.Id}>${opcion.Technicallocation}</option>`;
+                });
+                $("#input_update_equipment_space").html(`<option value="" selected disabled></option>`);
+                $("#input_update_equipment_space").append(imprimi)
+                $("#input_update_equipment_space").val(array_equipment_update.space.Id);
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
 });
 
 function create_page() {
@@ -452,6 +535,7 @@ function create_page() {
         callback: function (data, pagination) {
             $("#cards_content_equiment").empty();
             data.forEach(function (item) {
+                console.log(array_equiment)
                 let isoDateString = item.createdAt;
                 let date = new Date(isoDateString);
                 let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
@@ -469,11 +553,13 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'>${item.classification.Classification}</label>
                           <BR>
-                             <label class='styles-cards-font'>${item.Name}</label>
+                             <label class='styles-cards-font'>Nombre: ${item.Name}</label>
                              <br>
-                             <label class='styles-cards-font colorblue'>referencia</label>
+                             <label class='styles-cards-font '>Marca: ${item.Brand}</label>
                              <br>
-                             <label class='styles-cards-font colorblue'>${item.Numparts}</label>
+                             <label class='styles-cards-font '>Modelo: ${item.Model}</label>
+                             <br>
+                             <label class='styles-cards-font '>Fabricante: ${item.Maker}</label>
                           </label>
                       <br>
                   </div>
@@ -509,10 +595,10 @@ function create_page() {
                   <img src='img/drop.png' >
               </button>
               <div class='dropdown-content'>
-              <a type class='btn-view-user cursor-pointer-styles' data-index="${item.Id}">
+              <a type class='btn-view-equipment cursor-pointer-styles' data-index="${item.Id}">
               <i class="fa-solid fa-bullseye">
                       </i> Visualizar</a>
-                  <a type class='btn-edit-user cursor-pointer-styles' data-index="${item.Id}">
+                  <a type class='btn-edit-equipment cursor-pointer-styles' data-index="${item.Id}">
                       <i class="fas fa-pencil-alt">
                       </i> Editar</a>
                   <a data-index="${item.Id}" class='ps-delete-btn-equipment cursor-pointer-styles'>
@@ -566,12 +652,17 @@ function searchuser(search) {
     });
 }
 
-function consult_user(action) {
+function consult_equipment(action) {
+    console.log("llegue")
     $.ajax({
-        url: "/api/users/" + indextemp, type: "get", success: function (response) {
-            array_users_update = response;
+        url: "/api/equipment/" + indextemp,
+        type: "get",
+        success: function (response) {
+            array_equipment_update = response;
+            console.log(array_equipment_update)
             switch (action) {
                 case "update":
+                    console.log(array_equipment_update)
                     fill_inputup_date()
                     break;
                 default:
@@ -579,31 +670,45 @@ function consult_user(action) {
                     break;
             }
         },
+        error: function(error) {
+            console.log(error)
+        }
+
     });
 }
 
 function fill_inputup_date() {
-    $("#input_update_users_name").val(array_users_update.name);
-    $("#input_update_users_lastname").val(array_users_update.lastname);
-    $("#input_update_users_phone_number").val(array_users_update.phone);
-    $('select[name="country_user_update"] option[value="' + array_users_update.country + '"]').prop('selected', true);
-    $('select[name="document_user_update"] option[value="' + array_users_update.typedocument + '"]').prop('selected', true);
-    $("#input_update_users_number_ducumnet").val(array_users_update.document);
-    $("#input_update_users_charge").val(array_users_update.burden);
-    $("#input_update_users_email").val(array_users_update.email);
-    $('input[name="rol_update_user"][value="' + array_users_update.role + '"]').prop('checked', true);
+     $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
+     $("#input_update_equipment_name").val(array_equipment_update.Name);
+     $("#input_update_equipment_Maker").val(array_equipment_update.Maker);
+     $("#input_update_equipment_classification").val(array_equipment_update.classification.Id);
+     $("#input_update_equipment_Model").val(array_equipment_update.Model);
+     $("#input_update_equipment_brand").val(array_equipment_update.Brand);
+     $("#input_update_users_price").val(array_equipment_update.Price);
+     $('#input_update_equipment_campus').val(array_equipment_update.space.area.floor.building.campus.Id);
+     $('#input_update_equipment_campus').trigger('change');
+
+
+     console.log($("#input_update_equipment_building").val())
+
+     console.log($('select[name="building_update_equipment"]').val());
+     $("#input_update_equipment_space").val();
+     $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
+     $("#fuction_update_equipment").val(array_equipment_update.Function);
+
+
+
 
 }
 
-
 function fill_view_user() {
-    $("#view-user-name").html(array_users_update.name + " " + array_users_update.lastname);
-    $("#view-user-document").html(array_users_update.typedocument + " " + array_users_update.document);
-    $("#view-user-burden").html(array_users_update.burden);
-    $("#view-user-phone").html(`<i class="fa-solid fa-mobile-screen"id="user_data_personal_staff_icon_mobil"></i>(+` + array_users_update.country + ")" + " " + array_users_update.phone);
-    $("#view-user-email").html(`<i class="fa-solid fa-envelope"id="user_data_personal_staff_icon_envelope"></i>` + " " + array_users_update.email);
-    $("#view-user-rol").html(array_users_update.role);
-    $("#view-user-rol-date").html(array_users_update.updatedAt);
+    $("#view-user-name").html(array_equipment_update.name + " " + array_equipment_update.lastname);
+    $("#view-user-document").html(array_equipment_update.typedocument + " " + array_equipment_update.document);
+    $("#view-user-burden").html(array_equipment_update.burden);
+    $("#view-user-phone").html(`<i class="fa-solid fa-mobile-screen"id="user_data_personal_staff_icon_mobil"></i>(+` + array_equipment_update.country + ")" + " " + array_equipment_update.phone);
+    $("#view-user-email").html(`<i class="fa-solid fa-envelope"id="user_data_personal_staff_icon_envelope"></i>` + " " + array_equipment_update.email);
+    $("#view-user-rol").html(array_equipment_update.role);
+    $("#view-user-rol-date").html(array_equipment_update.updatedAt);
 }
 
 function consult_extra_new() {
@@ -620,6 +725,7 @@ function consult_extra_new() {
                 imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
             });
             $("#input_new_equipment_campus").append(imprimi)
+            $("#input_update_equipment_campus").append(imprimi)
         },
         error: function(xhr, status, error) {
 
@@ -638,8 +744,14 @@ function consult_extra_new() {
                 imprimi_clas+=`<option value=${opcion.Id}>${opcion.Classification}</option>`;
             });
             $("#input_new_equipment_classification").append(imprimi_clas)
+            $("#input_update_equipment_classification").append(imprimi_clas)
         },
         error: function(xhr, status, error) {
         }
     });
+
+
 }
+ function components_update() {
+     
+ }
