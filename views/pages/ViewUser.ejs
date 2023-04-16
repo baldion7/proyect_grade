@@ -1,0 +1,419 @@
+<%- include('../partials/header') %>
+<div class="d-flex justify-content-start display_view_setting">
+    <%- include('../partials/left_menu') %>
+    <div class= "display_content_modules">
+        <div id="content_users">
+            <div>
+                <span class="titles_on_view">Usuarios</span>
+            </div>
+            <div class="d-flex justify-content-between" id="select_page_content">
+                <label for="lang">Ver
+                    <select name="numeric" id="select_users">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="10">10</option>
+                        <option value="18">18</option>
+                    </select>
+                    elementos
+                </label>
+                <div class="d-flex div_search_contens" role="search" >
+
+                    <input class="form-control me-2 search_input" placeholder="Buscar" id="search_users" aria-label="Search">
+                    <button id="btn_new_users" type="submit"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div>
+
+                <div class='card' id='cards_content_users'>
+                </div>
+                <footer>
+                <div class="creator">
+                    <div aria-label="Page navigation example" id="pagination" class="pagination">
+                        <label id="label_pagination">Pagina
+                            <input type="number" value="1" id="input_pagination">
+                            de
+                            <label id="paginacion_all"></label>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" id="btn-pagination-iz" class="btn btn-primary">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <button type="button" id="btn-pagination-de" class="btn btn-primary">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                </footer>
+            </div>
+        </div>
+        <div id="display_new_users">
+            <button class="btn-back-to">VOLVER</button>
+            <form action="" method="post" id="form_new_users">
+                <br/>
+                <br/>
+                <br/>
+                <span class="titles_on_view">Crear nuevo usuarios</span>
+                <div class="conteiner_form_div">
+                    <div class="conteiner_form_module">
+                        <div class="user-img-profile">
+
+                            <div class="user-img-profile-icon" id="user_img_profile_icon-new">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="user-information">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="name_user_new" id="input_new_users_name" placeholder="Nombre">
+                                <label for="input_new_users_name">Nombres</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="lastname_user_new" id="input_new_users_lastname" placeholder="Apellidos">
+                                <label for="input_new_users_lastname">Apellidos</label>
+                            </div>
+                            <div class="container-two-input-styles mb-3">
+                                <div class="form-floating styles_container_input_document_type">
+                                    <select class="form-select styles-font-input" name="document_user_new" id="input_new_users_document_type">
+                                        <option value="1" id="input_new_users_rol" selected disabled></option>
+                                        <option value="C.C.">C.C. Cedula de ciudadanía</option>
+                                        <option value="C.E.">C.E. Cedula de extranjería</option>
+                                    </select>
+                                    <label class="form-control-placeholder" for="input_new_users_document_type">Tipo de
+                                        documento</label>
+                                </div>
+                                <div class="form-floating  styles_container_input_number_ducumnet">
+                                    <input type="text" class="form-control styles-font-input" name="document_number_user_new" id="input_new_users_number_ducument" placeholder="Número de celular">
+                                    <label class="label-two-select-color" for="input_new_users_number_ducumnet">Número de documento</label>
+                                </div>
+                            </div>
+                            <div class="container-two-input-styles mb-3">
+                                <div class="form-floating styles_container_input_country">
+                                    <select class="form-select" id="input_new_users_country" name="country_user_new">
+                                        <option title="Colombia" value="57">Colombia (+57)</option>
+                                        <option title="Argentina" value="54">Argentina (+54)</option>
+                                        <option title="Ecuador" value="593">Ecuador (+593)</option>
+                                        <option title="Chile" value="56">Chile (+56)</option>
+                                        <option title="Venezuela" value="58"> (+58)</option>
+                                        <option title="Uruguay" value="595">Uruguay (+595)</option>
+                                        <option title="Paraguay" value="598">Paraguay (+598)</option>
+                                        <option title="Brasil" value="55">Brasil (+55)</option>
+                                    </select>
+                                </div>
+                                <div class="form-floating  styles_container_input_phone_number ">
+                                    <input type="text" class="form-control styles-font-input" name="number_phone_user_new" id="input_new_users_phone_number" placeholder="Número de celular">
+                                    <label class="label-two-select-color" for="input_new_users_phone_number">Número de celular</label>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="email_user_new" id="input_new_users_email" placeholder="Correo">
+                                <label for="input_new_users_email">Correo</label>
+                            </div>
+                            <div class="container-two-input-styles  mb-3">
+                                <div class="form-floating styles_container_input_document_type">
+                                <select class="form-select styles-font-input" name="campus_user_new"
+                                        id="input_new_users_campus">
+                                    <option value="1" id="input_new_users_rol" selected disabled></option>
+
+                                </select>
+                                <label class="form-control-placeholder" for="input_new_users_campus">Sede de la universida </label>
+                                </div>
+                                <div class="form-floating styles_container_input_phone_number">
+                                    <input type="text" class="form-control styles-font-input" name="charge_user_new" id="input_new_users_charge" placeholder="Cargo">
+                                    <label class="label-two-select-color" for="input_new_users_charge">Cargo</label>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control styles-font-input" name="password_user_new" id="input_new_users_password" placeholder="Contraseña">
+                                <label for="input_new_users_password">Contraseña</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control styles-font-input" name="confirmpassword_user_new" id="input_new_users_confirmpassword" placeholder="Confirmar Contraseña">
+                                <label for="input_new_users_confirmpassword">Confirmar Contraseña</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose-role">
+                        <div class="container-search-all-rol">
+                            <div>
+                                <div class="container-choose-role">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="titles_on_view">Asignar roles</label>
+                                        <button class="btn-new-rol"><i class="fa-solid fa-plus fa-1x"></i> Nuevo Rol </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3 d-flex justify-content-between container-roles-search-all">
+
+                            <div class="d-flex input-search-rol" id="buscar-acciones">
+                                <input class="form-control me-2  " placeholder="Buscar" aria-label="Search">
+                            </div>
+                        </div>
+                        <div class="container-rol-existent">
+                            <div class="container-rol-existent-div" id="container-rol-existent-div-new">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <div>
+                        <div class="creator">
+                            <br/>
+                            <button type="submit" class="btn-save ">Crear Usuario</button>
+                        </div>
+                    </div>
+                </footer>
+            </form>
+        </div>
+        <div id="display_update_users">
+            <button class="btn-back-to">VOLVER</button>
+            <form action="" method="post" id="form_update_users">
+                <br/>
+                <br/>
+                <br/>
+                <span class="titles_on_view">Editar usuario</span>
+                <div class="conteiner_form_div">
+                    <div class="conteiner_form_module">
+                        <div class="user-img-profile">
+
+                            <div class="user-img-profile-icon" id="user-img-profile-icon-update">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="user-information">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="name_user_update" id="input_update_users_name" placeholder="Nombre">
+                                <label for="input_update_users_name">Nombres</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="lastname_user_update" id="input_update_users_lastname" placeholder="Apellidos">
+                                <label for="input_update_users_lastname">Apellidos</label>
+                            </div>
+                            <div class="container-two-input-styles mb-3">
+                                <div class="form-floating styles_container_input_document_type">
+                                    <select class="form-select styles-font-input" name="document_user_update" id="input_update_users_document_type">
+                                        <option value="C.C.">C.C. Cedula de ciudadanía</option>
+                                        <option value="C.E.">C.E. Cedula de extranjería</option>
+                                    </select>
+                                    <label class="form-control-placeholder" for="input_update_users_document_type">Tipo
+                                        de documento</label>
+                                </div>
+                                <div class="form-floating  styles_container_input_number_ducumnet">
+                                    <input type="text" class="form-control styles-font-input" name="document_number_user_update" id="input_update_users_number_ducumnet" placeholder="Número de celular">
+                                    <label for="input_update_users_number_ducumnet">Número de documento</label>
+                                </div>
+                            </div>
+                            <div class="container-two-input-styles mb-3">
+                                <div class="form-floating styles_container_input_country">
+                                    <select class="form-select" id="input_update_users_country" name="country_user_update">
+                                        <option title="Colombia" value="57">Colombia (+57)</option>
+                                        <option title="Argentina" value="54">Argentina (+54)</option>
+                                        <option title="Ecuador" value="593">Ecuador (+593)</option>
+                                        <option title="Chile" value="56">Chile (+56)</option>
+                                        <option title="Venezuela" value="58"> (+58)</option>
+                                        <option title="Uruguay" value="595">Uruguay (+595)</option>
+                                        <option title="Paraguay" value="598">Paraguay (+598)</option>
+                                        <option title="Brasil" value="55">Brasil (+55)</option>
+                                    </select>
+                                </div>
+                                <div class="form-floating  styles_container_input_phone_number ">
+                                    <input type="text" class="form-control styles-font-input" name="number_phone_user_update" id="input_update_users_phone_number" placeholder="Número de celular">
+                                    <label for="input_update_users_phone_number">Número de celular</label>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input" name="email_user_update" id="input_update_users_email" placeholder="Correo">
+                                <label for="input_update_users_email">Correo</label>
+                            </div>
+                            <div class="container-two-input-styles  mb-3">
+                                <div class="form-floating styles_container_input_document_type">
+                                    <select class="form-select styles-font-input" name="campus_user_update"
+                                            id="input_update_users_campus">
+
+                                    </select>
+                                    <label class="form-control-placeholder" for="input_update_users_campus">Sede de la universida </label>
+                                </div>
+                                <div class="form-floating styles_container_input_phone_number">
+                                    <input type="text" class="form-control styles-font-input" name="charge_user_update" id="input_update_users_charge" placeholder="Cargo">
+                                    <label for="input_update_users_charge">Cargo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose-role">
+                        <div class="container-search-all-rol">
+                            <div>
+                                <div class="container-choose-role">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="titles_on_view">Asignar roles</label>
+                                        <button class="btn-new-rol"><i class="fa-solid fa-plus fa-1x"></i> Nuevo
+                                            Rol
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3 d-flex justify-content-between container-roles-search-all">
+                            <div class="check-styles-rol "><label for=""><input type="checkbox" id="activate_workers"> Todos</label>
+                            </div>
+                            <div class="d-flex input-search-rol" id="buscar-acciones">
+                                <input class="form-control me-2  " placeholder="Buscar" aria-label="Search">
+                            </div>
+                        </div>
+                        <div class="container-rol-existent">
+                            <div class="container-rol-existent-div" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="creator">
+                        <div>
+                            <button type="submit" class="btn-save ">Actualizar Usuario</button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div id="display_user_view">
+            <button class="btn-back-to">VOLVER</button>
+            <br/>
+            <br/>
+            <br/>
+            <span class="titles_on_view">Visualizar usuario</span>
+            <div class="conteinder-user-view">
+                <div class="conteinder-user-view-info">
+                    <div class="conteinder-user-view-info-div">
+                        <div class="container-img-use-view">
+                            <div class="user-img-profile-icon" id="user-img-profile-icon-update">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="container-info-use-view">
+                            <h3 id="view-user-name"></h3>
+                            <h5 id="view-user-document"> C.C 000000000000</h5>
+                            <label id="view-user-burden">Cargo</label>
+                            <div class="container-info-use-view-icons-info">
+                                <label class='styles-cards-font' id="view-user-phone">
+                                </label>
+                                <BR>
+                                <label class='styles-cards-font' id="view-user-email">ejemplo@ejemplo.com</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conteinder-user-view-rol">
+                    <div class="conteinder-user-view-rol-container">
+                        <h3>ROL DEL USUARIO</h3>
+                        <div class="conteinder-user-view-rol-div">
+                            <div class="roles-view">
+                                <div class="roles-view-name">
+                                    <label for="" id="view-user-rol"> Nombre Rol</label>
+                                </div>
+                                <div class="roles-view-date">
+                                    <label for="" id="view-user-rol-date"></label>
+                                </div>
+                                <div class="roles-view-icon">
+
+                                    <button type="button" id="myButton" data-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-placement="top" title="Ver detalle"><i
+                                                class="fa-solid fa-bullseye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div>
+                    <div class="creator">
+                        <br/>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <%- include('../partials/right_menu') %>
+</div>
+<div>
+    <div class="modal fade" id="modal_new_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-plus fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro que deseas crear este nuevo usuario?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button id="modal_create_user" type="button" class="btn btn-secondar" data-bs-dismiss="modal"> Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete_display" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-trash-alt fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro/a que deseas eliminar este usuario?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button id="modal_delete_user" type="button" class="btn btn-secondar" data-bs-dismiss="modal"> Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-pencil fa-8x"></i>
+                        </div>
+                        <label for="">¿Terminaste tu edición?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro/a que deseas guardar los cambios realizados sobre este usuario?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button type="button" class="btn btn-secondar " id="modal-edit" data-bs-dismiss="modal"> Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/lib/jquery-3.6.4.js"></script>
+<script src="/lib/bootstrap-5.3.0/js/bootstrap.bundle.js"></script>
+<script src="/lib/pagination.js"></script>
+<script src="/lib/datatables.js"></script>
+<script src="/lib/select2.min.js"></script>
+<script src="/lib/jquery.validate.js"></script>
+<script src="/js/ViewUser.js"></script>
+
+</body>
+</html>

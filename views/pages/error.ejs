@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<h1>Berror Node.js</h1>
+</body>
+</html>
+<div id="display_update_users">
+    <button class="btn-back-to">VOLVER</button>
+    <form action="" method="post" id="form_update_users">
+        <br />
+        <br />
+        <br />
+        <span class="titles_on_view">Editar usuario</span>
+        <div class="conteiner_form_div">
+            <div class="conteiner_form_module">
+                <div class="user-img-profile">
+                    <div class="user-img-profile-icon" id="user-img-profile-icon-update">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+                <div class="user-information">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control styles-font-input"
+                               name="name_user_update" id="input_update_users_name" placeholder="Nombre">
+                        <label for="input_update_users_name">Nombres</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control styles-font-input"
+                               name="lastname_user_update" id="input_update_users_lastname"
+                               placeholder="Apellidos">
+                        <label for="input_update_users_lastname">Apellidos</label>
+                    </div>
+                    <div class="container-two-input-styles mb-3">
+                        <div class="form-floating styles_container_input_document_type">
+                            <select class="form-select styles-font-input" name="document_user_update"
+                                    id="input_update_users_document_type">
+                                <option value="C.C.">C.C. Cedula de ciudadanía</option>
+                                <option value="C.E.">C.E. Cedula de extranjería</option>
+                            </select>
+                            <label class="form-control-placeholder"
+                                   for="input_update_users_document_type">Tipo
+                                de documento</label>
+                        </div>
+                        <div class="form-floating  styles_container_input_number_ducumnet">
+                            <input type="text" class="form-control styles-font-input"
+                                   name="document_number_user_update"
+                                   id="input_update_users_number_ducumnet" placeholder="Número de celular">
+                            <label for="input_update_users_number_ducumnet">Número de documento</label>
+                        </div>
+                    </div>
+                    <div class="container-two-input-styles mb-3">
+                        <div class="form-floating styles_container_input_country">
+                            <select class="form-select" id="input_update_users_country"
+                                    name="country_user_update">
+                                <option title="Colombia" value="57">Colombia (+57)</option>
+                                <option title="Argentina" value="54">Argentina (+54)</option>
+                                <option title="Ecuador" value="593">Ecuador (+593)</option>
+                                <option title="Chile" value="56">Chile (+56)</option>
+                                <option title="Venezuela" value="58"> (+58)</option>
+                                <option title="Uruguay" value="595">Uruguay (+595)</option>
+                                <option title="Paraguay" value="598">Paraguay (+598)</option>
+                                <option title="Brasil" value="55">Brasil (+55)</option>
+                            </select>
+                        </div>
+                        <div class="form-floating  styles_container_input_phone_number ">
+                            <input type="text" class="form-control styles-font-input"
+                                   name="number_phone_user_update" id="input_update_users_phone_number"
+                                   placeholder="Número de celular">
+                            <label for="input_update_users_phone_number">Número de celular</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control styles-font-input"
+                               name="email_user_update" id="input_update_users_email" placeholder="Correo">
+                        <label for="input_update_users_email">Correo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control styles-font-input"
+                               name="charge_user_update" id="input_update_users_charge"
+                               placeholder="Cargo">
+                        <label for="input_update_users_charge">Cargo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="choose-role">
+                <div class="container-search-all-rol">
+                    <div>
+                        <div class="container-choose-role">
+                            <div class="d-flex justify-content-between">
+                                <label class="titles_on_view">Asignar roles</label>
+                                <button class="btn-new-rol"><i class="fa-solid fa-plus fa-1x"></i> Nuevo
+                                    Rol
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3 d-flex justify-content-between container-roles-search-all">
+                    <div class="check-styles-rol "><label for=""><input type="checkbox"
+                                                                        id="activate_workers"> Todos</label>
+                    </div>
+                    <div class="d-flex input-search-rol" id="buscar-acciones">
+                        <input class="form-control me-2  " placeholder="Buscar" aria-label="Search">
+                    </div>
+                </div>
+                <div class="container-rol-existent">
+                    <div class="container-rol-existent-div">
+                        <div class="new-rol">
+                            <div>
+                                <input type="radio" name="rol_update_user" class="form-check-input"
+                                       value="admin" class="input_update_users_rol"><label for="">
+                                    Administrador</label>
+                            </div>
+                            <button><i class="fa-solid fa-bullseye"></i></button>
+                        </div>
+                        <div class="new-rol">
+                            <div>
+                                <input type="radio" name="rol_update_user" class="form-check-input"
+                                       value="user" class="input_update_users_rol"><label
+                                        for="">Usuario</label>
+                            </div>
+                            <button><i class="fa-solid fa-bullseye"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div>
+                <div class="creator">
+                    <br />
+
+                    <button type="submit" class="btn-save ">Actualizar Usuario</button>
+                </div>
+            </div>
+        </footer>
+
+    </form>
+</div>
+<div id="display_user_view">
+    <button class="btn-back-to">VOLVER</button>
+    <br />
+    <br />
+    <br />
+    <span class="titles_on_view">Visualizar usuario</span>
+    <div class="conteinder-user-view">
+        <div class="conteinder-user-view-info">
+            <div class="conteinder-user-view-info-div">
+                <div class="container-img-use-view">
+                    <div class="user-img-profile-icon" id="user-img-profile-icon-update">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+                <div class="container-info-use-view">
+                    <h3 id="view-user-name"></h3>
+                    <h5 id="view-user-document"> C.C 000000000000</h5>
+                    <label id="view-user-burden">Cargo</label>
+                    <div class="container-info-use-view-icons-info">
+                        <label class='styles-cards-font' id="view-user-phone">
+                        </label>
+                        <BR>
+                        <label class='styles-cards-font'
+                               id="view-user-email">ejemplo@ejemplo.com</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conteinder-user-view-rol">
+            <div class="conteinder-user-view-rol-container">
+                <h3>ROL DEL USUARIO</h3>
+                <div class="conteinder-user-view-rol-div">
+                    <div class="roles-view">
+                        <div class="roles-view-name">
+                            <label for="" id="view-user-rol"> Nombre Rol</label>
+                        </div>
+                        <div class="roles-view-date">
+                            <label for="" id="view-user-rol-date"></label>
+                        </div>
+                        <div class="roles-view-icon">
+
+                            <button type="button" id="myButton" data-toggle="tooltip"
+                                    data-bs-custom-class="custom-tooltip" data-placement="top"
+                                    title="Ver detalle"><i class="fa-solid fa-bullseye"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <div class="creator">
+                <br />
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,1801 @@
+body {
+    background: #EFF2F3 0% 0% no-repeat padding-box;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+
+body::-webkit-scrollbar {
+    width: 10px; /* ancho de la barra */
+}
+
+/* Selector para personalizar el pulgar de la barra de desplazamiento */
+body::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* color del pulgar */
+    border-radius: 5px; /* borde redondeado del pulgar */
+}
+
+
+@font-face {
+    font-family: SemplicitaPro;
+    src: url(/fonts/SemplicitaPro.otf);
+}
+
+@font-face {
+    font-family: SemplicitaProbold;
+    src: url(/fonts/SemplicitaProbold.ttf);
+}
+
+@font-face {
+    font-family: SemplicitaPro-italy;
+    src: url(/fonts/SemplicitaPro-BoldItalic.ttf);
+}
+
+@font-face {
+    font-family: Europa-Regular;
+    src: url(/fonts/europa-regular.ttf);
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url(/fonts/Ubuntu-Regular.ttf);
+}
+
+.label-spna-font {
+    text-align: left;
+    font: normal normal bold 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.img-nav {
+    background: transparent;
+    width: 100px;
+    opacity: 1;
+}
+
+#search {
+    width: 3.75rem;
+    height: 1.438rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DEDEDE;
+    border-radius: 3px;
+    opacity: 1;
+}
+
+#search_one {
+    width: 14.188rem;
+    height: 1.813rem;
+    margin-top: 10px;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border: 1px solid #C8C8C8;
+    border-radius: 3px;
+    opacity: 1;
+}
+
+.div-search {
+    position: relative;
+    width: 16.938rem;
+}
+
+#icon_search {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: 0.438rem;
+    color: #878787;
+    opacity: 1;
+}
+
+.navbar-toggler {
+    margin-left: 45rem;
+}
+
+nav {
+    margin-top: 0;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 34px #AFAFAF24;
+    opacity: 1;
+    padding-right: 0.625rem;
+    z-index: 3;
+    height: 4.375rem;
+}
+
+.display_view_setting{
+    height: 100vh;
+}
+
+#cogs {
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.938rem;
+    border: transparent;
+    background-color: transparent;
+}
+
+#cogs i {
+    color: #023F87;
+    font-size: 2rem;
+}
+
+#div_user i {
+    padding-right: 0.625rem;
+    color: #4286D4;
+    margin-left: 0.625rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#div_user {
+    border-right-color: #E6E6E6;
+    border-right-style: solid;
+    padding-right: 0.625rem;
+    padding-top: 0.938rem;
+    height: 3.125rem;
+}
+
+#div_user span {
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+#left_menu {
+    background: #FCFCFC 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 12px #A7A7A729;
+    opacity: 1;
+    top: 3.75rem !important;
+    left: 0px !important;
+    width: 4.313rem;
+    height: 100vh;
+    padding-top: 5.625rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    align-items: center;
+    z-index: 0;
+}
+
+#left_menu i {
+    padding-top: 0.625rem;
+    color: #4286D4;
+}
+
+#right_menu {
+    padding-top: 0.625rem;
+    background: #0b4a75;
+    opacity: 1;
+    top: 4.125rem;
+    right: 0;
+    height: 100vh;
+    align-items: center;
+    position: fixed;
+    z-index: 0;
+    width: 15.313rem !important;
+}
+
+#right_menu_container {
+    margin-top: 1.875rem;
+}
+
+#right_menu_container div {
+    padding-top: 0.188rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.625rem;
+}
+
+#control_access {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    padding-left: 0.625rem;
+}
+
+#svg_of_cogs {
+    width: 19%;
+    color: #B1C3DA !important;
+}
+
+.right-menu-icon {
+    display: flex;
+    align-items: center;
+    padding-top: 0.625rem !important;
+}
+
+.right-menu-icon button {
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    width: 7.813rem;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border-color: transparent;
+}
+
+.right-menu-icon i {
+    padding-right: 0.625rem;
+}
+
+.seccionmenusi {
+    background: #4286D4 0% 0% no-repeat padding-box;
+}
+
+.right-menu-icon {
+    display: flex;
+    align-items: center;
+    padding-right: 0.313rem !important;
+}
+
+#content_users, #content_equipment {
+    margin-top: 7.875rem;
+    padding-right: 2%;
+    padding-left: 2%;
+    z-index: 1;
+    width: 100%;
+}
+
+ #select_page_content {
+    margin-top: 1.938rem;
+    text-align: left;
+    font: normal normal normal 14px/14px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+}
+
+#select_page_content label select {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DEDEDE;
+    border-radius: 3px;
+    opacity: 1;
+    text-align: center;
+    font: normal normal normal 14px/14px "Europa-Regular";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    width: 60px;
+    height: 23px !important;
+}
+
+.search_input {
+    width: 18.563rem;
+    height: 2.938rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #C8C8C8;
+    border-radius: 3px;
+    opacity: 1;
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+#search_users::placeholder {
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+.div_search_contens button {
+    width: 2.875rem;
+    height: 2.938rem;
+    background-color: #4286D4;
+    border-color: transparent;
+    box-shadow: 3px 0px 6px #00000029;
+    border-radius: 3px;
+}
+
+.div_search_contens button i {
+    color: #FFFFFF;
+}
+/*
+#select_search_user {
+    width: 11.063rem;
+    height: 2.938rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #C8C8C8;
+    border-radius: 2px;
+    opacity: 1;
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+#select_search_user option {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #5D5D5D;
+    opacity: 1;
+}
+*/
+.display_content_modules {
+    margin-left: 4.313rem;
+    margin-right: 15.313rem;
+    z-index: 1;
+    background-color: #EFF2F3;
+    width: 100%;
+    background: #EFF2F3 0% 0% no-repeat padding-box;
+}
+
+#activate_all_cards {
+    margin-top: 2.375rem;
+    float: right;
+    display: flex;
+    flex-direction: row;
+}
+
+#activate_all_cards label {
+    text-align: left;
+    font: italic normal normal 14px/20px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    display: flex;
+    margin-right: 10px;
+}
+
+#cards_content_users, #cards_content_equiment {
+    background: #EFF2F3;
+    border: transparent;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    overflow-y: visible;
+    overflow-x: hidden;
+    padding-bottom: 85px;
+}
+
+#cards_content_users::-webkit-scrollbar, #cards_content_equiment ::-webkit-scrollbar {
+    display: none;
+}
+
+.content-display-module-cards {
+    display: grid;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #F6F6F6;
+    border-radius: 4px;
+    grid-template-columns: 36% 25% 25% auto;
+    height: auto;
+    padding-top: 0.938rem;
+}
+
+#btn_edit_users {
+    padding-left: 4%;
+}
+
+#btn_edit_users div div div {
+    margin-right: 5%;
+}
+
+#content-btn-edit div {
+    width: 40px;
+    height: 40px;
+    background: #FFC10E 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-radius: 50px;
+    color: #FFFFFF;
+    border-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user_name_creator {
+    margin-top: 1.5%;
+    margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-left: solid;
+    border-left-color: #CECECE;
+    opacity: 1;
+}
+
+.dropdown-btn {
+    background-color: transparent;
+    color: white;
+    float: right;
+    font-size: 16px;
+    border: none;
+}
+
+#content_menu_deployment {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-btn img {
+    float: left;
+    padding-top: 100%;
+    width: 50px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.25px solid #D0D0D1;
+    opacity: 1;
+    z-index: 6;
+    left: 50%;
+    margin-left: -100px !important;
+}
+
+.dropdown-content a i {
+    color: #707070;
+    opacity: 1;
+}
+
+.dropdown-content a {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.cursor-pointer-styles {
+    cursor: pointer;
+}
+
+#cards_users {
+    width: 100vh;
+}
+
+.cards-content-module {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0.5%;
+}
+
+.creator {
+    margin-bottom: 30px;
+    padding-bottom: 1%;
+    width: 100%;
+    float: right;
+    background: #EFF2F3 0% 0% no-repeat padding-box;
+}
+
+.creator span {
+    text-align: left;
+    font: italic normal normal 13px/19px "SemplicitaPro-italy";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+#input_pagination, #input_pagination_equiment {
+    width: 56px;
+    height: 23px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DEDEDE;
+    border-radius: 3px;
+    opacity: 1;
+}
+
+#input_pagination,#input_pagination_equiment::-webkit-inner-spin-button,
+#input_pagination,#input_pagination_equiment::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#label_pagination button {
+    background: #4286D4 0% 0% no-repeat padding-box;
+    opacity: 1;
+    height: 23px;
+    width: 23px;
+    border-color: #4286D4;
+}
+
+#label_pagination i {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 13px;
+}
+
+.pagination {
+    float: right;
+}
+
+#user_data_personal_staff_icon_mobil {
+    margin-right: 10px;
+    font-size: 21px;
+    color: #ACACAC;
+    opacity: 1;
+}
+
+#user_data_personal_staff_icon_envelope {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #ACACAC;
+    opacity: 1;
+}
+
+.styles-cards-font {
+    text-align: left;
+    font: normal normal normal 14px/20px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.styles-two_roles {
+    text-align: left;
+    font: normal normal normal 12px/16px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #ACACAC;
+    opacity: 1;
+}
+
+.radio-toggle {
+    display: none;
+}
+
+.toggle-wrapper {
+    background-color: #EBEBEB;
+    width: 30px;
+    height: 17px;
+    display: block;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    float: right;
+    margin-left: 2%;
+}
+
+.toggle-circle {
+    background-color: #FF3434;
+    width: 13px;
+    height: 13px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    transition: left 0.4s ease, background 0.3s;
+}
+
+.radio-toggle:checked+.toggle-circle {
+    background-color: #09CC4A;
+    left: 15px;
+    transition: left 0.4s ease, background 0.3s;
+}
+
+.check_display_organize {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 4.8%;
+    padding-left: 2% !important;
+}
+
+.switchText {
+    text-align: left;
+    font: italic normal normal 14px/20px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #09CC4A;
+    opacity: 1;
+}
+
+#activate_workers {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    margin: 2px !important;
+}
+
+#activate_workers:checked:after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: #4286D4;
+    border-radius: 50%;
+}
+
+#display_traceability {
+    margin-top: 98px;
+    padding-left: 2%;
+    display: none;
+}
+
+#display_new_users, #display_new_equipment {
+    display: none;
+    margin-top: 98px;
+    padding-left: 2%;
+    height: 100vh;
+}
+
+.btn-back-to, .btn-back-to-equipment {
+    font-size: 13px !important;
+    width: 154px !important;
+    height: 41px !important;
+    float: left;
+    text-align: left;
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    opacity: 1;
+    background: #4286D4 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    border-color: transparent;
+}
+
+.btn-save {
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    opacity: 1;
+    background: #4286D4 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    border-color: transparent;
+    width: 177px;
+    height: 41px;
+    margin-right: 5.7%;
+    margin-bottom: 2%;
+    float: right;
+}
+
+.time-line {
+    position: relative;
+    height: 100%;
+    font-family: Arial;
+    width: 100%;
+    float: left;
+    margin-bottom: 90px
+}
+
+.responsible_traceability p {
+    text-align: left;
+    font: normal normal 600 12px/16px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+    width: 70px;
+    height: 16px;
+}
+
+.card {
+    width: 100%;
+}
+
+.moment {
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.description {
+    margin-left: 4%;
+}
+
+.card-style {
+    width: 100%;
+    height: 146px !important;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 4px;
+    opacity: 1;
+    border: transparent;
+}
+
+.moment_user {
+    width: 40px;
+    height: 40px;
+    background: #FFC10E 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    display: flex;
+    margin-top: 40px;
+}
+
+.time-line::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    background: #4286D4 0% 0% no-repeat padding-box;
+    opacity: 1;
+    left: 7px;
+    height: 100%;
+    border-radius: 10px;
+    margin-right: 1%;
+}
+
+.moment::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 50px);
+    background: #4286D4 0% 0% no-repeat padding-box;
+    opacity: 1;
+    /* left: 23px; */
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin-right: 1%;
+}
+
+.styles-font-traceability-h5-p {
+    text-align: left;
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+#table_traceability {
+    width: 94%;
+}
+
+.titles_on_view {
+    text-align: left;
+    font: normal normal bold 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.conteiner_form_module{
+    display: grid;
+    grid-template-columns: auto 771px;
+    margin-top: 3.438rem;
+}
+
+.user-img-profile-icon {
+    width: 86px;
+    height: 86px;
+    background: #FFC10E 0% 0% no-repeat padding-box;
+    opacity: 1;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #023F87;
+    font-size: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-active-modal {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #023F87 0% 0% no-repeat padding-box;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: transparent;
+}
+
+.user-img-profile {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-right: 3.438rem;
+}
+
+.btn-examine {
+    width: 177px;
+    height: 41px;
+    display: inline-block;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 2px solid #3072BE;
+    border-radius: 5px;
+    opacity: 1;
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #3072BE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-accept {
+    width: 177px;
+    height: 41px;
+    background: #3072BE 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    border: transparent;
+}
+
+#imgInput, #imgInput_update {
+    display: none;
+}
+
+#modal_img_profile_container_update .modal-dialog .modal-content {
+    width: 613px;
+    height: 713px;
+}
+
+.user-information div input , select {
+    height: 47px !important;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 2px;
+    opacity: 1;
+    border: transparent;
+    border-radius: 0px !important;
+}
+textarea{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 2px;
+    opacity: 1;
+    border: transparent;
+    border-radius: 0px !important;
+}
+.user-information {
+    width: 48.188rem;
+}
+
+.user-information div label {
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #a9a0a0;
+    opacity: 1;
+    display: flex;
+}
+
+.container-two-input-styles {
+    display: grid;
+    grid-template-columns: 297px 455px;
+    position: relative;
+    margin-bottom: 23px !important;
+    display: flex;
+}
+
+.container-two-input-styles-select {
+    display: grid;
+    grid-template-columns: 50% 50% !important;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-two-input-styles div input,
+.container-two-input-style-select div input {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 2px;
+    opacity: 1;
+    border: transparent;
+}
+
+.label-two-select-color{
+    color: #a9a0a0 !important;
+}
+
+.container-two-input-styles div label,
+.container-two-input-style-select div label {
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #746969;
+    opacity: 1;
+}
+
+.styles_container_input_country div,
+.input_new_users_number_ducumnet div {
+    width: 100% !important;
+    height: 47px !important;
+}
+
+.styles_container_input_country,
+.styles_container_input_document_type {
+    margin-right: 19px;
+}
+
+.styles_container_input_phone_number div {
+    width: 455px !important;
+    height: 47px !important;
+}
+
+.form-select {
+    padding-top: 1.1rem !important;
+}
+
+.form-select {
+    width: 297px;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.select2-selection__rendered {
+    line-height: 44px !important;
+    width: 297px !important;
+}
+
+.select2 {
+    width: 297px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 42px !important;
+    border: none;
+    box-shadow: 0px 3px 6px #00000012;
+    border-radius: 2px;
+}
+
+.span-select2-document-type {
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+.span-select2-document-type img {
+    width: 10% !important;
+}
+
+.select2-selection__arrow {
+    height: 44px !important;
+}
+
+.styles_container_input_number_ducumnet {
+    width: 100% !important;
+    height: 44px !important
+}
+
+.styles_container_input_phone_number {
+    width: 100% !important;
+    height: 44px !important
+}
+
+.styles-select-tam {
+    width: 377px !important;
+}
+
+.styles_container_input_user {
+    width: 377px;
+}
+
+.styles_container_input_date_insert {
+    width: 377px;
+}
+
+.styles-font-input {
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #a9a0a0;
+    opacity: 1;
+}
+
+.choose-role {
+    margin-left: 4%;
+    width: 455px;
+    height: 577px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000001F;
+    opacity: 1;
+}
+
+.btn-new-rol {
+    width: 154px;
+    height: 41px;
+    background: #4286D4 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px;
+    opacity: 1;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: transparent;
+}
+
+.btn-new-rol i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.container-choose-role {
+    padding-top: 25px;
+    padding-right: 35px;
+    padding-bottom: 27.5px;
+    border-bottom: 1px solid #E9E9E9;
+    opacity: 1;
+}
+
+.container-choose-role div {
+    display: flex;
+    align-items: center;
+}
+
+.input-search-rol input {
+    width: 232px;
+    height: 47px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #C8C8C8;
+    border-radius: 3px;
+    opacity: 1;
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+.input-search-rol label {
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #BFBFBF;
+    opacity: 1;
+}
+
+.container-roles-search-all {
+    padding-top: 20px;
+    padding-left: 22.27px;
+    padding-right: 20px;
+    margin-bottom: 28px;
+}
+
+.container-roles-search-all div label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-styles-rol {
+    display: flex;
+    align-items: end;
+}
+
+.container-rol-existent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-rol-existent-div {
+    width: 396px;
+    height: 383px;
+}
+
+.new-rol {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E9E9E9;
+    padding-bottom: 20px;
+    margin-bottom: 16.43px;
+}
+
+.new-rol div label {
+    text-align: left;
+    font: normal normal normal 16px/18px "Ubuntu";
+    letter-spacing: 0px;
+    color: #5D5D5D;
+    opacity: 1;
+}
+
+.new-rol div input {
+    width: 15px;
+    height: 15px;
+    margin-right: 9.91px;
+}
+
+.new-rol button i {
+    color: #4286D4;
+}
+
+.new-rol button {
+    background: transparent;
+    border: transparent;
+}
+
+.container-search-all-rol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-search-all-rol div {
+    width: 396px;
+}
+
+.container-modal-image{
+    width: 474px !important;
+    height: 474px !important;
+    border-style: solid;
+    border-width: 71px;
+    border-color: #515151;
+    border-radius: 11px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.container-modal {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+#user_edit_image,
+#user_edit_image_update {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+input.error {
+    border: 1px solid red !important;
+    font-weight: 300 !important;
+}
+
+span.error {
+    font-weight: 300 !important;
+    color: red !important;
+}
+
+span.error {
+    font-weight: 300 !important;
+    color: red !important;
+}
+
+select.error {
+    border: 1px solid red !important;
+    font-weight: 300 !important;
+    color: red !important;
+}
+textarea.error{
+    border: 1px solid red !important;
+    font-weight: 300 !important;
+    color: red !important;
+}
+
+.error {
+    font-weight: 300 !important;
+    border: red !important;
+}
+
+#display_update_users {
+    margin-top: 98px;
+    padding-left: 2%;
+    display: none;
+    height: 100vh;
+}
+
+#display_user_view {
+    margin-top: 98px;
+    padding-left: 2%;
+    display: none;
+    height: 100vh;
+}
+
+.color_degraded {
+    background: linear-gradient(180deg, #4185D3 0%, #034189 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.conteinder-user-view {
+    margin-top: 5%;
+    display: flex;
+}
+
+.conteinder-user-view-info {
+    width: 50%;
+    display: flex;
+    padding-right: 2%;
+}
+
+.conteinder-user-view-rol {
+    width: 50%;
+    display: flex;
+    align-items: end;
+    padding-right: 2%;
+}
+
+.contorl-acces {
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #B1C3DA;
+    opacity: 1;
+}
+
+.conteinder-user-view-rol-container {
+    width: 100%;
+    height: 321px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    opacity: 1;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.conteinder-user-view-info-div {
+    width: 100%;
+    height: 327px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    opacity: 1;
+    display: grid;
+    grid-template-columns: 20% auto;
+}
+
+.container-img-use-view {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15%;
+}
+
+.container-info-use-view {
+    padding-top: 5%;
+    padding-left: 13%;
+}
+
+.container-info-use-view H3,
+.conteinder-user-view-rol-container H3 {
+    text-align: left;
+    font: normal normal 600 25px/35px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.container-info-use-view H5 {
+    text-align: left;
+    font: normal normal normal 20px/27px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.container-info-use-view label {
+    text-align: left;
+    font: italic normal normal 18px/25px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #4286D4;
+    opacity: 1;
+}
+
+.container-info-use-view-icons-info {
+    padding-top: 5%;
+}
+
+.container-info-use-view-logo-company div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-info-use-view-icons-info label {
+    padding-bottom: 2%;
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+}
+
+.container-info-use-view-logo-company {
+    display: flex;
+    align-items: end;
+    padding-bottom: 20%;
+}
+
+.container-info-use-view-logo-company label {
+    text-align: left;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.container-info-use-view-logo-company-div {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 9px #00000029;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.container-info-use-view-logo-company-div img {
+    width: 90%;
+    height: 12%;
+}
+
+.roles-view {
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    border-bottom: 1px solid #E9E9E9;
+    padding-bottom: 2%;
+    margin-bottom: 4%;
+}
+
+.roles-view-name label {
+    text-align: left;
+    letter-spacing: 0px;
+    font: normal normal 300 16px/19px "Ubuntu";
+    color: #5D5D5D;
+    font-size: 18px;
+}
+
+.roles-view-date label {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: left;
+    font: italic normal 300 16px/19px "Ubuntu";
+    letter-spacing: 0px;
+    color: #5D5D5D;
+    opacity: 1;
+    font-size: 18px;
+}
+
+.roles-view-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.roles-view-icon button {
+    border: transparent;
+    background: transparent;
+}
+
+.roles-view-icon button:hover {
+    border: transparent;
+    background: transparent;
+}
+
+.roles-view-icon i {
+    display: flex;
+    align-items: center;
+    color: #023F87;
+    font-size: 18px;
+}
+
+.conteinder-user-view-rol-container h3 {
+    margin-top: 4%;
+    margin-bottom: 6%;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: #023F87;
+}
+
+.modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-title div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0 !important;
+}
+
+.modal-title i {
+    font-size: 45px;
+}
+
+.modal-title span {
+    text-align: center;
+    font: italic normal bold 25px/35px "SemplicitaPro-italy";
+    letter-spacing: 0px;
+    color: #044189;
+    opacity: 1;
+    font-size: 25px;
+    padding-left: 2%;
+}
+
+.subtitle label {
+    text-align: center;
+    font: normal normal normal 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.subtitle {
+    margin-top: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.module-rol {
+    width: 802px;
+    height: 513px;
+    /* UI Properties */
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 8px;
+    opacity: 1;
+    margin-bottom: 3%;
+}
+
+#control_detail .modal-dialog .modal-content {
+    width: 929px !important;
+    height: 733px !important;
+}
+
+.display-img-cards{
+    display: flex;
+    justify-content: center;
+}
+
+#control_detail {
+    opacity: 1;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 8px;
+    opacity: 1;
+}
+
+.modal {
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
+}
+
+.conteiner-module-rol {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.module-rol-title p {
+    text-align: center;
+    font: normal normal 600 12px/16px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #6C6C6C;
+    opacity: 1;
+}
+
+.module-rol-title {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.module-rol-icon i {
+    color: #4286D4;
+}
+
+.module-rol-icon span {
+    text-align: center;
+    font: normal normal medium 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.module-rol-icon {
+    padding-left: 2%;
+}
+
+.module-rol-sub-module {
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: 2%;
+    background: #EEEEEE 0% 0% no-repeat padding-box;
+    margin-right: 2%;
+    width: 772px;
+    height: 30px;
+}
+
+.module-rol-sub-module label {
+    margin-left: 2%;
+    display: flex;
+    align-items: center;
+    font: normal normal 600 12px/16px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #6C6C6C;
+    opacity: 1;
+}
+
+.module-rol-sub-module-name {
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 772px;
+    border-bottom: 1px solid #ECECEC;
+    padding-bottom: 1.3%;
+}
+
+.module-rol-sub-module-name label {
+    text-align: center;
+    font: normal normal medium 14px/20px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.actions-sub-module {
+    display: flex;
+    flex-direction: column;
+}
+
+.actions-sub-module label {
+    text-align: center;
+    font: normal normal medium 14px/20px "SemplicitaPro" !important;
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+
+.conteiner-module-rol {
+    height: 563px;
+    overflow: auto
+}
+
+.conteiner-module-rol::-webkit-scrollbar {
+    background-color: #E8E8E8;
+    width: 15px;
+    border-radius: 2%;
+}
+
+.conteiner-module-rol::-webkit-scrollbar-thumb {
+    background-color: #828282;
+    border-radius: 5px;
+}
+
+.coteniner-modal label {
+    display: flex;
+    justify-content: center;
+    font: italic normal bold 25px/35px "SemplicitaProbold";
+    letter-spacing: 0px;
+    color: rgba(4, 65, 137, 1);
+    opacity: 1;
+    margin-top: 4%;
+}
+
+.container-finish-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-finish-modal label {
+    text-align: center !important;
+    font: normal normal normal 16px/22px "SemplicitaPro" !important;
+    letter-spacing: 0px !important;
+    color: #707070 !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+    margin-top: 40px;
+    margin-bottom: 8%;
+    width: 319px;
+}
+
+#btn-close-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#btn-close-modal button {
+    background: #3072BE 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    opacity: 1;
+    width: 248px;
+    height: 41px;
+    text-align: left;
+    font: normal normal 600 16px/22px "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    font-size: 16px;
+    text-align: center;
+}
+
+.img-user-traza {
+    width: 60px;
+    height: 60px;
+    background: #FFC10E 0% 0% no-repeat padding-box;
+    margin-left: 5%;
+    border-radius: 50%;
+}
+
+.img-user-traza img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+.modal {
+    z-index: 1050 !important;
+}
+
+.colorblue {
+    color: #4286D4;
+}
+
+.option-dropdown-filter {
+    width: 177px;
+    margin-right: 9px;
+}
+
+.option-dropdown-filter button {
+    width: 177px !important;
+    margin-right: 9px;
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+    border: 1px solid #C8C8C8 !important;
+    border-radius: 2px;
+}
+
+.dropdown-menu li {
+    margin-left: 5%;
+    text-align: left;
+    letter-spacing: 0px;
+    color: #5D5D5D;
+    opacity: 1;
+}
+
+.dropdown-menu li input {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #AEAEAE;
+}
+
+.option-dropdown-filter i {
+    float: right;
+    margin-top: 5px;
+    margin-right: 19.8px;
+}
+
+.option-dropdown-filter input {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+.option-dropdown-filter label {
+    float: left;
+    color: #C8C8C8 !important;
+    margin-left: 14px;
+    font-size: 16px;
+}
+
+.option-dropdown-filter li:hover {
+    background-color: transparent !important;
+}
+
+.user-status {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #AEAEAE;
+}
+
+.fa-caret-down {
+    color: #BFBFBF !important;
+    font-size: 18px !important;
+}
+
+.btn-dropdown-serach {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logout span i{
+    display: flex;
+    align-items: center;
+}
+
+.conteinder-user-name-img{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.conteiner_form_div {
+    background: #EFF2F3 0% 0% no-repeat padding-box;
+}
+
+footer{
+    background: #EFF2F3 0% 0% no-repeat padding-box;
+}
+
+.img_input_equiment_previous{
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+}
+.img_previous_equiment{
+    width: 100%;
+    justify-content: center;
+}
+.container-two-select-styles{
+    position: relative;
+    margin-bottom: 23px !important;
+    display: flex;
+    justify-content: space-between;
+}.container-two-select-styles select{
+     width: 98% !important;
+ }
+.right{
+    float: right;
+}
+@media screen and (min-width: 1700px) {
+    .conteiner_form_div {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+@media screen and (max-width: 1699px) {
+    .conteiner_form_div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}

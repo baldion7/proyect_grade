@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div id="content">
+    <h1 id="content_h1">
+
+    </h1>
+
+    <div id="mensaje">
+        <p style="text-align:justify">
+            Estimado usuario para poder acceder a la plataforma de mantenimientos de equipos debe hacer uso del formulario
+        </p>
+        <p style="text-align:justify; font-weight:bold">
+            <br>
+            <br>
+            <br>
+            <br>
+        </p>
+    </div>
+    <br>
+    <form action="/api/login" method="post">
+    <div id="cajalogueo1">
+
+        <p>
+            Usuario
+            <input type="text" name="email" id="email" size="15" value>
+        </p>
+    </div>
+    <div id="cajalogueo2">
+        <p>
+            Contraseña
+            <input type="password" name="password" id="password" size="15" value>
+        </p>
+    </div>
+    <div id="botones">
+        <a id="btn-recordar" type="button"  class="otros">Recordar contraseña</a>
+        <a onclick="redirigir()" type="button" id="btn-restablecer"  class="otros">Restablecer</a>
+        <button id="btn-login" type="submit" >Ingresar</button>
+    </div>
+    </form>
+</div>
+<script>
+    function redirigir() {
+        window.location.href = "/forgot-password";
+    }
+</script>
+</body>
+
+</html>
