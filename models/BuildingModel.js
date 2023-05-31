@@ -12,7 +12,19 @@ export class Building extends Model {
                 Name: {
                     type: DataTypes.STRING,
                     allowNull: false
-                }
+                },
+                Address: {
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                Description: {
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                Dateconstruction: {
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
             },
             {
                 sequelize,

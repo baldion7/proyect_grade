@@ -1,5 +1,4 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
-
 export class Campus extends Model {
     static init(sequelize) {
         return super.init(

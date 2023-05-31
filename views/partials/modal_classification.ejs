@@ -1,0 +1,108 @@
+<div>
+    <div class="modal fade" id="modal_new_classification" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-plus fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro que deseas crear este nueva clasificacion?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button id="modal_create_classification" type="button" class="btn btn-secondar"
+                                data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete_display_classification" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-trash-alt fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro/a que deseas eliminar esta clasificacion?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button id="modal_delete_classification" type="button" class="btn btn-secondar"
+                                data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_update_classification" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-pencil fa-8x"></i>
+                        </div>
+                        <label for="">¿Terminaste tu edición?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro/a que deseas guardar los cambios realizados sobre esta
+                                clasificacion?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button type="button" class="btn btn-secondar " id="modal-edit-classification"
+                                data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="view_display_typesequipment" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+
+                            <i class="fa-solid fa-arrow-up-short-wide fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro/a que deseas revisar los typos de equipos?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <form id="formbuilding" action="/typesequipment" method="post">
+                            <input type="text" name="ID" id="id_typesequipment">
+                            <button type="submit" id="submitypesequipment"></button>
+                        </form>
+                        <button id="modal_view_typesequipment" type="button" class="btn btn-secondar"
+                                data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

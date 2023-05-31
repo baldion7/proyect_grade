@@ -1,9 +1,9 @@
-import {AllowsClassifications} from "../models/AllowsClassifications.js";
+import {AllowsClassificationsModel} from "../models/AllowsClassificationsModel.js";
 
 export const CreateAllowsClassifications =async(req, res)=>{
     const {spaceId,classificationId} = req.body;
     try {
-        const respuesta =await AllowsClassifications.create({
+        const respuesta =await AllowsClassificationsModel.create({
             classificationId:classificationId,
             spaceId:spaceId
         });
@@ -15,7 +15,7 @@ export const CreateAllowsClassifications =async(req, res)=>{
 
 export const GetAllowsClassifications = async (req, res) => {
     try {
-        const response = await AllowsClassifications.findAll({
+        const response = await AllowsClassificationsModel.findAll({
             where: {
                 spaceId: req.params.id
             }

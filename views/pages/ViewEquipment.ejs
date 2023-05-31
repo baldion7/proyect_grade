@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-start display_view_setting">
     <%- include('../partials/left_menu') %>
     <div class="display_content_modules">
-        <div id="content_equipment">
+        <div class="content_views-principal" id="content_equipment">
             <div>
                 <span class="titles_on_view">Equipos de la UTS</span>
             </div>
@@ -32,7 +32,7 @@
             <br>
             <br>
             <div>
-                <div class='card' id='cards_content_equiment'>
+                <div class='card cards_content' id='cards_content_equiment'>
                     <div style="display:flex;justify-content:center;align-items:center">
                         <div style="height:100%;width:auto; display:flex;">
                             <div class="sk-cube-grid">
@@ -52,7 +52,7 @@
                 <div class="creator">
                     <div aria-label="Page navigation example" class="pagination" id="pagination_equiment">
                         <label id="label_pagination">Pagina
-                            <input type="number" value="1" id="input_pagination_equiment">
+                            <input type="number" value="1" id="input_pagination_equiment" class="input_pagination">
                             de
                             <label id="paginacion_equiment_all"></label>
                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -68,9 +68,9 @@
                 </div>
             </div>
         </div>
-        <div id="display_new_equipment">
-            <button class="btn-back-to-equipment">VOLVER</button>
-            <form action="" method="post" id="form_new_equipment">
+        <div class="display_new" id="display_new_equipment">
+            <button class="btn-back-to">VOLVER</button>
+            <form  method="post" id="form_new_equipment">
                 <div id="resultado"></div>
                 <br />
                 <br />
@@ -97,27 +97,11 @@
                                        placeholder="Nombre">
                                 <label for="input_new_equipment_name">Nombre del equipo</label>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control styles-font-input"
-                                       name="Maker_equipment_new" id="input_new_equipment_Maker"
-                                       placeholder="Fabricante">
-                                <label for="input_new_equipment_Maker">Fabricante del equipo</label>
-                            </div>
-                            <div class="container-two-input-styles mb-3">
-                                <div class="form-floating styles_container_input_document_type">
-                                    <select class="form-select styles-font-input" name="select_new_equipment_classification"
-                                            id="input_new_equipment_classification">
-                                        <option value="" id="input_new_users_rol" selected disabled></option>
-                                    </select>
-                                    <label class="form-control-placeholder"
-                                           for="input_new_equipment_classification">Clasificación del equipo</label>
-                                </div>
-                            <div class="form-floating styles_container_input_number_ducumnet">
+                            <div class="form-floating  mb-3">
                                 <input type="text" class="form-control styles-font-input"
                                        name="Model_equipment_new" id="input_new_equipment_Model"
                                        placeholder="Modelo">
                                 <label class="label-two-select-color" for="input_new_equipment_Model">Modelo del equipo</label>
-                            </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control styles-font-input"
@@ -130,55 +114,25 @@
                                        name="price_equipment_new" id="input_new_users_price" placeholder="Precio">
                                 <label for="input_new_users_price">Precio del equipo</label>
                             </div>
-                            <div class="container-two-input-styles mb-3">
-                                <div class="form-floating styles_container_input_document_type">
-                                    <select class="form-select styles-font-input" name="campus_new_equipment"
-                                            id="input_new_equipment_campus">
-                                        <option value="1" id="input_new_users_rol" selected disabled></option>
-                                    </select>
-                                    <label class="form-control-placeholder"
-                                           for="input_new_equipment_campus">Sede de locacion del equipo</label>
-                                </div>
-                                <div class="form-floating styles_container_input_number_ducumnet">
+                            <div class="form-floating mb-3">
                                     <input type="datetime-local" class="form-control styles-font-input"
                                            name="date_shoping_new_equipment" id="date_shoping_new_equipment" >
                                     <label for="date_shoping_new_equipment">Fecha de compra del equipo</label>
-                                </div>
                             </div>
                             <div class="container-two-select-styles mb-3">
                                 <div class="form-floating styles_container_input_number_ducumnet">
-                                    <select class="form-select styles-font-input" name="building_new_equipment"
-                                            id="input_new_equipment_building">
-                                        <option value="1" id="input_new_users_rol" selected disabled></option>
+                                    <select class="form-select styles-font-input" name="select_new_equipment_classification"
+                                            id="input_new_equipment_classification">
                                     </select>
                                     <label class="form-control-placeholder"
-                                           for="input_new_equipment_building">Edifcio de locacion del equipo</label>
+                                           for="input_new_equipment_classification">Clasificación del equipo</label>
                                 </div>
                                 <div class="form-floating styles_container_input_number_ducumnet">
-                                    <select class="form-select styles-font-input right" name="floor_new_equipment"
-                                            id="input_new_equipment_floor">
-                                        <option value="1" id="input_new_users_rol" selected disabled></option>
+                                    <select class="form-select styles-font-input right" name="typesequipmente_new_equipment"
+                                            id="input_new_equipment_types">
                                     </select>
                                     <label class="form-control-placeholder"
-                                           for="input_new_equipment_building">Piso de locacion del equipo</label>
-                                </div>
-                            </div>
-                            <div class="container-two-select-styles mb-3">
-                                <div class="form-floating styles_container_input_number_ducumnet">
-                                    <select class="form-select styles-font-input" name="area_new_equipment"
-                                            id="input_new_equipment_area">
-                                        <option value="1" id="input_new_users_rol" selected disabled></option>
-                                    </select>
-                                    <label class="form-control-placeholder"
-                                           for="input_new_equipment_building">Area de locacion del equipo</label>
-                                </div>
-                                <div class="form-floating styles_container_input_number_ducumnet">
-                                    <select class="form-select styles-font-input right" name="space_new_equipment"
-                                            id="input_new_equipment_space">
-                                        <option value="1" id="input_new_users_rol" selected disabled></option>
-                                    </select>
-                                    <label class="form-control-placeholder"
-                                           for="input_new_equipment_building">Espacio de locacion del equipo</label>
+                                           for="input_new_equipment_building">Tipo de equipo</label>
                                 </div>
                             </div>
                             <div class="form-floating">
@@ -195,20 +149,32 @@
                         </div>
                     </div>
             </form>
-            <form action="" method="post" id="for_new_paremters ">
+            <form  method="post" id="for_new_paremters">
+                <br />
+                <br />
+                <br />
+                <div class="conteiner_form_div">
+                    <div class="conteiner_form_module_details" >
+                        <div class="user-information" id="details-equipment">
+                        </div>
+                    </div>
+                </div>
                 <div>
-
+                    <div class="creator">
+                        <br/>
+                        <button type="submit" class="btn-save ">Continuar</button>
+                    </div>
                 </div>
             </form>
         </div>
-        <div id="display_update_equipment">
-            <button class="btn-back-to-equipment">VOLVER</button>
-            <form action="" method="post" id="form_update_equipment">
+        <div class="display_new" id="display_update_equipment">
+            <button class="btn-back-to">VOLVER</button>
+            <form  method="post" id="form_update_equipment">
                 <div id="resultado"></div>
                 <br />
                 <br />
                 <br />
-                <span class="titles_on_view">Crear nuevo equipo</span>
+                <span class="titles_on_view">Editar equipo</span>
                 <div class="conteiner_form_div">
                     <div class="conteiner_form_module">
                         <div>
@@ -218,7 +184,7 @@
                                 </div>
                                 <button id="btn_activate_modal_update_equipment_img myBtn" class="img-active-modal"
                                         type="button" data-bs-toggle="modal"
-                                        data-bs-target="#modal_img_profile_container">
+                                        data-bs-target="#modal_img_profile_container_update_equipment">
                                     <i class="fa-solid fa-pencil"></i></button>
                             </div>
                             <input type="hidden"  id="input_img_update_equipment" name="img_update_equipment_name">
@@ -232,24 +198,24 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control styles-font-input"
-                                       name="Maker_equipment_update" id="input_update_equipment_Maker"
-                                       placeholder="Fabricante">
-                                <label for="input_update_equipment_Maker">Fabricante del equipo</label>
+                                       name="Model_equipment_update" id="input_update_equipment_Model"
+                                       placeholder="Modelo">
+                                <label class="label-two-select-color" for="input_update_equipment_Model">Modelo del equipo</label>
                             </div>
-                            <div class="container-two-input-styles mb-3">
-                                <div class="form-floating styles_container_input_document_type">
+                            <div class="container-two-select-styles mb-3">
+                                <div class="form-floating styles_container_input_number_ducumnet">
                                     <select class="form-select styles-font-input" name="select_update_equipment_classification"
-                                            id="input_update_equipment_classification">
-                                        <option value="" id="input_update_users_rol" selected disabled></option>
+                                            id="input_update_equipment_classification" disabled>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_classification">Clasificación del equipo</label>
                                 </div>
                                 <div class="form-floating styles_container_input_number_ducumnet">
-                                    <input type="text" class="form-control styles-font-input"
-                                           name="Model_equipment_update" id="input_update_equipment_Model"
-                                           placeholder="Modelo">
-                                    <label class="label-two-select-color" for="input_update_equipment_Model">Modelo del equipo</label>
+                                    <select class="form-select styles-font-input right" name="typesequipmente_update_equipment"
+                                            id="input_update_equipment_types" disabled>
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_update_equipment_types">Tipo de equipo</label>
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
@@ -266,8 +232,7 @@
                             <div class="container-two-input-styles mb-3">
                                 <div class="form-floating styles_container_input_document_type">
                                     <select class="form-select styles-font-input" name="campus_update_equipment"
-                                            id="input_update_equipment_campus">
-                                        <option value="" id="input_update_users_rol" selected disabled></option>
+                                            id="input_update_equipment_campus"disabled>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_campus">Sede de locacion del equipo</label>
@@ -281,9 +246,6 @@
                             <div class="container-two-select-styles mb-3">
                                 <div class="form-floating styles_container_input_number_ducumnet">
                                     <select class="form-select styles-font-input" name="building_update_equipment" id="input_update_equipment_building">
-                                        <option value="0" id="input_update_users_rol" selected disabled></option>
-                                        <option value="1" id="input_update_users_rol" >hola</option>
-                                        <option value="2" id="input_update_users_rol" >hola2</option>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_building">Edifcio de locacion del equipo</label>
@@ -291,7 +253,6 @@
                                 <div class="form-floating styles_container_input_number_ducumnet">
                                     <select class="form-select styles-font-input right" name="floor_update_equipment"
                                             id="input_update_equipment_floor">
-                                        <option value="1" id="input_update_users_rol" selected disabled></option>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_floor">Piso de locacion del equipo</label>
@@ -301,7 +262,6 @@
                                 <div class="form-floating styles_container_input_number_ducumnet">
                                     <select class="form-select styles-font-input" name="area_update_equipment"
                                             id="input_update_equipment_area">
-                                        <option value="1" id="input_update_users_rol" selected disabled></option>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_area">Area de locacion del equipo</label>
@@ -309,7 +269,6 @@
                                 <div class="form-floating styles_container_input_number_ducumnet">
                                     <select class="form-select styles-font-input right" name="space_update_equipment"
                                             id="input_update_equipment_space">
-                                        <option value="1" id="input_update_users_rol" selected disabled></option>
                                     </select>
                                     <label class="form-control-placeholder"
                                            for="input_update_equipment_space">Espacio de locacion del equipo</label>
@@ -335,6 +294,54 @@
                 </div>
             </form>
         </div>
+        <div class="display_view" id="display_equipment_view">
+            <button class="btn-back-to">VOLVER</button>
+            <br/>
+            <br/>
+            <br/>
+            <span class="titles_on_view">Visualizar equipo</span>
+            <div class="conteinder-equipment-view-info">
+                <div class="conteinder-quipment-view">
+                    <div class="conteinder-equipment-view-info-div">
+                        <div class="container-img-equipment-view">
+                            <div class="equipment-img-profile-icon" id="equipment-img-profile">
+
+                            </div>
+                        </div>
+                        <div class="container-info-equipment-view">
+                            <label class='label-spna-font'>Dactos Tecnicos</label>
+                            <label class='styles-cards-font' id="view-equipment-Clasification"></label>
+                            <label class='styles-cards-font' id="view-equipment-TypesEquipment"></label>
+                            <label class='styles-cards-font' id="view-equipment-Name"></label>
+                            <label class='styles-cards-font' id="view-equipment-Model"></label>
+                            <label class='styles-cards-font' id="view-equipment-Brand"></label>
+                            <label class='styles-cards-font' id="view-equipment-fuction"></label>
+                        </div>
+                        <div class="container-equipment-info">
+                            <div class="conatiner-info-user-equipmente-ubications">
+                            </div>
+                            <div class="container-info-user-equipment">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class=conteinder-equipment-view-info">
+                    <div class="conteinder-equipment-view-details" >
+                        <div id="conteiner-equipment-view-details-equipment">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div>
+                    <div class="creator">
+                        <br/>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
     <%- include('../partials/right_menu') %>
 </div>
@@ -348,5 +355,4 @@
 <script src="/js/base64.min.js"></script>
 <script src="/js/ViewEquipment.js"></script>
 </body>
-
 </html>

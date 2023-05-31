@@ -13,10 +13,6 @@ export class Equipment extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
-                Maker: {
-                    type: DataTypes.STRING,
-                    allowNull: false,
-                },
                 Price: {
                     type: DataTypes.STRING,
                     allowNull: false,

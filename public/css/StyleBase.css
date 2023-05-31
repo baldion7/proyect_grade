@@ -237,7 +237,7 @@ nav {
     padding-right: 0.313rem !important;
 }
 
-#content_users, #content_equipment {
+.content_views-principal {
     margin-top: 7.875rem;
     padding-right: 2%;
     padding-left: 2%;
@@ -352,7 +352,7 @@ nav {
     margin-right: 10px;
 }
 
-#cards_content_users, #cards_content_equiment {
+.cards_content {
     background: #EFF2F3;
     border: transparent;
     width: 100%;
@@ -360,7 +360,7 @@ nav {
     overflow: scroll;
     overflow-y: visible;
     overflow-x: hidden;
-    padding-bottom: 85px;
+    padding-bottom: 130px;
 }
 
 #cards_content_users::-webkit-scrollbar, #cards_content_equiment ::-webkit-scrollbar {
@@ -376,7 +376,15 @@ nav {
     height: auto;
     padding-top: 0.938rem;
 }
-
+.content-display-module-cards-3-colums {
+    display: grid;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #F6F6F6;
+    border-radius: 4px;
+    grid-template-columns: 48% 37.5% auto;
+    height: auto;
+    padding-top: 0.938rem;
+}
 #btn_edit_users {
     padding-left: 4%;
 }
@@ -481,6 +489,7 @@ nav {
     height: 100%;
     width: 100%;
     margin-bottom: 0.5%;
+    padding-bottom: 2%;
 }
 
 .creator {
@@ -491,6 +500,8 @@ nav {
     background: #EFF2F3 0% 0% no-repeat padding-box;
 }
 
+
+
 .creator span {
     text-align: left;
     font: italic normal normal 13px/19px "SemplicitaPro-italy";
@@ -499,7 +510,7 @@ nav {
     opacity: 1;
 }
 
-#input_pagination, #input_pagination_equiment {
+.input_pagination, #input_pagination_equiment {
     width: 56px;
     height: 23px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -508,8 +519,8 @@ nav {
     opacity: 1;
 }
 
-#input_pagination,#input_pagination_equiment::-webkit-inner-spin-button,
-#input_pagination,#input_pagination_equiment::-webkit-outer-spin-button {
+.input_pagination::-webkit-inner-spin-button,
+.input_pagination::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -646,7 +657,7 @@ nav {
     display: none;
 }
 
-#display_new_users, #display_new_equipment, #display_update_equipment {
+.display_new {
     display: none;
     margin-top: 98px;
     padding-left: 2%;
@@ -798,7 +809,9 @@ nav {
     grid-template-columns: auto 771px;
     margin-top: 3.438rem;
 }
-
+.conteiner_form_module_details{
+    margin-top: 3.438rem;
+}
 .user-img-profile-icon {
     width: 86px;
     height: 86px;
@@ -812,7 +825,21 @@ nav {
     justify-content: center;
     align-items: center;
 }
-
+.equipment-img-profile-icon {
+    width: 100%;
+    background: #FFC10E 0% 0% no-repeat padding-box;
+    opacity: 1;
+    color: white;
+    border: 3px solid #023F87;
+    font-size: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-view-equipment{
+    width: 100%;
+    height: 100%;
+}
 .img-active-modal {
     width: 26px;
     height: 26px;
@@ -863,12 +890,18 @@ nav {
 #imgInput, #imgInput_update {
     display: none;
 }
-
+.container-equipment-info{
+    display: flex;
+    flex-direction: column;
+    padding-top: 12%;
+}
 #modal_img_profile_container_update .modal-dialog .modal-content {
     width: 613px;
     height: 713px;
 }
-
+#for_new_paremters{
+    display: none;
+}
 .user-information div input , select {
     height: 47px !important;
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -965,6 +998,10 @@ textarea{
     color: #707070;
     opacity: 1;
 }
+.form-select-full {
+    width: 100% !important;
+
+}
 
 .select2-selection__rendered {
     line-height: 44px !important;
@@ -1030,8 +1067,8 @@ textarea{
 
 .choose-role {
     margin-left: 4%;
-    width: 455px;
-    height: 577px;
+    min-width: 455px;
+    min-height: 577px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #0000001F;
     opacity: 1;
@@ -1113,11 +1150,12 @@ textarea{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .container-rol-existent-div {
-    width: 396px;
-    height: 383px;
+    min-width: 396px;
+    min-height: 383px;
 }
 
 .new-rol {
@@ -1222,14 +1260,7 @@ textarea.error{
     border: red !important;
 }
 
-#display_update_users {
-    margin-top: 98px;
-    padding-left: 2%;
-    display: none;
-    height: 100vh;
-}
-
-#display_user_view {
+.display_view {
     margin-top: 98px;
     padding-left: 2%;
     display: none;
@@ -1254,6 +1285,20 @@ textarea.error{
     width: 50%;
     display: flex;
     padding-right: 2%;
+
+}
+.conteinder-quipment-view {
+    width: 100%;
+    display: flex;
+    padding-right: 2%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+.conteinder-equipment-view-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 2%;
 }
 
 .conteinder-user-view-rol {
@@ -1272,14 +1317,28 @@ textarea.error{
 
 .conteinder-user-view-rol-container {
     width: 100%;
-    height: 321px;
+    min-height: 321px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 3px;
     opacity: 1;
     padding-left: 2%;
     padding-right: 2%;
 }
+.conteinder-equipment-view-details{
+    width: 30%;
+    height: 321px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    opacity: 1;
+    padding-left: 4%;
+    padding-right: 2%;
+    padding-top: 3%;
+}
+#conteiner-equipment-view-details-equipment{
+    display: flex;
+    flex-direction: column;
 
+}
 .conteinder-user-view-info-div {
     width: 100%;
     height: 327px;
@@ -1289,35 +1348,74 @@ textarea.error{
     display: grid;
     grid-template-columns: 20% auto;
 }
-
+.conteinder-equipment-view-info-div {
+    width: 100%;
+    height: 327px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    opacity: 1;
+    display: grid;
+    grid-template-columns: 25% auto auto;
+}
 .container-img-use-view {
     display: flex;
     justify-content: flex-end;
     padding-top: 15%;
 }
-
+.container-img-equipment-view {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10%;
+    width: 100%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+}
 .container-info-use-view {
     padding-top: 5%;
     padding-left: 13%;
 }
+.container-info-equipment-view {
+    padding-top: 12%;
+    padding-left: 20%;
+    display: flex;
+    flex-direction: column;
+}
+.container-info-user-equipment{
+    display: flex;
+    flex-direction: column;
+    padding-top: 8%;
 
-.container-info-use-view H3,
+}
+.container-info-use-view H3,.container-info-equipment-view H3,
 .conteinder-user-view-rol-container H3 {
     text-align: left;
-    font: normal normal 600 25px/35px "SemplicitaPro";
+    font-family:  "SemplicitaPro";
     letter-spacing: 0px;
     color: #707070;
     opacity: 1;
 }
 
-.container-info-use-view H5 {
+.container-info-use-view H5,.container-info-equipment-view H5 {
     text-align: left;
-    font: normal normal normal 20px/27px "SemplicitaPro";
+    font-family:"SemplicitaPro";
     letter-spacing: 0px;
     color: #707070;
     opacity: 1;
 }
-
+.container-info-use-view H4,.container-info-equipment-view H4 {
+    text-align: left;
+    font-family: "SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
+.container-info-use-view H6,.container-info-equipment-view H6 {
+    text-align: left;
+    font-family:"SemplicitaPro";
+    letter-spacing: 0px;
+    color: #707070;
+    opacity: 1;
+}
 .container-info-use-view label {
     text-align: left;
     font: italic normal normal 18px/25px "SemplicitaPro";
@@ -1863,7 +1961,10 @@ footer{
     animation-delay: 0.2s;
     background-color: var(--blue500);
 }
+#new_typearea-error,#rol_update_user-error{
+    display: none !important;
 
+}
 @-webkit-keyframes sk-cubeGridScaleDelay {
 
     0%,

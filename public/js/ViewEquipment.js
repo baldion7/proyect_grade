@@ -1,56 +1,60 @@
-var array_equiment = [];
+var array_equipment_update = [];
+var id_input_details_valor=[];
 var copy_array_equiment = [];
 var arrar_temp_equiment = [];
-var newSize = 5;
-var totalPages = 0;
-var contpage = 1;
 var stopInterval = false;
-var cD = 0;
+var array_equiment = [];
+var id_input_details=[]
+var id_typdetails=0;
+var img_base64  = 0;
+var indextemp  = 0;
+var totalPages = 0;
+var id_equipment=0;
+var modal_img  = 0;
+var contpage = 1;
+var newSize = 5;
+var totapa  = 0;
 var intervalcontinua;
-var totapa;
-var array_equipment_update = [];
-var indextemp;
-var modal_img;
-var img_base64;
+var cD = 0;
 $(document).ready(function () {
 
     consult_extra_new()
-    setTimeout(function() {
 
-    var intervalinicial = setInterval(function () {
-        chageequiment();
-        if (arrar_temp_equiment.length > 0) {
-            copy_array_equiment = arrar_temp_equiment;
-            array_equiment = arrar_temp_equiment;
-            console.log(array_equiment)
-            create_page();
-        }
+    setTimeout(function () {
 
-        if (stopInterval) {
-
-            clearInterval(intervalinicial);
-        }
-
-        if (arrar_temp_equiment = !null || arrar_temp_equiment > 0) {
-
-            stopInterval = true;
-        }
-    }, 100);
-
-    intervalcontinua = setInterval(function () {
-        if (JSON.stringify(copy_array_equiment) === JSON.stringify(arrar_temp_equiment)) {
-            chageequiment(array_equiment);
-        } else {
-            array_equiment = arrar_temp_equiment;
-            copy_array_equiment = array_equiment;
-            if (array_equiment.length > 0) {
+        var intervalinicial = setInterval(function () {
+            chageequiment();
+            if (arrar_temp_equiment.length > 0) {
+                copy_array_equiment = arrar_temp_equiment;
+                array_equiment = arrar_temp_equiment;
                 create_page();
             }
 
-        }
-    }, 1000);
+            if (stopInterval) {
 
-}, 1000);
+                clearInterval(intervalinicial);
+            }
+
+            if (arrar_temp_equiment = !null || arrar_temp_equiment > 0) {
+
+                stopInterval = true;
+            }
+        }, 100);
+
+        intervalcontinua = setInterval(function () {
+            if (JSON.stringify(copy_array_equiment) === JSON.stringify(arrar_temp_equiment)) {
+                chageequiment(array_equiment);
+            } else {
+                array_equiment = arrar_temp_equiment;
+                copy_array_equiment = array_equiment;
+                if (array_equiment.length > 0) {
+                    create_page();
+                }
+
+            }
+        }, 1000);
+
+    }, 1000);
 
     $("#cogs").click(function () {
         if (cD == 0) {
@@ -95,14 +99,14 @@ $(document).ready(function () {
         validPassword: "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.",
     });
 
-    $(".btn-back-to-equipment").click(function () {
+    $(".btn-back-to").click(function () {
         $("#display_update_equipment").hide();
         $("#display_new_equipment").hide();
         $("#display_traceability").hide();
-        $("#display_user_view").hide();
+        $("#display_equipment_view").hide();
         $("#content_equipment").show();
-        $("#form_update_users").trigger("reset");
-        $("#form_new_users").trigger("reset");
+        $("#form_update_equipment").trigger("reset");
+        $("#form_new_equipment").trigger("reset");
         $("#user_img_profile_icon-new").html(` <i class="fas fa-file-image fa-1x"></i>`)
     });
 
@@ -118,8 +122,8 @@ $(document).ready(function () {
 
     $(document).on("click", ".btn-view-equipment", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
-        $("#content_users").hide();
-        $("#display_user_view").show();
+        $("#content_equipment").hide();
+        $("#display_equipment_view").show();
         let action = "view"
         consult_equipment(action)
     });
@@ -128,14 +132,14 @@ $(document).ready(function () {
         indextemp = $(e.currentTarget).attr("data-index");
         $("#display_update_equipment").show();
         $("#content_equipment").hide();
+        consult_extra_update()
         let action = "update"
         consult_equipment(action)
-
     });
 
     $("#select_equiment").on("change", function () {
         newSize = parseInt($("#select_equiment").val());
-        create_page(newSize);
+        create_page();
         $("#cards_content_equiment").pagination("refresh");
     });
 
@@ -145,41 +149,40 @@ $(document).ready(function () {
         if (contpage > 1) {
             contpage -= 1;
         }
-        $("#paginacion_equiment_all").val(contpage + "")
+        $("#input_pagination_equiment").val(contpage + "")
     });
+    
 
+    
     $("#btn-pagination-equiment-de").on("click", function () {
         $("#cards_content_equiment").pagination("next");
         $("#cards_content_equiment").pagination("refresh");
         if (contpage < totapa) {
             contpage += 1;
         }
-        $("#paginacion_equiment_all").val(contpage + "")
+        $("#input_pagination_equiment").val(contpage + "")
     });
 
-    $("#paginacion_equiment_all").on("change", function (event) {
+    $("#input_pagination_equiment").on("change", function (event) {
         const pageNumber = parseInt($(this).val());
         if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
             $("#cards_content_equiment").pagination("go", pageNumber);
         } else if (!isNaN(pageNumber) && pageNumber > totalPages) {
             $("#cards_content_equiment").pagination("go", totalPages);
-            $("#paginacion_equiment_all").val(totalPages);
+            $("#input_pagination_equiment").val(totalPages);
         } else if (!isNaN(pageNumber) && pageNumber <= 0) {
             $("#cards_content_equiment").pagination("go", 1);
-            $("#paginacion_equiment_all").val(1);
+            $("#input_pagination_equiment").val(1);
         }
     });
 
     $("#form_new_equipment").validate({
-        ignore: function(index, element) {
+        ignore: function (index, element) {
             return $(element).hasClass('oculto');
-        },
-        rules: {
+        }, rules: {
             input_img_new_equipment_name: {
                 required: true,
             }, name_equipment_new: {
-                required: true,
-            }, Maker_equipment_new: {
                 required: true,
             }, select_new_equipment_classification: {
                 required: true,
@@ -190,16 +193,10 @@ $(document).ready(function () {
             }, brand_equipment_new: {
                 required: true,
             }, price_equipment_new: {
-                required: true, minlength: 3,number: true,digits: true,
-            }, campus_new_equipment: {
-                required: true,
+                required: true, minlength: 3, number: true, digits: true,
             }, area_new_equipment: {
                 required: true,
-            }, building_new_equipment: {
-                required: true,
-            }, floor_new_equipment: {
-                required: true,
-            }, space_new_equipment: {
+            }, typesequipmente_new_equipment: {
                 required: true,
             }, date_shoping_new_equipment: {
                 required: true,
@@ -216,89 +213,121 @@ $(document).ready(function () {
 
     });
 
+    $("#form_update_equipment").validate({
+        ignore: function (index, element) {
+            return $(element).hasClass('oculto');
+        }, rules: {
+            input_img_update_equipment_name: {
+                required: true,
+            }, name_equipment_update: {
+                required: true,
+            }, select_update_equipment_classification: {
+                required: true,
+            }, country_user_update: {
+                required: true,
+            }, Model_equipment_update: {
+                required: true,
+            }, brand_equipment_update: {
+                required: true,
+            }, price_equipment_update: {
+                required: true, minlength: 3, number: true, digits: true,
+            }, area_update_equipment: {
+                required: true,
+            }, typesequipmente_update_equipment: {
+                required: true,
+            }, date_shoping_update_equipment: {
+                required: true,
+            }, fuction_update_equipment: {
+                required: true,
+            }, img_update_equipment_name: {
+                required: true,
+            }
+        }, errorElement: "span",
+
+        submitHandler: function () {
+            $("#modal_update_equipment").modal("show");
+        },
+
+    });
+
     $("#modal_create_equipment").click(function () {
-        console.log("hola")
+        $("#form_new_equipment").hide()
+        $("#for_new_paremters").show()
         let Named = $("#input_new_equipment_name").val();
-        let Marker = $("#input_new_equipment_Maker").val();
-        let classificationId = $("#input_new_equipment_classification").val();
+        let ClassificationId = $("#input_new_equipment_classification").val();
         let Model = $("#input_new_equipment_Model").val();
         let Brand = $("#input_new_equipment_brand").val();
         let Price = $("#input_new_users_price").val();
-        let spaceId = $("#input_new_equipment_space").val();
         let DataShoping = $("#date_shoping_new_equipment").val();
         let Functionn = $("#fuction_new_equipment").val();
+        let TypesEquipmentId = $("#input_new_equipment_types").val();
         let ImgEquipment = img_base64;
-        var file = $('#imgInput')[0].files[0];
         $.ajax({
             url: "/api/equipment", type: "post", data: {
-               name:Named,
-                maker:Marker,
-                price:Price,
-                model:Model,
-                brand:Brand,
-                datashoping:DataShoping,
-                fuction:Functionn,
-                imgequipment:ImgEquipment,
-                spaceid:spaceId,
-                classificationid:classificationId,
+                name: Named,
+                price: Price,
+                model: Model,
+                brand: Brand,
+                datashoping: DataShoping,
+                fuction: Functionn,
+                imgequipment: ImgEquipment,
+                classificationid: ClassificationId,
+                typesequipmentid: TypesEquipmentId
             }, success: function (respuesta) {
-                console.log("hola")
-                console.log(respuesta)
+                id_equipment=respuesta.Id
+                console.log(id_equipment)
             }, error: function (error) {
                 console.log(error)
             }
 
         });
-        $(".btn-back-to-equipment").click()
+        $("#input_img_new_equipment").val(null);
         $("#user_img_profile_icon-new").html(` <i class="fas fa-file-image fa-1x"></i>`)
     });
 
-    $("#modal-edit").click(function () {
-        let name_user = $("#input_update_users_name").val();
-        let lastname = $("#input_update_users_lastname").val();
-        let document_type = $("#input_update_users_document_type").val();
-        let number_ducument = $("#input_update_users_number_ducument").val();
-        let country = $("#input_update_users_country").val();
-        let phone_number = $("#input_update_users_phone_number").val();
-        let email = $("#input_update_users_email").val();
-        let charge = $("#input_update_users_charge").val();
-        let rol = $('input[name="rol_update_user"]:checked').val();
+    $("#modal-edit-equipment").click(function () {
+        let Named = $("#input_update_equipment_name").val();
+        let Model = $("#input_update_equipment_Model").val();
+        let Brand = $("#input_update_equipment_brand").val();
+        let Price = $("#input_update_users_price").val();
+        let spaceId = $("#input_update_equipment_space").val();
+        let DataShoping = $("#date_shoping_update_equipment").val();
+        let Functionn = $("#fuction_update_equipment").val();
+        let TypesEquipmentId = $("#input_update_equipment_types").val();
+        let ImgEquipment = img_base64;
 
         $.ajax({
-            url: "/api/users/" + array_equipment_update.id, type: "patch", data: {
-                name: name_user,
-                lastname: lastname,
-                document_type: document_type,
-                ducument: number_ducument,
-                country: country,
-                phone_number: phone_number,
-                email: email,
-                charge: charge,
-                rol: rol,
+            url: "/api/equipment/" + indextemp, type: "patch", data: {
+                name: Named,
+                price: Price,
+                model: Model,
+                brand: Brand,
+                datashoping: DataShoping,
+                fuction: Functionn,
+                imgequipment: ImgEquipment,
+                spaceid: spaceId,
+                typesequipmentid: TypesEquipmentId
             }, success: function (respuesta) {
-
             }, error: function (error) {
                 console.log(error)
             }
+
         });
         $(".btn-back-to").click()
+        $("#user_img_profile_icon-update").html(` <i class="fas fa-file-image fa-1x"></i>`)
     });
 
-    $('#user_company_all').click(function () {
-        $('.user-company').prop('checked', false)
-        // updatePagination(filter,status_user_list)
-    })
 
-    $('#search_users').keyup(function () {
-        var search = $('#search_users').val();
+    $('#search_equiment').keyup(function () {
+        var search = $('#search_equiment').val();
         if (search.length > 2) {
-            searchuser(search);
-            create_page(newSize);
+            searchequipment(search);
+            create_page();
         }
-        if ($('#search_users').val().trim() == '') {
+        if ($('#search_equiment').val().trim() == '') {
             array_equiment = arrar_temp_equiment;
-            searchuser(search);
-            create_page(newSize);
+            searchequipment(search);
+            create_page();
         }
     })
 
@@ -315,30 +344,28 @@ $(document).ready(function () {
     })
 
     $("#btn_activate_modal_new_equipment_img").click(function () {
-      modal_img="nuevo";
+        modal_img = "nuevo";
     })
 
     $("#btn_save_img_user").click(function () {
         var url_img = $("#imgInput").val();
-        console.log($("#imgInput"));
         $("#input_img_new_equipment").val(url_img);
+
+    });
+
+    $("#btn_save_img_equipment").click(function () {
+        var url_img = $("#imgInput_update").val();
+        $("#input_img_update_equipment").val(url_img);
 
     });
 
     $("#imgInput").change(function () {
         var $inputImagen = $('#imgInput');
-        // Verificar si se seleccionó una imagen
         if ($inputImagen[0].files && $inputImagen[0].files[0]) {
-            // Crear objeto FileReader
             const reader = new FileReader();
-
-            // Escuchar evento load del FileReader
             reader.onload = (event) => {
-                // Crear imagen y asignar URL del FileReader
                 const $imagen = $('<img>').attr('src', event.target.result).addClass('img_previous_equiment');
-
-                // Agregar imagen al contenedor de previsualización
-                $('.container-modal-image').empty().append($imagen);
+                $('#container-modal-image-new').empty().append($imagen);
                 $("#user_img_profile_icon-new").html(`<img class="img_input_equiment_previous" src="${event.target.result}" alt="">`)
                 const arrayBuffer = event.target.result;
                 const bytes = new Uint8Array(arrayBuffer);
@@ -347,35 +374,83 @@ $(document).ready(function () {
                     binary += String.fromCharCode(byte);
                 });
                 img_base64 = btoa(binary);
-
             };
-            console.log($inputImagen[0].files[0])
-            // Leer archivo de imagen como URL base64
             reader.readAsDataURL($inputImagen[0].files[0]);
         }
-
         var imagen = $("#imgInput")[0].files[0];
         var lector = new FileReader();
-        lector.onloadend = function() {
+        lector.onloadend = function () {
             var base64 = btoa(lector.result);
-            img_base64=base64
+            img_base64 = base64
         };
         lector.readAsBinaryString(imagen);
     });
 
-    $("#input_new_equipment_campus").change(function () {
-        let id=$("#input_new_equipment_campus").val()
-        $.ajax({
-            url: "/api/building/"+id,
-            type: "post",
-            success: function (response) {
-                let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
+    $("#imgInput_update").change(function () {
+        var $inputImagen = $('#imgInput_update');
+        if ($inputImagen[0].files && $inputImagen[0].files[0]) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const $imagen = $('<img>').attr('src', event.target.result).addClass('img_previous_equiment');
+                $('#container-modal-image-update').empty().append($imagen);
+                $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="${event.target.result}" alt="">`)
+                const arrayBuffer = event.target.result;
+                const bytes = new Uint8Array(arrayBuffer);
+                let binary = '';
+                bytes.forEach((byte) => {
+                    binary += String.fromCharCode(byte);
                 });
-                $("#input_new_equipment_building").html(`<option value="1" id="input_new_users_rol" selected disabled></option>`);
-                $("#input_new_equipment_building").append(imprimi)
+                img_base64 = btoa(binary);
+            };
+            reader.readAsDataURL($inputImagen[0].files[0]);
+        }
+        var imagen = $("#imgInput_update")[0].files[0];
+        var lector = new FileReader();
+        lector.onloadend = function () {
+            var base64 = btoa(lector.result);
+            img_base64 = base64
+        };
+        lector.readAsBinaryString(imagen);
+    });
+
+    $("#input_new_equipment_classification").change(function () {
+        let id = $("#input_new_equipment_classification").val()
+        $.ajax({
+            url: "/api/Classification/TypesEquipment/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value="${opcion.Id}">${opcion.Name}</option>`;
+                });
+                $("#input_new_equipment_types").html(`<option value=""  selected disabled></option>`);
+                $("#input_new_equipment_types").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_update_equipment_classification").change(function () {
+        let id = $("#input_update_equipment_classification").val()
+        $.ajax({
+            url: "/api/Classification/TypesEquipment/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value="${opcion.Id}">${opcion.Name}</option>`;
+                });
+                $("#input_update_equipment_types").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_types").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_new_equipment_types").change(function () {
+        let id = $("#input_new_equipment_types").val()
+        $.ajax({
+            url: "/api/allowstypesdetails/" + id, type: "get", success: function (response) {
+                id_input_details= [];
+                detailsequipment(response)
 
             }, error: function (error) {
                 console.log(error)
@@ -383,79 +458,22 @@ $(document).ready(function () {
         });
     })
 
-    $("#input_new_equipment_building").change(function () {
-        console.log("funciono?")
-        let id=$("#input_new_equipment_building").val()
+    $("#input_update_equipment_campus").change(function () {
+        let imprimi = " ";
         $.ajax({
-            url: "/api/floor/"+id,
-            type: "post",
-            success: function (response) {
-                let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
-                });
-                $("#input_new_equipment_floor").html(`<option value="1" id="input_new_users_rol" selected disabled></option>`);
-                $("#input_new_equipment_floor").append(imprimi)
-            }, error: function (error) {
-                console.log(error)
-            }
-        });
-    })
+            url: "/api/building/campus/user", type: "get", success: function (response) {
 
-    $("#input_new_equipment_floor").change(function () {
-        let id=$("#input_new_equipment_floor").val()
-        $.ajax({
-            url: "/api/area/"+id,
-            type: "post",
-            success: function (response) {
-                let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
+                console.log(response)
+                response.forEach(function (opcion) {
+                    var opcions = opcion.campus.buildings;
+                    opcions.forEach(function (opciont) {
+                        console.log(opciont)
+                        imprimi += `<option value=${opciont.id}>${opciont.name}</option>`;
+                    })
                 });
-                $("#input_new_equipment_area").html(`<option value="1" id="input_new_users_rol" selected disabled></option>`);
-                $("#input_new_equipment_area").append(imprimi)
-            }, error: function (error) {
-                console.log(error)
-            }
-        });
-    })
-
-    $("#input_new_equipment_area").change(function () {
-        let id=$("#input_new_equipment_area").val()
-        $.ajax({
-            url: "/api/space/"+id,
-            type: "post",
-            success: function (response) {
-                let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Technicallocation}</option>`;
-                });
-                $("#input_new_equipment_space").html(`<option value="1" id="input_new_users_rol" selected disabled></option>`);
-                $("#input_new_equipment_space").append(imprimi)
-            }, error: function (error) {
-                console.log(error)
-            }
-        });
-    })
-
-   $("#input_update_equipment_campus").change(function () {
-        let id=$("#input_update_equipment_campus").val()
-        $.ajax({
-            url: "/api/building/"+id,
-            type: "post",
-            success: function (response) {
-                let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value="${opcion.Id}">${opcion.Name}</option>`;
-                });
-                $("#input_update_equipment_building").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_building").html(`<option  selected disabled></option>`);
                 $("#input_update_equipment_building").append(imprimi)
-                $("#input_update_equipment_building").val(array_equipment_update.space.area.floor.building.Id);
-                $('#input_update_equipment_building').trigger('change');
+
             }, error: function (error) {
                 console.log(error)
             }
@@ -463,20 +481,16 @@ $(document).ready(function () {
     })
 
     $("#input_update_equipment_building").change(function () {
-        let id=$("#input_update_equipment_building").val()
+        let id = $("#input_update_equipment_building").val()
         $.ajax({
-            url: "/api/floor/"+id,
-            type: "post",
-            success: function (response) {
+            url: "/api/floors/" + id, type: "get", success: function (response) {
                 let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
+                response.forEach(function (opcion) {
+
+                    imprimi += `<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
                 });
-                $("#input_update_equipment_floor").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_floor").html(`<option  selected disabled></option>`);
                 $("#input_update_equipment_floor").append(imprimi)
-                $("#input_update_equipment_floor").val(array_equipment_update.space.area.floor.Id);
-                $('#input_update_equipment_floor').trigger('change');
             }, error: function (error) {
                 console.log(error)
             }
@@ -484,20 +498,15 @@ $(document).ready(function () {
     })
 
     $("#input_update_equipment_floor").change(function () {
-        let id=$("#input_update_equipment_floor").val()
+        let id = $("#input_update_equipment_floor").val()
         $.ajax({
-            url: "/api/area/"+id,
-            type: "post",
-            success: function (response) {
+            url: "/api/area/floor/" + id, type: "get", success: function (response) {
                 let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Name}</option>`;
                 });
-                $("#input_update_equipment_area").html(`<option value=""  selected disabled></option>`);
+                $("#input_update_equipment_area").html(`<option selected disabled></option>`);
                 $("#input_update_equipment_area").append(imprimi)
-                $("#input_update_equipment_area").val(array_equipment_update.space.area.Id);
-                $('#input_update_equipment_area').trigger('change');
             }, error: function (error) {
                 console.log(error)
             }
@@ -505,24 +514,54 @@ $(document).ready(function () {
     })
 
     $("#input_update_equipment_area").change(function () {
-        let id=$("#input_update_equipment_area").val()
+        let id = $("#input_update_equipment_area").val()
         $.ajax({
-            url: "/api/space/"+id,
-            type: "post",
-            success: function (response) {
+            url: "/api/space/" + id, type: "get", success: function (response) {
                 let imprimi;
-                response.forEach(function(opcion) {
-                    console.log(opcion)
-                    imprimi+=`<option value=${opcion.Id}>${opcion.Technicallocation}</option>`;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Technicallocation}</option>`;
                 });
-                $("#input_update_equipment_space").html(`<option value="" selected disabled></option>`);
+                $("#input_update_equipment_space").html(`<option  selected disabled></option>`);
                 $("#input_update_equipment_space").append(imprimi)
-                $("#input_update_equipment_space").val(array_equipment_update.space.Id);
             }, error: function (error) {
                 console.log(error)
             }
         });
     })
+
+
+    $("#modal_create_equipment_details").click( function () {
+
+        id_input_details.forEach(function(item) {
+            var nuevoObjeto = {
+                "Id":item.Id,
+                "Name": item.Name,
+                "IdInput": "id_details_"+item.Name,
+                "Idequipment":id_equipment,
+                "Valor": $("#" + item.IdInput).val()
+            };
+            id_input_details_valor.push(nuevoObjeto);
+        });
+        id_input_details_valor.forEach(function(item) {
+            $.ajax({
+                url: "/api/Detailsequipment" ,
+                type: "post",
+                data: {
+                    Details:item.Valor,
+                    typesDetailId:item.Id,
+                    equipmentId:item.Idequipment
+                },success: function (response) {
+
+                }, error: function (error) {
+                    console.log(error)
+                }
+            });
+        })
+        $("#form_new_equipment").show()
+        $("#for_new_paremters").hide()
+        $(".btn-back-to").click()
+    });
+
 });
 
 function create_page() {
@@ -535,9 +574,9 @@ function create_page() {
         callback: function (data, pagination) {
             $("#cards_content_equiment").empty();
             data.forEach(function (item) {
-                console.log(array_equiment)
                 let isoDateString = item.createdAt;
                 let date = new Date(isoDateString);
+                console.log(item.typesEquipment)
                 let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
                 $("#cards_content_equiment").append(`<div class='cards-content-module'>
   <div class='content-display-module-cards'>
@@ -551,15 +590,15 @@ function create_page() {
                           </div>
                       </div>
                       <label class='label-spna-font'>
-                          <label class='label-spna-font'>${item.classification.Classification}</label>
-                          <BR>
+                          <label class='label-spna-font'>Datos tecnicos</label>
+                             <br>
+                             <label class='styles-cards-font'>Clasificacion: ${item.typesEquipment.classification.Name}</label>
+                             <br>
                              <label class='styles-cards-font'>Nombre: ${item.Name}</label>
                              <br>
                              <label class='styles-cards-font '>Marca: ${item.Brand}</label>
                              <br>
                              <label class='styles-cards-font '>Modelo: ${item.Model}</label>
-                             <br>
-                             <label class='styles-cards-font '>Fabricante: ${item.Maker}</label>
                           </label>
                       <br>
                   </div>
@@ -581,15 +620,14 @@ function create_page() {
                <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${item.space.Location}</label>
          </div>
      </div>
-      <div id='user_data_rol' >
+       <div id='user_data_rol' >
           <div>
               <label class='label-spna-font'>Datos de ingreso</label>
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${item.user.Name} ${item.user.Lastname}</label>
               <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
-
           </div>
-      </div>                                                 
+      </div>                                                  
           <div class='dropdown'>
               <button class='dropdown-btn'>
                   <img src='img/drop.png' >
@@ -620,13 +658,10 @@ function create_page() {
 
 function chageequiment() {
     $.ajax({
-        url: "/api/equipment",
-        type: "get",
-        success: function(response) {
+        url: "/api/equipment", type: "get", success: function (response) {
             arrar_temp_equiment = response;
 
-        },
-        error: function(xhr, status, error) {
+        }, error: function (xhr, status, error) {
 
         }
     });
@@ -639,38 +674,34 @@ function deleteuser() {
     });
 }
 
-function searchuser(search) {
+function searchequipment(search) {
     $.ajax({
-        url: "/api/searchuser", type: "post", data: {
+        url: "/api/equipment/search", type: "post", data: {
             search: search
         }, success: function (response) {
             array_equiment = response;
-            create_page(newSize);
-        }, error: function (xhr, status, error) {
-
+            create_page();
+        }, error: function (error) {
+            console.log(error)
         }
     });
 }
 
 function consult_equipment(action) {
-    console.log("llegue")
+
     $.ajax({
-        url: "/api/equipment/" + indextemp,
-        type: "get",
-        success: function (response) {
+        url: "/api/equipment/" + indextemp, type: "get", success: function (response) {
             array_equipment_update = response;
-            console.log(array_equipment_update)
             switch (action) {
                 case "update":
-                    console.log(array_equipment_update)
                     fill_inputup_date()
                     break;
+
                 default:
-                    fill_view_user()
+                    fill_view_equipment()
                     break;
             }
-        },
-        error: function(error) {
+        }, error: function (error) {
             console.log(error)
         }
 
@@ -678,80 +709,182 @@ function consult_equipment(action) {
 }
 
 function fill_inputup_date() {
-     $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
-     $("#input_update_equipment_name").val(array_equipment_update.Name);
-     $("#input_update_equipment_Maker").val(array_equipment_update.Maker);
-     $("#input_update_equipment_classification").val(array_equipment_update.classification.Id);
-     $("#input_update_equipment_Model").val(array_equipment_update.Model);
-     $("#input_update_equipment_brand").val(array_equipment_update.Brand);
-     $("#input_update_users_price").val(array_equipment_update.Price);
-     $('#input_update_equipment_campus').val(array_equipment_update.space.area.floor.building.campus.Id);
-     $('#input_update_equipment_campus').trigger('change');
-
-
-     console.log($("#input_update_equipment_building").val())
-
-     console.log($('select[name="building_update_equipment"]').val());
-     $("#input_update_equipment_space").val();
-     $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
-     $("#fuction_update_equipment").val(array_equipment_update.Function);
-
-
-
+    $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
+    $("#input_update_equipment_name").val(array_equipment_update.Name);
+    $("#input_update_equipment_classification").val(array_equipment_update.typesEquipment.classificationId);
+    $('#input_update_equipment_classification').trigger('change');
+    $("#input_update_equipment_Model").val(array_equipment_update.Model);
+    $("#input_update_equipment_brand").val(array_equipment_update.Brand);
+    $("#input_update_users_price").val(array_equipment_update.Price);
+    $('#input_update_equipment_campus').val(array_equipment_update.space.area.floor.building.campus.Id);
+    $('#input_update_equipment_campus').trigger('change');
+    setTimeout(function () {
+        $("#input_update_equipment_types").val(array_equipment_update.typesEquipment.Id);
+    }, 150);
+    setTimeout(function () {
+        $("#input_update_equipment_building").val(array_equipment_update.space.area.floor.building.Id);
+        $('#input_update_equipment_building').trigger('change');
+    }, 70);
+    setTimeout(function () {
+        $("#input_update_equipment_floor").val(array_equipment_update.space.area.floorId);
+        $('#input_update_equipment_floor').trigger('change');
+    }, 140);
+    setTimeout(function () {
+        $("#input_update_equipment_area").val(array_equipment_update.space.areaId);
+        $('#input_update_equipment_area').trigger('change');
+    }, 210);
+    setTimeout(function () {
+        $("#input_update_equipment_space").val(array_equipment_update.spaceId);
+    }, 280);
+    $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
+    $("#fuction_update_equipment").val(array_equipment_update.Function);
+    img_base64=array_equipment_update.ImgEquipment;
+    $("#input_img_update_equipment").val(img_base64);
 
 }
 
-function fill_view_user() {
-    $("#view-user-name").html(array_equipment_update.name + " " + array_equipment_update.lastname);
-    $("#view-user-document").html(array_equipment_update.typedocument + " " + array_equipment_update.document);
-    $("#view-user-burden").html(array_equipment_update.burden);
-    $("#view-user-phone").html(`<i class="fa-solid fa-mobile-screen"id="user_data_personal_staff_icon_mobil"></i>(+` + array_equipment_update.country + ")" + " " + array_equipment_update.phone);
-    $("#view-user-email").html(`<i class="fa-solid fa-envelope"id="user_data_personal_staff_icon_envelope"></i>` + " " + array_equipment_update.email);
-    $("#view-user-rol").html(array_equipment_update.role);
-    $("#view-user-rol-date").html(array_equipment_update.updatedAt);
+function fill_view_equipment() {
+    let isoDateString = array_equipment_update.createdAt;
+    let date = new Date(isoDateString);
+    let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
+    $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificacion: ${array_equipment_update.typesEquipment.classification.Name}`);
+    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Typo de equipo: ${array_equipment_update.typesEquipment.Name}`);
+    $("#view-equipment-Name").html(`<i class="fas fa-cog"></i> Nombre:  ${array_equipment_update.Name}`);
+    $("#view-equipment-Model").html(`<i class="fas fa-cogs"></i> Modelo: ${array_equipment_update.Model}`);
+    $("#view-equipment-Brand").html(`<i class="fa-brands fa-bandcamp"></i> Marca: ${array_equipment_update.Brand}`);
+    $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Funcion: ${array_equipment_update.Function}`);
+    $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usario</label>
+    <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${array_equipment_update.user.Name} ${array_equipment_update.user.Lastname}</label>
+    <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>`)
+    $("#equipment-img-profile").html(`<img class="img-view-equipment" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
+    $(".conatiner-info-user-equipmente-ubications").html(`<label class='label-spna-font'>Ubicacion del equipo</label>
+              <BR>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${array_equipment_update.space.area.floor.building.campus.Name}</label>
+              <BR>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> </i>Edificio: ${array_equipment_update.space.area.floor.building.Name}</label>
+              <BR>
+              <label class='styles-cards-font'><i class="fas fa-elevator"></i> </i>Piso: ${array_equipment_update.space.area.floor.Floornumber}</label>
+              <BR>
+              <label class='styles-cards-font'><i class="fas fa-map-marker"></i> </i>Area: ${array_equipment_update.space.area.Name}</label>
+              <BR>
+              <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${array_equipment_update.space.Location}</label>`)
+    viewdetailsequipment(array_equipment_update.Id)
 }
 
 function consult_extra_new() {
     var imprimi
-    var campus=[];
+    var campus = [];
     $.ajax({
-        url: "/api/campus",
-        type: "get",
-        success: function(response) {
+        url: "/api/campus", type: "get", success: function (response) {
             campus = response;
-            console.log(campus)
-            campus.forEach(function(opcion) {
-                console.log(opcion)
-                imprimi+=`<option value=${opcion.Id}>${opcion.Name}</option>`;
+            campus.forEach(function (opcion) {
+                imprimi += `<option value=${opcion.Id}>${opcion.Name}</option>`;
             });
+            $("#input_new_equipment_campus").html(`<option  selected disabled></option>`);
             $("#input_new_equipment_campus").append(imprimi)
-            $("#input_update_equipment_campus").append(imprimi)
-        },
-        error: function(xhr, status, error) {
+        }, error: function (xhr, status, error) {
 
         }
     });
-    var classification=[];
-   var imprimi_clas;
+
+
+    var classification = [];
+    var imprimi_clas;
     $.ajax({
-        url: "/api/classification",
-        type: "get",
-        success: function(response) {
+        url: "/api/classification", type: "get", success: function (response) {
             imprimi_clas = response;
             console.log(imprimi_clas)
-            imprimi_clas.forEach(function(opcion) {
+            imprimi_clas.forEach(function (opcion) {
                 console.log(opcion)
-                imprimi_clas+=`<option value=${opcion.Id}>${opcion.Classification}</option>`;
+                imprimi_clas += `<option value=${opcion.Id}>${opcion.Name}</option>`;
             });
+            $("#input_new_equipment_classification").html(`<option value=""  selected disabled></option>`);
             $("#input_new_equipment_classification").append(imprimi_clas)
+            $("#input_update_equipment_classification").html(`<option value=""  selected disabled></option>`);
             $("#input_update_equipment_classification").append(imprimi_clas)
-        },
-        error: function(xhr, status, error) {
+        }, error: function (xhr, status, error) {
         }
     });
 
 
 }
- function components_update() {
-     
- }
+
+function consult_extra_update(){
+    $.ajax({
+        url: "/api/campus/user", type: "get", success: function (response) {
+            campus = response;
+            var imprimi=""
+            campus.forEach(function (opcion) {
+                imprimi = `<option value=${opcion.campus.Id}>${opcion.campus.Name}</option>`;
+                console.log(imprimi)
+            });
+            $("#input_update_equipment_campus").html(`<option selected disabled></option>`);
+            $("#input_update_equipment_campus").append(imprimi)
+        }, error: function (xhr, status, error) {
+
+        }
+    });
+}
+
+function detailsequipment(response) {
+    $("#details-equipment").html(" ")
+    response.forEach(function(item) {
+        var nuevoObjeto = {
+            "Id": item.typesDetail.Id,
+            "Name": item.typesDetail.Name.replace(/\s+/g, "-"),
+            "IdInput": "id_details_" + item.typesDetail.Name
+        };
+        id_input_details.push(nuevoObjeto);
+    });
+
+    $("#details-equipment").html("");
+
+    id_input_details.forEach(function(item) {
+        $("#details-equipment").append(`
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control styles-font-input" name="${item.Name}" id="${item.IdInput}" placeholder="${item.IdInput}">
+                <label for="${item.IdInput}">${item.Name}</label>
+            </div>
+        `);
+    });
+
+    $("#for_new_paremters").validate({
+        rules: getValidationRules(),
+        errorElement: "span",
+        submitHandler: function() {
+            $("#modal_new_equipment_details").modal("show");
+        }
+    });
+}
+
+function getValidationRules() {
+    var rules = {};
+
+    id_input_details.forEach(function(item) {
+        rules[item.Name] = {
+            required: true
+        };
+    });
+    console.log(rules)
+    return rules;
+}
+
+function  viewdetailsequipment(id){
+    var imprimi="";
+    $.ajax({
+        url: "/api/Detailsequipment/"+id,
+        type: "get",
+        success: function (response) {
+            let ruta=response
+            ruta.forEach(function(item) {
+                imprimi+= `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.typesDetail.Name}: ${item.Details}</label>`
+            })
+            $("#conteiner-equipment-view-details-equipment").html("")
+            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Detalles del equipo</label>`+imprimi)
+        }, error: function (error) {
+            console.log(error)
+        }
+
+    });
+}
+

@@ -20,7 +20,31 @@
                         </button>
                     </div>
                 </div>
-            </div>s
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_new_equipment_details" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class=" coteniner-modal">
+                        <div class="color_degraded">
+                            <i class="fas fa-plus fa-8x"></i>
+                        </div>
+                        <label for="">¿Estas seguro/a?</label>
+                        <div class="container-finish-modal">
+                            <label>¿Estas seguro que deseas agregar los detalles del equipo?</label>
+                        </div>
+                    </div>
+                    <div id="btn-close-modal">
+                        <button id="modal_create_equipment_details" type="button" class="btn btn-secondar"
+                                data-bs-dismiss="modal">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="delete_display_equipment" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -76,12 +100,29 @@
             <div class="modal-content container-modal">
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
-                <div class='container-modal-image'>
+                <div class='container-modal-image' id="container-modal-image-new">
                 </div>
                 <div class="modal-footer d-flex justify-content-around">
                     <input type="file" id="imgInput" accept="image/*">
                     <label for="imgInput" id="imgInputLabel" class="btn-examine">Examinar</label>
                     <button type="button" id="btn_save_img_user" data-bs-dismiss="modal"
+                            class="btn-accept">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal_img_profile_container_update_equipment" tabindex="-1"
+         aria-labelledby="modal_img_profile" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content container-modal">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                <div class='container-modal-image' id="container-modal-image-update">
+                </div>
+                <div class="modal-footer d-flex justify-content-around">
+                    <input type="file" id="imgInput_update" accept="image/*">
+                    <label for="imgInput_update" id="imgInputLabel" class="btn-examine">Examinar</label>
+                    <button type="button" id="btn_save_img_equipment" data-bs-dismiss="modal"
                             class="btn-accept">Aceptar</button>
                 </div>
             </div>

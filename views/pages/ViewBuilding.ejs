@@ -1,0 +1,233 @@
+<%- include('../partials/header') %>
+<div class="d-flex justify-content-start display_view_setting">
+    <%- include('../partials/left_menu') %>
+    <input type="hidden" id="id_campus" value="<%= id %>">
+    <label for=""><%= id %></label>
+    <div class= "display_content_modules">
+        <div class="content_views-principal" id="content_building">
+            <div>
+                <span class="titles_on_view">Edificios de la regional de la Uts</span>
+            </div>
+            <div class="d-flex justify-content-between" id="select_page_content">
+                <label for="lang">Ver
+                    <select name="numeric" id="select_building">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" selected>5</option>
+                        <option value="6">6</option>
+                        <option value="10">10</option>
+                        <option value="18">18</option>
+                    </select>
+                    elementos
+                </label>
+                <div class="d-flex div_search_contens" role="search" >
+
+                    <input class="form-control me-2 search_input" placeholder="Buscar" id="search_campus" aria-label="Search">
+                    <button id="btn_new_building" type="submit"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div>
+                <div class='card cards_content' id='cards_content_building'>
+                    <div style="display:flex;justify-content:center;align-items:center">
+                        <div style="height:100%;width:auto; display:flex;">
+                            <div class="sk-cube-grid">
+                                <div class="sk-cube sk-cube1"></div>
+                                <div class="sk-cube sk-cube2"></div>
+                                <div class="sk-cube sk-cube3"></div>
+                                <div class="sk-cube sk-cube4"></div>
+                                <div class="sk-cube sk-cube5"></div>
+                                <div class="sk-cube sk-cube6"></div>
+                                <div class="sk-cube sk-cube7"></div>
+                                <div class="sk-cube sk-cube8"></div>
+                                <div class="sk-cube sk-cube9"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <div class="creator">
+                        <div aria-label="Page navigation example" id="pagination" class="pagination">
+                            <label id="label_pagination">Pagina
+                                <input type="number" value="1" id="input_pagination" class="input_pagination">
+                                de
+                                <label id="paginacion_all"></label>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" id="btn-pagination-iz" class="btn btn-primary">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" id="btn-pagination-de" class="btn btn-primary">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="display_new" id="display_new_building">
+            <button class="btn-back-to">VOLVER</button>
+            <form  method="post" id="form_new_building">
+                <div id="resultado"></div>
+                <br />
+                <br />
+                <br />
+                <span class="titles_on_view">Crear nuevo edificio</span>
+                <div class="conteiner_form_div">
+                    <div class="conteiner_form_module">
+                        <div>
+                            <div class="user-img-profile">
+                                <div class="user-img-profile-icon" id="user_img_profile_icon-new">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-information">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input"
+                                       name="name_building_new" id="input_new_building_name"
+                                       placeholder="Nombre">
+                                <label for="input_new_building_name">Nombre</label>
+                            </div>
+                            <div class="form-floating  mb-3">
+                                <input type="text" class="form-control styles-font-input"
+                                       name="Address_building_new" id="input_new_building_Address"
+                                       placeholder="Address">
+                                <label class="label-two-select-color" for="input_new_building_Address">Direccion</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="datetime-local" class="form-control styles-font-input"
+                                       name="date_construction_new" id="date_construction_new" >
+                                <label for="date_construction_update_update">Fecha de construcion del edificio</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="description_new_building" name="description_new_building" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Descripcion</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="creator">
+                        <br/>
+                        <button type="submit" class="btn-save">Continuar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="display_new" id="display_update_building">
+            <button class="btn-back-to">VOLVER</button>
+            <form  method="post" id="form_update_building">
+                <div id="resultado"></div>
+                <br />
+                <br />
+                <br />
+                <span class="titles_on_view">Actualizar nuevo edificio</span>
+                <div class="conteiner_form_div">
+                    <div class="conteiner_form_module">
+                        <div>
+                            <div class="user-img-profile">
+                                <div class="user-img-profile-icon" id="user_img_profile_icon-update">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-information">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control styles-font-input"
+                                       name="name_building_update" id="input_update_building_name"
+                                       placeholder="Nombre">
+                                <label for="input_update_building_name">Nombre</label>
+                            </div>
+                            <div class="form-floating  mb-3">
+                                <input type="text" class="form-control styles-font-input"
+                                       name="Address_building_update" id="input_update_building_Address"
+                                       placeholder="Address">
+                                <label class="label-two-select-color" for="input_update_building_Address">Direccion</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="datetime-local" class="form-control styles-font-input"
+                                       name="date_construction_update" id="date_construction_update" >
+                                <label for="date_construction_update_update">Fecha de construcion del edificio</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="description_update_building" name="description_update_building" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Descripcion</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="creator">
+                        <br/>
+                        <button type="submit" class="btn-save">Continuar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="display_new" id="display_building_view">
+            <button class="btn-back-to">VOLVER</button>
+            <br/>
+            <br/>
+            <br/>
+            <span class="titles_on_view">Visualizar Edifcio</span>
+            <div class="conteinder-user-view">
+                <div class="conteinder-user-view-info">
+                    <div class="conteinder-user-view-info-div">
+                        <div class="container-img-use-view">
+                            <div class="user-img-profile-icon" id="user-img-profile-icon-update">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                        </div>
+                        <div class="container-info-use-view">
+                            <h3 id="view-campus-name"></h3>
+                            <h5 id="view-campus-Address"></h5>
+                            <div class="container-info-use-view-icons-info">
+                                <label class='styles-cards-font' id="view-campus-phone">
+                                </label>
+                                <BR>
+                                <label class='styles-cards-font' id="view-campus-email"></label>
+                                <BR>
+                                <label class='styles-cards-font' id="view-campus-Schedules"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conteinder-user-view-rol">
+                    <div class="conteinder-user-view-rol-container">
+                        <h3>Pisos del edificio</h3>
+                        <div class="conteinder-user-view-rol-div">
+                            <div class="buil-campus">
+                                <div class="roles-view-name">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <div>
+                    <div class="creator">
+                        <br/>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <%- include('../partials/right_menu') %>
+</div>
+<div>
+    <%- include('../partials/modal_building') %>
+    <%- include('../partials/Importjs') %>
+    <script src="/js/ViewBuilding.js"></script>
+</div>
+</body>
+</html>

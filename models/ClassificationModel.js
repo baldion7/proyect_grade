@@ -9,7 +9,15 @@ export class Classification extends Model {
                     autoIncrement: true,
                     primaryKey: true
                 },
-                Classification:{
+                Name:{
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                Description:{
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                ClassificationCriteria:{
                     type: DataTypes.STRING,
                     allowNull: false
                 },
