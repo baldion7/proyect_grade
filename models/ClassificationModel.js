@@ -17,10 +17,6 @@ export class Classification extends Model {
                     type: DataTypes.STRING,
                     allowNull: false
                 },
-                ClassificationCriteria:{
-                    type: DataTypes.STRING,
-                    allowNull: false
-                },
             },
             {
                 sequelize,

@@ -13,17 +13,16 @@ var array_areas_update = [];
 var indextemp;
 var cargar = 1;
 var id_building = 0;
+var action
 $(document).ready(function () {
+    $("#menu_regionales").addClass("seccionmenusi");
     id_building = $("#id_building").val()
-
-
     setTimeout(function () {
         var intervalinicial = setInterval(function () {
             chageareas();
             if (arrar_temp_buildig.length > 0) {
                 copy_array_areas = arrar_temp_buildig;
                 array_areas = arrar_temp_buildig;
-                console.log(array_areas)
                 create_page();
             }
 
@@ -136,26 +135,29 @@ $(document).ready(function () {
         $("#delete_display_areas").modal("show");
     });
 
-    $(document).on("click", ".btn-view-areas", function (e) {
+    $(document).on("click", ".ps-space-btn", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
-        $("#content_areas").hide();
-        $("#display_areas_view").show();
-        let action = "view"
-        consult_areas(action)
+        $("#id_space").val(indextemp)
+        indextemp = $(e.currentTarget).attr("data-name");
+        $("#name_space").val(indextemp)
+        $("#view_display_space").modal("show")
     });
 
     $("#btn_new_areas").click(function () {
         $("#display_new_areas").show();
         $("#content_areas").hide();
-        let action = "new"
+         action = "new"
         chagefloors(id_building, action)
     });
+    $("#modal_view_space").click(function () {
+        $("#submitspace").click()
+    })
 
     $(document).on("click", ".btn-edit-areas", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
         $("#display_update_areas").show();
         $("#content_areas").hide();
-        let action = "update"
+         action = "update"
         chagefloors(id_building, action)
         consult_areas(action)
     });
@@ -233,12 +235,24 @@ $(document).ready(function () {
             $("#modal_update_areas").modal("show");
         },
     });
+    $("#new_typesearea").validate({
+        rules: {
+            name_typeareas_new: {
+                required: true, minlength: 3,
+            }, description_typeareas_new: {
+                required: true, minlength: 3,
+            },
+        }, errorElement: "span", submitHandler: function () {
+            createtypesarea()
+            $("#modal_new_typeareas").modal("hide");
+        },
+    });
 
     $("#modal_create_areas").click(function () {
         let Name = $("#input_new_areas_name").val();
         let description = $("#description_new_areas").val();
         let floor = $("#input_new_areas_floor").val();
-        let typearea = $('input[name="update_typearea"]:checked').val();
+        let typearea = $('input[name="new_typearea"]:checked').val();
         $.ajax({
             url: "/api/area", type: "post", data: {
                 name: Name,
@@ -304,9 +318,6 @@ $(document).ready(function () {
         });
     })
 
-    $("#btn_menu_Equipment").click(function () {
-        window.location.replace('/equipment')
-    })
 })
 ;
 
@@ -318,7 +329,6 @@ function create_page() {
         showNavigator: true,
         totalPage: true,
         callback: function (data, pagination) {
-            console.log("hola")
             $("#cards_content_areas").empty();
             data.forEach(function (item) {
                 let isoDateString = item.createdAt;
@@ -357,7 +367,7 @@ function create_page() {
           <div>
               <label class='label-spna-font'>Datos de ingreso</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> {item.user.Name} {item.user.Lastname}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${item.user.Name} ${item.user.Lastname}</label>
               <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
           </div>
@@ -372,7 +382,7 @@ function create_page() {
                       </i> Editar</a>
                   <a data-index="${item.Id}"class='ps-delete-btn cursor-pointer-styles'>
                       <i class="fa-solid fa-trash-can"></i> Eliminar</a>
-                      <a data-index="${item.Id}"class='ps-delete-btn cursor-pointer-styles'>
+                      <a data-index="${item.Id}" data-name="${item.Name}" class='ps-space-btn cursor-pointer-styles'>
                       <i class="fa-solid fa-layer-group"></i> Revisar Espacio</a>
 
               </div>
@@ -388,6 +398,8 @@ function create_page() {
     totalPages = $("#cards_content_areas").pagination("getTotalPage");
     $("#paginacion_all").html(totalPages);
     totapa = totalPages;
+    contpage=1;
+    $("#input_pagination").val(contpage + "")
 }
 
 function chageareas() {
@@ -405,13 +417,14 @@ function chageareas() {
 
 function searchcampus(search) {
     $.ajax({
-        url: "/api/campus/search", type: "post", data: {
-            search: search
+        url: "/api/Area/search", type: "post", data: {
+            search: search,
+            Id:id_building
         }, success: function (response) {
-            array_areas = response;
+            array_areas = getAllAreas(response);
             create_page();
-        }, error: function (xhr, status, error) {
-
+        }, error: function (error) {
+            console.log(error)
         }
     });
 }
@@ -430,7 +443,6 @@ function consult_areas(action) {
 }
 
 function fill_inputup_date() {
-    console.log(array_areas_update)
     $("#input_update_areas_name").val(array_areas_update.Name);
     $("#input_update_areas_floor").val(array_areas_update.floor.Floornumber);
     $("#description_update_areas").val(array_areas_update.Description);
@@ -447,7 +459,6 @@ function deletecampus() {
 
 function carga() {
     if (cargar == 1) {
-        console.log("hola")
         $("#cards_content_users").html(`<div style="display:flex;justify-content:center;align-items:center">
                             <div style="height:100%;width:auto; display:flex;">
                                 <div class="sk-cube-grid">
@@ -555,9 +566,10 @@ function getAllAreas(json) {
                     "Id": opcion.Id,
                     "Name": opcion.Name,
                     "Description": opcion.Description,
-                    "createdAt ": opcion.createdAt,
+                    "createdAt": opcion.createdAt,
                     "typesArea": opcion.typesArea,
-                    "Building": json.Name
+                    "Building": json.Name,
+                    "user":opcion.user
                 };
                 areas.push(nuevoObjeto);
             })
@@ -566,4 +578,23 @@ function getAllAreas(json) {
     }
     json = areas;
     return json;
+}
+
+function createtypesarea() {
+    var description=$("#input_new_description_typeareas").val();
+    var name=$("#input_new_name_typeareas").val()
+    $.ajax({
+        url: "/api/TypesArea",
+        type: "post",
+        data:{
+            Description:description,
+            Name:name
+        },
+        success: function (response) {
+        },
+        error: function (xhr, status, error) {
+
+        }
+    });
+    chagefloors(id_building, action)
 }

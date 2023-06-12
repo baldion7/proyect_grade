@@ -10,11 +10,14 @@ export const prueba=(req,res)=>{
 export const UserView=(req,res)=>{
     res.render('pages/user', { title: 'Mi aplicación Node.js' });
 }
+export const PersonnelResponsibleView=(req,res)=>{
+    res.render('pages/ViewPersonnelResponsible', { title: 'Mi aplicación Node.js', perfil:req.session.name});
+}
 export const RegisterView=(req,res)=>{
     res.render('pages/register', { title: 'Mi aplicación Node.js' });
 }
 export const LoginView=(req,res)=>{
-    res.render('pages/login', { title: 'Mi aplicación Node.js' });
+    res.render('pages/login');
 }
 export const ErrorView=(req,res)=>{
     res.render('pages/error', { title: 'Mi aplicación Node.js' });
@@ -37,6 +40,10 @@ export const TypesEquipmentView=(req,res)=>{
 export const AreaView=(req,res)=>{
     const {ID,Name} = req.body;
     res.render('pages/ViewArea', { title: 'Mi aplicación Node.js', perfil:req.session.name, id:ID,name:Name});
+}
+export const SpaceView=(req,res)=>{
+    const {ID,Name} = req.body;
+    res.render('pages/ViewSpace', { title: 'Mi aplicación Node.js', perfil:req.session.name, id:ID,name:Name});
 }
 export const ClassificationView=(req,res)=>{
     res.render('pages/ViewClassification', { title: 'Mi aplicación Node.js', perfil:req.session.name});

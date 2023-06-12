@@ -6,7 +6,8 @@ import {Building} from "../models/BuildingModel.js";
 
 export const Getcampus = async (req, res) => {
     try {
-        const response = await Campus.findAll({});
+        const response = await Campus.findAll({
+        });
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({msg: error.message});
@@ -44,8 +45,9 @@ export const GetcampusById = async (req, res) => {
                         {
                             model: Floor
                         }
-                    ]
-                }
+                    ],
+
+                },
             ]
         });
 
@@ -64,7 +66,7 @@ export const CreateCampus = async (req, res) => {
             Email: email,
             Phone: phone,
             Schedules: schedules,
-            utId: utid
+            utId: utid,
         });
 
         res.status(200).json(response);

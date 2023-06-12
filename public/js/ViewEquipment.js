@@ -1,23 +1,26 @@
 var array_equipment_update = [];
-var id_input_details_valor=[];
+var id_input_details_valor = [];
 var copy_array_equiment = [];
 var arrar_temp_equiment = [];
 var stopInterval = false;
 var array_equiment = [];
-var id_input_details=[]
-var id_typdetails=0;
-var img_base64  = 0;
-var indextemp  = 0;
+var id_input_details = []
+var id_typdetails = 0;
+var img_base64 = 0;
+var indextemp = 0;
 var totalPages = 0;
-var id_equipment=0;
-var modal_img  = 0;
+var id_equipment = 0;
+var modal_img = 0;
 var contpage = 1;
 var newSize = 5;
-var totapa  = 0;
+var totapa = 0;
 var intervalcontinua;
 var cD = 0;
+var parts = [];
+var value_parts = [];
 $(document).ready(function () {
 
+    $("#menu_Equipment").addClass("seccionmenusi");
     consult_extra_new()
 
     setTimeout(function () {
@@ -130,11 +133,10 @@ $(document).ready(function () {
 
     $(document).on("click", ".btn-edit-equipment", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
-        $("#display_update_equipment").show();
-        $("#content_equipment").hide();
         consult_extra_update()
         let action = "update"
         consult_equipment(action)
+
     });
 
     $("#select_equiment").on("change", function () {
@@ -151,9 +153,8 @@ $(document).ready(function () {
         }
         $("#input_pagination_equiment").val(contpage + "")
     });
-    
 
-    
+
     $("#btn-pagination-equiment-de").on("click", function () {
         $("#cards_content_equiment").pagination("next");
         $("#cards_content_equiment").pagination("refresh");
@@ -274,8 +275,7 @@ $(document).ready(function () {
                 classificationid: ClassificationId,
                 typesequipmentid: TypesEquipmentId
             }, success: function (respuesta) {
-                id_equipment=respuesta.Id
-                console.log(id_equipment)
+                id_equipment = respuesta.Id
             }, error: function (error) {
                 console.log(error)
             }
@@ -335,6 +335,10 @@ $(document).ready(function () {
         deleteuser()
     })
 
+    $("#modal_create_equipment_parts").click(function () {
+        valueparts()
+    })
+
     $("#logout").click(function () {
         $.ajax({
             url: "/api/logout", type: "get", success: function () {
@@ -358,7 +362,15 @@ $(document).ready(function () {
         $("#input_img_update_equipment").val(url_img);
 
     });
+    $("#num_parts_equipment").click(function () {
+        let num = $("#input_num_parts_equipment").val()
+        if (num > 0) {
+            $("#contenedor_num_parts_equipment").hide()
+            newparts(num);
+            $("#btn_submit_parts").show()
+        }
 
+    })
     $("#imgInput").change(function () {
         var $inputImagen = $('#imgInput');
         if ($inputImagen[0].files && $inputImagen[0].files[0]) {
@@ -449,7 +461,7 @@ $(document).ready(function () {
         let id = $("#input_new_equipment_types").val()
         $.ajax({
             url: "/api/allowstypesdetails/" + id, type: "get", success: function (response) {
-                id_input_details= [];
+                id_input_details = [];
                 detailsequipment(response)
 
             }, error: function (error) {
@@ -462,12 +474,9 @@ $(document).ready(function () {
         let imprimi = " ";
         $.ajax({
             url: "/api/building/campus/user", type: "get", success: function (response) {
-
-                console.log(response)
                 response.forEach(function (opcion) {
                     var opcions = opcion.campus.buildings;
                     opcions.forEach(function (opciont) {
-                        console.log(opciont)
                         imprimi += `<option value=${opciont.id}>${opciont.name}</option>`;
                     })
                 });
@@ -515,11 +524,15 @@ $(document).ready(function () {
 
     $("#input_update_equipment_area").change(function () {
         let id = $("#input_update_equipment_area").val()
+        let imprimi
         $.ajax({
-            url: "/api/space/" + id, type: "get", success: function (response) {
-                let imprimi;
-                response.forEach(function (opcion) {
-                    imprimi += `<option value=${opcion.Id}>${opcion.Technicallocation}</option>`;
+            url: "/api/allowsclassifications/space/", type: "post", data: {
+                classificationid: array_equipment_update.typesEquipment.classificationId,
+                spaceid: id
+            }, success: function (response) {
+                const result = Array.from(new Set(response.map(item => item.space)));
+                result.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Location}</option>`;
                 });
                 $("#input_update_equipment_space").html(`<option  selected disabled></option>`);
                 $("#input_update_equipment_space").append(imprimi)
@@ -530,36 +543,35 @@ $(document).ready(function () {
     })
 
 
-    $("#modal_create_equipment_details").click( function () {
+    $("#modal_create_equipment_details").click(function () {
 
-        id_input_details.forEach(function(item) {
+        id_input_details.forEach(function (item) {
             var nuevoObjeto = {
-                "Id":item.Id,
+                "Id": item.Id,
                 "Name": item.Name,
-                "IdInput": "id_details_"+item.Name,
-                "Idequipment":id_equipment,
+                "IdInput": "id_details_" + item.Name,
+                "Idequipment": id_equipment,
                 "Valor": $("#" + item.IdInput).val()
             };
             id_input_details_valor.push(nuevoObjeto);
         });
-        id_input_details_valor.forEach(function(item) {
+        id_input_details_valor.forEach(function (item) {
             $.ajax({
-                url: "/api/Detailsequipment" ,
+                url: "/api/Detailsequipment",
                 type: "post",
                 data: {
-                    Details:item.Valor,
-                    typesDetailId:item.Id,
-                    equipmentId:item.Idequipment
-                },success: function (response) {
+                    Details: item.Valor,
+                    typesDetailId: item.Id,
+                    equipmentId: item.Idequipment
+                }, success: function (response) {
 
                 }, error: function (error) {
                     console.log(error)
                 }
             });
         })
-        $("#form_new_equipment").show()
+        $("#for_new_parts").show()
         $("#for_new_paremters").hide()
-        $(".btn-back-to").click()
     });
 
 });
@@ -576,7 +588,6 @@ function create_page() {
             data.forEach(function (item) {
                 let isoDateString = item.createdAt;
                 let date = new Date(isoDateString);
-                console.log(item.typesEquipment)
                 let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
                 $("#cards_content_equiment").append(`<div class='cards-content-module'>
   <div class='content-display-module-cards'>
@@ -593,6 +604,8 @@ function create_page() {
                           <label class='label-spna-font'>Datos tecnicos</label>
                              <br>
                              <label class='styles-cards-font'>Clasificacion: ${item.typesEquipment.classification.Name}</label>
+                             <br>
+                             <label class='styles-cards-font'>Categoria: ${item.typesEquipment.Name}</label>
                              <br>
                              <label class='styles-cards-font'>Nombre: ${item.Name}</label>
                              <br>
@@ -641,8 +654,6 @@ function create_page() {
                       </i> Editar</a>
                   <a data-index="${item.Id}" class='ps-delete-btn-equipment cursor-pointer-styles'>
                       <i class="fa-solid fa-trash-can"></i> Eliminar</a>
-                  <a type class='ps-traceability-btn cursor-pointer-styles' data-index="${item.Id}"><i class="fas fa-history"></i>
-                      Trazabilidad</a>
               </div>
           </div>
       </div>
@@ -654,6 +665,8 @@ function create_page() {
     totalPages = $("#cards_content_equiment").pagination("getTotalPage");
     $("#paginacion_equiment_all").html(totalPages);
     totapa = totalPages;
+    contpage = 1;
+    $("#input_pagination").val(contpage + "")
 }
 
 function chageequiment() {
@@ -661,8 +674,8 @@ function chageequiment() {
         url: "/api/equipment", type: "get", success: function (response) {
             arrar_temp_equiment = response;
 
-        }, error: function (xhr, status, error) {
-
+        }, error: function (error) {
+            console.log(error)
         }
     });
 }
@@ -709,6 +722,7 @@ function consult_equipment(action) {
 }
 
 function fill_inputup_date() {
+    console.log(array_equipment_update.space.area.floor.building.Id)
     $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
     $("#input_update_equipment_name").val(array_equipment_update.Name);
     $("#input_update_equipment_classification").val(array_equipment_update.typesEquipment.classificationId);
@@ -724,22 +738,25 @@ function fill_inputup_date() {
     setTimeout(function () {
         $("#input_update_equipment_building").val(array_equipment_update.space.area.floor.building.Id);
         $('#input_update_equipment_building').trigger('change');
-    }, 70);
+    }, 180);
     setTimeout(function () {
         $("#input_update_equipment_floor").val(array_equipment_update.space.area.floorId);
         $('#input_update_equipment_floor').trigger('change');
-    }, 140);
+    }, 220);
     setTimeout(function () {
         $("#input_update_equipment_area").val(array_equipment_update.space.areaId);
         $('#input_update_equipment_area').trigger('change');
-    }, 210);
+    }, 250);
     setTimeout(function () {
         $("#input_update_equipment_space").val(array_equipment_update.spaceId);
-    }, 280);
+        console.log(array_equipment_update.spaceId)
+    }, 290);
     $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
     $("#fuction_update_equipment").val(array_equipment_update.Function);
-    img_base64=array_equipment_update.ImgEquipment;
+    img_base64 = array_equipment_update.ImgEquipment;
     $("#input_img_update_equipment").val(img_base64);
+    $("#display_update_equipment").show();
+    $("#content_equipment").hide();
 
 }
 
@@ -769,6 +786,8 @@ function fill_view_equipment() {
               <BR>
               <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${array_equipment_update.space.Location}</label>`)
     viewdetailsequipment(array_equipment_update.Id)
+    partsview(array_equipment_update.parts)
+
 }
 
 function consult_extra_new() {
@@ -793,9 +812,7 @@ function consult_extra_new() {
     $.ajax({
         url: "/api/classification", type: "get", success: function (response) {
             imprimi_clas = response;
-            console.log(imprimi_clas)
             imprimi_clas.forEach(function (opcion) {
-                console.log(opcion)
                 imprimi_clas += `<option value=${opcion.Id}>${opcion.Name}</option>`;
             });
             $("#input_new_equipment_classification").html(`<option value=""  selected disabled></option>`);
@@ -809,14 +826,13 @@ function consult_extra_new() {
 
 }
 
-function consult_extra_update(){
+function consult_extra_update() {
     $.ajax({
-        url: "/api/campus/user", type: "get", success: function (response) {
+        url: "/api/campus", type: "get", success: function (response) {
             campus = response;
-            var imprimi=""
+            var imprimi = ""
             campus.forEach(function (opcion) {
-                imprimi = `<option value=${opcion.campus.Id}>${opcion.campus.Name}</option>`;
-                console.log(imprimi)
+                imprimi += `<option value=${opcion.Id}>${opcion.Name}</option>`;
             });
             $("#input_update_equipment_campus").html(`<option selected disabled></option>`);
             $("#input_update_equipment_campus").append(imprimi)
@@ -828,7 +844,7 @@ function consult_extra_update(){
 
 function detailsequipment(response) {
     $("#details-equipment").html(" ")
-    response.forEach(function(item) {
+    response.forEach(function (item) {
         var nuevoObjeto = {
             "Id": item.typesDetail.Id,
             "Name": item.typesDetail.Name.replace(/\s+/g, "-"),
@@ -839,7 +855,7 @@ function detailsequipment(response) {
 
     $("#details-equipment").html("");
 
-    id_input_details.forEach(function(item) {
+    id_input_details.forEach(function (item) {
         $("#details-equipment").append(`
             <div class="form-floating mb-3">
                 <input type="text" class="form-control styles-font-input" name="${item.Name}" id="${item.IdInput}" placeholder="${item.IdInput}">
@@ -851,7 +867,7 @@ function detailsequipment(response) {
     $("#for_new_paremters").validate({
         rules: getValidationRules(),
         errorElement: "span",
-        submitHandler: function() {
+        submitHandler: function () {
             $("#modal_new_equipment_details").modal("show");
         }
     });
@@ -859,28 +875,26 @@ function detailsequipment(response) {
 
 function getValidationRules() {
     var rules = {};
-
-    id_input_details.forEach(function(item) {
+    id_input_details.forEach(function (item) {
         rules[item.Name] = {
             required: true
         };
     });
-    console.log(rules)
     return rules;
 }
 
-function  viewdetailsequipment(id){
-    var imprimi="";
+function viewdetailsequipment(id) {
+    var imprimi = "";
     $.ajax({
-        url: "/api/Detailsequipment/"+id,
+        url: "/api/Detailsequipment/" + id,
         type: "get",
         success: function (response) {
-            let ruta=response
-            ruta.forEach(function(item) {
-                imprimi+= `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.typesDetail.Name}: ${item.Details}</label>`
+            let ruta = response
+            ruta.forEach(function (item) {
+                imprimi += `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.typesDetail.Name}: ${item.Details}</label>`
             })
             $("#conteiner-equipment-view-details-equipment").html("")
-            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Detalles del equipo</label>`+imprimi)
+            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Detalles del equipo</label>` + imprimi)
         }, error: function (error) {
             console.log(error)
         }
@@ -888,3 +902,119 @@ function  viewdetailsequipment(id){
     });
 }
 
+
+function newparts(num) {
+    parts=[]
+
+    for (let i = 0; i < num; i++) {
+        $("#conten-form-parts").append(`
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control styles-font-input"
+                    name="new_name_parts_equipment${i+1}" id="input_name_new_parts_equipment${i + 1}" placeholder="Nombre de la parte del equipo">
+                <label for="input_name_new_parts_equipment${i}">Nombre de la parte ${i + 1} del equipo</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control styles-font-input"
+                    name="new_quantity_parts_equipment${i+1}" id="input_quantity_new_parts_equipment${i + 1}" placeholder="Cantidad de partes del equipo">
+                <label for="input_quantity_new_parts_equipment${i}">Cantidad de partes ${i + 1} del equipo</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea type="text" class="form-control styles-font-input"
+                    name="new_comments_parts_equipment${i+1}" id="input_comments_new_parts_equipment${i + 1}" placeholder="Descripción de la parte del equipo" style="height: 100px"></textarea>
+                <label for="input_comments_new_parts_equipment${i}">Descripción de la parte ${i + 1} del equipo</label>
+            </div>
+            <br>
+        `);
+
+        var nuevoObjeto = {
+            "Id_name": `input_name_new_parts_equipment${i+1}`,
+            "name_name": `new_name_parts_equipment${i+1}`,
+            "Id_quantity": `input_quantity_new_parts_equipment${i+1}`,
+            "name_quantity": `new_quantity_parts_equipment${i+1}`,
+            "Id_comments": `input_comments_new_parts_equipment${i+1}`,
+            "name_comments": `new_comments_parts_equipment${i+1}`
+        };
+        parts.push(nuevoObjeto);
+    }
+    $("#for_new_parts").validate({
+        rules: getValidationRulesparts(),
+        errorElement: "span",
+        submitHandler: function () {
+            $("#modal_new_equipment_parts").modal("show");
+
+        }
+    });
+}
+
+function getValidationRulesparts() {
+    var rules = {};
+    parts.forEach(function (item) {
+        rules[item.name_name] = {
+            required: true
+        };
+        rules[item.name_quantity] = {
+            required: true
+        };
+        rules[item.name_comments] = {
+            required: true
+        };
+    });
+
+    return rules;
+}
+
+function valueparts() {
+    value_parts=[]
+    parts.forEach(function (item) {
+        var name = $("#"+item.Id_name).val();
+        var quantity = $("#"+item.Id_quantity).val();
+        var comments = $("#"+item.Id_comments).val();
+
+        var nuevoObjeto = {
+            val_name: name,
+            val_quantity: quantity,
+            val_comments: comments,
+            Idequipment: id_equipment,
+        };
+
+        value_parts.push(nuevoObjeto);
+    });
+
+    addparts();
+}
+
+
+function addparts() {
+    value_parts.forEach(function (item) {
+        $.ajax({
+            url: "/api/parts",
+            type: "post",
+            data: {
+                name: item.val_name,
+                quantity: item.val_quantity,
+                comments: item.val_comments,
+                idequipment:item.Idequipment
+            }, success: function (response) {
+
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+    $("#conten-form-parts").html(" ")
+    $("#for_new_parts").hide()
+    $("#contenedor_num_parts_equipment").show()
+    $("btn_submit_parts").hide()
+    $("#form_new_equipment").show()
+    $(".btn-back-to").click()
+}
+
+function partsview(json) {
+    var imprimi=" "
+    let ruta = json
+    ruta.forEach(function (item) {
+        imprimi += `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.Name}: ${item.Quantity}</label> <br>`
+    })
+    $("#conteiner-equipment-view-parts-equipment").html("")
+    $("#conteiner-equipment-view-parts-equipment").append(`<label class='label-spna-font'>Partes del equipo</label> <br>` + imprimi)
+}

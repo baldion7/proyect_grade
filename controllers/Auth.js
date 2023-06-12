@@ -21,6 +21,7 @@ export const Login = async (req, res) => {
     if (!match) return res.status(400).json({ msg: "Contraseñas incorrectas" });
     req.session.userId = user.Id;
     req.session.name = `${user.Name} ${user.Lastname}`;
+    req.session.campusId = user.campusId;
     const name = user.name;
     const lastname = user.Lastname;
     const emaill = user.email;

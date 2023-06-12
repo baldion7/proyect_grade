@@ -1,11 +1,11 @@
-import {AllowsTypesDetailsModel} from "../models/AllowsTypesDetailsModel.js";
+import {AllowsTypesDetails} from "../models/AllowsTypesDetails.js";
 
 import {TypesDetails} from "../models/TypesDetailsModel.js";
 
 export const CreateAllowsTypesDetails =async(req, res)=>{
     const {Typesequipmentid,Typesdetailid} = req.body;
     try {
-        const respuesta =await AllowsTypesDetailsModel.create({
+        const respuesta =await AllowsTypesDetails.create({
             typesEquipmentId :Typesequipmentid,
             typesDetailId:Typesdetailid
         });
@@ -17,7 +17,7 @@ export const CreateAllowsTypesDetails =async(req, res)=>{
 
 export const GetAllowsTypesDetails = async (req, res) => {
     try {
-        const response = await AllowsTypesDetailsModel.findAll({
+        const response = await AllowsTypesDetails.findAll({
             where: {
                 typesEquipmentId: req.params.id
             },
@@ -35,7 +35,7 @@ export const GetAllowsTypesDetails = async (req, res) => {
 };
 export const DeleteAllowsTypesDetails = async (req, res) => {
     try {
-        const response = await AllowsTypesDetailsModel.destroy({
+        const response = await AllowsTypesDetails.destroy({
             where: {
                 typesEquipmentId: req.params.id
             }

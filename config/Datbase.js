@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import { AllowsClassificationsModel } from "../models/AllowsClassificationsModel.js"
-import {AllowsTypesDetailsModel} from "../models/AllowsTypesDetailsModel.js"
+import { AllowsClassifications } from "../models/AllowsClassifications.js"
+import {AllowsTypesDetails} from "../models/AllowsTypesDetails.js"
 import { Area } from "../models/AreaModel.js";
 import { Building } from "../models/BuildingModel.js";
 import { Campus } from "../models/CampusModel.js";
@@ -25,8 +25,8 @@ const db = new Sequelize("auth_db", "root", "", {
     freezeTableName: true
 });
 
-db.AllowsClassificationsModel = AllowsClassificationsModel.init(db,Sequelize);
-db.AllowsTypesDetailsModel = AllowsTypesDetailsModel.init(db,Sequelize);
+db.AllowsClassifications = AllowsClassifications.init(db,Sequelize);
+db.AllowsTypesDetails = AllowsTypesDetails.init(db,Sequelize);
 db.Area = Area.init(db, Sequelize);
 db.Building = Building.init(db, Sequelize);
 db.Campus = Campus.init(db, Sequelize);
@@ -45,73 +45,143 @@ db.TypesSpace = TypesSpace.init(db, Sequelize);
 db.Users = User.init(db, Sequelize);
 db.Uts = Uts.init(db, Sequelize);
 
-db.Uts.hasMany(db.Campus);
+db.Uts.hasMany(db.Campus, {
+    onDelete: 'CASCADE'
+});
 db.Campus.belongsTo(db.Uts);
 
-db.Campus.hasMany(db.Building);
+db.Campus.hasMany(db.Building, {
+    onDelete: 'CASCADE'
+});
 db.Building.belongsTo(db.Campus);
 
-db.Building.hasMany(db.Floor);
+db.Building.hasMany(db.Floor, {
+    onDelete: 'CASCADE'
+});
 db.Floor.belongsTo(db.Building);
 
-db.Floor.hasMany(db.Area);
+db.Floor.hasMany(db.Area, {
+    onDelete: 'CASCADE'
+});
 db.Area.belongsTo(db.Floor);
 
-db.TypesArea.hasMany(db.Area);
+db.TypesArea.hasMany(db.Area, {
+    onDelete: 'CASCADE'
+});
 db.Area.belongsTo(db.TypesArea);
 
-db.Area.hasMany(db.Space);
+db.Area.hasMany(db.Space, {
+    onDelete: 'CASCADE'
+});
 db.Space.belongsTo(db.Area);
 
-db.TypesSpace.hasMany(db.Space);
+db.TypesSpace.hasMany(db.Space, {
+    onDelete: 'CASCADE'
+});
 db.Space.belongsTo(db.TypesSpace);
 
-db.Space.hasMany(db.Equipment);
+db.Space.hasMany(db.Equipment, {
+    onDelete: 'CASCADE'
+});
 db.Equipment.belongsTo(db.Space);
 
-db.Space.hasMany(db.AllowsClassificationsModel);
-db.AllowsClassificationsModel.belongsTo(db.Space);
+db.Space.hasMany(db.AllowsClassifications, {
+    onDelete: 'CASCADE'
+});
+db.AllowsClassifications.belongsTo(db.Space);
 
-db.PersonnelResponsible.hasMany(db.Space);
+db.PersonnelResponsible.hasMany(db.Space, {
+    onDelete: 'CASCADE'
+});
 db.Space.belongsTo(db.PersonnelResponsible);
 
-db.Classification.hasMany(db.AllowsClassificationsModel);
-db.AllowsClassificationsModel.belongsTo(db.Classification);
+db.Classification.hasMany(db.AllowsClassifications, {
+    onDelete: 'CASCADE'
+});
+db.AllowsClassifications.belongsTo(db.Classification);
 
-db.Classification.hasMany(db.TypesEquipment);
+db.Classification.hasMany(db.TypesEquipment, {
+    onDelete: 'CASCADE'
+});
+
 db.TypesEquipment.belongsTo(db.Classification);
 
-db.TypesEquipment.hasMany(db.Equipment);
-db.Equipment.belongsTo(db.TypesEquipment);
+db.TypesEquipment.hasMany(db.AllowsTypesDetails, {
+    onDelete: 'CASCADE'
+});
 
-db.TypesEquipment.hasMany(db.AllowsTypesDetailsModel);
-db.AllowsTypesDetailsModel.belongsTo(db.TypesEquipment);
+db.AllowsTypesDetails.belongsTo(db.TypesEquipment);
 
-//db.TypesEquipment.hasMany(db.TypesDetails);
-//db.TypesDetails.belongsTo(db.TypesEquipment);
+db.TypesEquipment.hasMany(db.TypesDetails,{
+    onDelete: 'CASCADE'
+});
 
-db.TypesDetails.hasMany(db.AllowsTypesDetailsModel);
-db.AllowsTypesDetailsModel.belongsTo(db.TypesDetails);
+db.TypesDetails.belongsTo(db.TypesEquipment);
 
-db.TypesDetails.hasMany(db.DetailsEquipment);
+db.TypesDetails.hasMany(db.AllowsTypesDetails, {
+    onDelete: 'CASCADE'
+});
+db.AllowsTypesDetails.belongsTo(db.TypesDetails);
+
+db.TypesDetails.hasMany(db.DetailsEquipment, {
+    onDelete: 'CASCADE'
+});
 db.DetailsEquipment.belongsTo(db.TypesDetails);
 
-db.Equipment.hasMany(db.Parts);
+db.Equipment.hasMany(db.Parts, {
+    onDelete: 'CASCADE'
+});
 db.Parts.belongsTo(db.Equipment);
 
-db.Equipment.hasMany(db.DetailsEquipment);
+db.TypesEquipment.hasMany(db.Equipment, {
+    onDelete: 'CASCADE'
+});
+db.Equipment.belongsTo(db.TypesEquipment);
+
+
+db.Equipment.hasMany(db.DetailsEquipment, {
+    onDelete: 'CASCADE'
+});
 db.DetailsEquipment.belongsTo(db.Equipment);
 
-db.Users.hasMany(db.Equipment);
+db.Users.hasMany(db.Equipment, {
+    onDelete: 'CASCADE'
+});
 db.Equipment.belongsTo(db.Users);
 
-db.Campus.hasMany(db.PersonnelResponsible);
+db.Users.hasMany(db.Area, {
+    onDelete: 'CASCADE'
+});
+db.Area.belongsTo(db.Users);
+
+db.Users.hasMany(db.Building, {
+    onDelete: 'CASCADE'
+});
+db.Building.belongsTo(db.Users);
+
+db.Users.hasMany(db.Space, {
+    onDelete: 'CASCADE'
+});
+db.Space.belongsTo(db.Users);
+
+db.Users.hasMany(db.TypesEquipment, {
+    onDelete: 'CASCADE'
+});
+db.TypesEquipment.belongsTo(db.Users);
+
+db.Campus.hasMany(db.PersonnelResponsible, {
+    onDelete: 'CASCADE'
+});
 db.PersonnelResponsible.belongsTo(db.Campus);
 
-db.Campus.hasMany(db.Users);
+db.Campus.hasMany(db.Users, {
+    onDelete: 'CASCADE'
+});
 db.Users.belongsTo(db.Campus);
 
-db.Role.hasMany(db.Users);
+db.Role.hasMany(db.Users, {
+    onDelete: 'CASCADE'
+});
 db.Users.belongsTo(db.Role);
 
 

@@ -16,6 +16,7 @@ var id_campus = 0;
 $(document).ready(function () {
     id_campus = $("#id_campus").val()
 
+    $("#menu_regionales").addClass("seccionmenusi");
 
     setTimeout(function () {
         var intervalinicial = setInterval(function () {
@@ -177,7 +178,6 @@ $(document).ready(function () {
     });
 
     $("#modal_view_area").click( function () {
-
         $("#submitarea").click()
     })
 
@@ -310,8 +310,8 @@ $(document).ready(function () {
         }
     })
 
-    $("#modal_delete_campus").click(function () {
-        deletecampus()
+    $("#modal_delete_building").click(function () {
+        deleteBuilding()
     })
 
     $("#logout").click(function () {
@@ -377,8 +377,8 @@ function create_page() {
           <div>
               <label class='label-spna-font'>Datos de ingreso</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> {item.user.Name} {item.user.Lastname}</label>
-              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> {formattedDate}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${item.user.Name} ${item.user.Lastname}</label>
+              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
           </div>
       </div>                                              
@@ -412,6 +412,8 @@ function create_page() {
     totalPages = $("#cards_content_building").pagination("getTotalPage");
     $("#paginacion_all").html(totalPages);
     totapa = totalPages;
+    contpage=1;
+    $("#input_pagination").val(contpage + "")
 }
 
 function chagebuilding() {
@@ -429,13 +431,13 @@ function chagebuilding() {
 
 function searchcampus(search) {
     $.ajax({
-        url: "/api/campus/search", type: "post", data: {
-            search: search
+        url: "/api/search/building", type: "post", data: {
+            search: search,
         }, success: function (response) {
             array_building = response;
             create_page();
-        }, error: function (xhr, status, error) {
-
+        }, error: function (error) {
+            console.log(error)
         }
     });
 }
@@ -457,7 +459,6 @@ function consult_building(action) {
 }
 
 function fill_inputup_date() {
-    console.log(array_building_update)
     $("#input_update_building_name").val(array_building_update.Name);
     $("#input_update_building_Address").val(array_building_update.Address);
     $("#date_construction_update").val(array_building_update.Dateconstruction);
@@ -466,15 +467,14 @@ function fill_inputup_date() {
 
 }
 
-function deletecampus() {
+function deleteBuilding() {
     $.ajax({
-        url: "/api/campus/" + indextemp, type: "delete", success: function (response) {
+        url: "/api/building/" + indextemp, type: "delete", success: function (response) {
         },
     });
 }
 
 function fill_view_building() {
-    console.log(array_building_update)
     let isoDateStringa = array_building_update.Dateconstruction;
     let datea = new Date(isoDateStringa);
     let formattedDatea = `${datea.getDate()}/${datea.getMonth() + 1}/${datea.getFullYear().toString().slice(-2)}`;
@@ -501,7 +501,6 @@ function fill_view_building() {
 
 function carga() {
     if (cargar == 1) {
-        console.log("hola")
         $("#cards_content_users").html(`<div style="display:flex;justify-content:center;align-items:center">
                             <div style="height:100%;width:auto; display:flex;">
                                 <div class="sk-cube-grid">

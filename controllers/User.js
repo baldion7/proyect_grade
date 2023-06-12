@@ -98,7 +98,7 @@ export const UpdateUser = async (req, res) => {
         }
     });
     if (!user) return res.status(404).json({msg: "User tidak ditemukan"});
-    const {name, lastname, document_type,ducument,country, phone_number,email,charge, rol} = req.body;
+    const {name, lastname, document_type,ducument,country, phone_number,email,charge, rol,campus} = req.body;
     try {
         await User.update({
             Name: name,
@@ -109,6 +109,7 @@ export const UpdateUser = async (req, res) => {
             Document:ducument,
             burden:charge,
             email: email,
+            campusId:campus,
             roleId: rol
         }, {
             where: {
@@ -179,6 +180,6 @@ export const ResetPassword=async (req, res) => {
             {
                 where: { Id: user.Id }
             });
-        res.render('pages/error' );
+        res.render('pages/login' );
     });
 }

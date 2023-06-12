@@ -13,7 +13,7 @@ var indextemp;
 var input_new_users_email;
 var cargar = 1;
 $(document).ready(function () {
-    $("#menu_user").addClass("seccionmenusi");
+    $("#menu_personal").addClass("seccionmenusi");
     consult_extra_new()
     consult_extra_update()
     setTimeout(function () {
@@ -260,20 +260,8 @@ $(document).ready(function () {
             area_user_new: {
                 required: true,
             },
-            rol_update_user: {
-                required: true,
-            },
             campus_user_new: {
                 required: true,
-            },
-
-            password_user_new: {
-                required: true,
-                validPassword: true,
-            },
-            confirmpassword_user_new: {
-                required: true,
-                equalTo: '#input_new_users_password',
             },
         },
         errorElement: "span",
@@ -321,9 +309,7 @@ $(document).ready(function () {
             area_user_update: {
                 required: true,
             },
-            rol_update_user: {
-                required: true,
-            },
+
         },
         errorElement: "span",
         submitHandler: function () {
@@ -346,7 +332,7 @@ $(document).ready(function () {
         let confPassword = $("#input_new_users_confirmpassword").val();
 
         $.ajax({
-            url: "/api/users",
+            url: "/api/personnelresponsible",
             type: "post",
             data: {
                 name: name_user,
@@ -358,9 +344,6 @@ $(document).ready(function () {
                 email: email,
                 charge: charge,
                 campus: campus,
-                rol: rol,
-                password: password,
-                confPassword: confPassword
             },
             success: function (respuesta) {
             },
@@ -376,15 +359,13 @@ $(document).ready(function () {
         let name_user = $("#input_update_users_name").val();
         let lastname = $("#input_update_users_lastname").val();
         let document_type = $("#input_update_users_document_type").val();
-        let number_ducument = $("#input_update_users_number_ducument").val();
+        let number_ducument = $("#input_update_users_number_ducumnet").val();
         let country = $("#input_update_users_country").val();
         let phone_number = $("#input_update_users_phone_number").val();
         let email = $("#input_update_users_email").val();
-        let campus = $("#input_update_users_campus").val();
         let charge = $("#input_update_users_charge").val();
-        let rol = $('input[name="rol_update_user"]:checked').val();
         $.ajax({
-            url: "/api/users/" + array_users_update.Id,
+            url: "/api/personnelresponsible/" + array_users_update.Id,
             type: "patch",
             data: {
                 name: name_user,
@@ -395,8 +376,6 @@ $(document).ready(function () {
                 phone_number: phone_number,
                 email: email,
                 charge: charge,
-                campus:campus,
-                rol: rol,
             },
             success: function (respuesta) {
 
@@ -502,9 +481,7 @@ function create_page() {
       
       <div id='user_data_rol' >
           <div class="d-flex flex-column">
-              <label class='label-spna-font'>Roles</label>
-              <BR>
-              <label class='styles-cards-font'>-${item.role.Name}</label>
+              
 
           </div>
       </div>                                              
@@ -539,7 +516,7 @@ function create_page() {
 
 function chageuser() {
     $.ajax({
-        url: "/api/users",
+        url: "/api/personnelresponsible",
         type: "get",
         beforeSend: function (xhr) {
             carga()
@@ -555,7 +532,7 @@ function chageuser() {
 
 function searchuser(search) {
     $.ajax({
-        url: "/api/searchuser",
+        url: "/api/personnelresponsible/search",
         type: "post",
         data: {
             search: search
@@ -564,15 +541,15 @@ function searchuser(search) {
             array_users = response;
             create_page();
         },
-        error: function (xhr, status, error) {
-
+        error: function ( error) {
+            console.log(error)
         }
     });
 }
 
 function consult_user(action) {
     $.ajax({
-        url: "/api/users/" + indextemp,
+        url: "/api/personnelresponsible/" + indextemp,
         type: "get",
         success: function (response) {
             array_users_update = response;
@@ -598,13 +575,12 @@ function fill_inputup_date() {
     $("#input_update_users_number_ducumnet").val(array_users_update.Document);
     $("#input_update_users_charge").val(array_users_update.burden);
     $("#input_update_users_email").val(array_users_update.email);
-    $('input[name="rol_update_user"][value="' + array_users_update.roleId + '"]').prop('checked', true);
 
 }
 
 function deleteuser() {
     $.ajax({
-        url: "/api/users/" + indextemp,
+        url: "/api/personnelresponsible/" + indextemp,
         type: "delete",
         success: function (response) {
         },
@@ -618,7 +594,6 @@ function fill_view_user() {
     $("#view-user-burden").html(array_users_update.burden);
     $("#view-user-phone").html(`<i class="fa-solid fa-mobile-screen" id="user_data_personal_staff_icon_mobil"></i>(+` + array_users_update.Country + ")" + " " + array_users_update.Phone);
     $("#view-user-email").html(`<i class="fa-solid fa-envelope" id="user_data_personal_staff_icon_envelope"></i>` + " " + array_users_update.email);
-    $("#view-user-rol").html(array_users_update.roleId);
     $("#view-user-rol-date").html(array_users_update.updatedAt);
 }
 
@@ -639,27 +614,7 @@ function consult_extra_update() {
 
         }
     });
-    $.ajax({
-        url: "/api/role",
-        type: "get",
-        success: function (response) {
-            roles = response;
-            imprimi = ""
-            roles.forEach(function (opcion) {
-                imprimi += `<div class="new-rol">
-                                    <div>
-                                        <input type="radio" name="rol_update_user" class="form-check-input" value="${opcion.Id}"class="input_update_users_rol"><label for="">${opcion.Name}</label>
-                                    </div>
-                                    <button><i class="fa-solid fa-bullseye"></i></button>
-                                </div>
-                                `;
-            });
-            $("#container-rol-existent-div-update").html(imprimi)
-        },
-        error: function (xhr, status, error) {
 
-        }
-    });
 
 }
 
@@ -680,31 +635,11 @@ function consult_extra_new() {
 
         }
     });
-    $.ajax({
-        url: "/api/role",
-        type: "get",
-        success: function (response) {
-            roles = response;
-            imprimi = ""
-            roles.forEach(function (opcion) {
-                imprimi += `<div class="new-rol">
-                                    <div>
-                                        <input type="radio" name="rol_new_user" class="form-check-input" value="${opcion.Id}" class="input_new_users_rol"><label for="">${opcion.Name}</label>
-                                    </div>
-                                    <button><i class="fa-solid fa-bullseye"></i></button>
-                                </div>
-                                `;
-            });
-
-            $("#container-rol-existent-div-new").html(imprimi)
-        },
-        error: function (xhr, status, error) {
-        }
-    });
 }
 
 function carga() {
     if (cargar == 1) {
+
         $("#cards_content_users").html(`<div style="display:flex;justify-content:center;align-items:center">
                             <div style="height:100%;width:auto; display:flex;">
                                 <div class="sk-cube-grid">

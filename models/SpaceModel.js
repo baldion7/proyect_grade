@@ -9,10 +9,6 @@ export class Space extends Model {
         primaryKey: true,
         autoIncrement: true
     },
-    Technicallocation: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     Location: {
         type: DataTypes.STRING,
         allowNull: false

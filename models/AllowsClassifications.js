@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
 
-export class AllowsClassificationsModel extends Model {
+export class AllowsClassifications extends Model {
     static init(sequelize) {
         return super.init(
             {

@@ -1,11 +1,16 @@
-
 import Sequelize from 'sequelize';
 import {PersonnelResponsible} from "../models/PersonnelResponsibleModel.js"
+import {Campus} from "../models/CampusModel.js";
 
 
 export const GetPersonnelResponsible = async (req, res) => {
     try {
         const response = await PersonnelResponsible.findAll({
+            include: [
+                {
+                    model: Campus,
+                },
+            ]
 
         });
         res.status(200).json(response);
@@ -14,6 +19,37 @@ export const GetPersonnelResponsible = async (req, res) => {
     }
 };
 
+export const GetPersonnelResponsibleById = async (req, res) => {
+    try {
+        const response = await PersonnelResponsible.findOne({
+            where:{
+               Id: req.params.id
+            },
+            include: [
+                {
+                    model: Campus,
+                },
+            ]
+
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+};
+
+export const GetPersonnelResponsibleCampus = async (req, res) => {
+    try {
+        const response = await PersonnelResponsible.findAll({
+            where: {
+                campusId: req.params.id
+            }
+        });
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+};
 
 
 export const GetPersonnelResponsibleByemail = async (req, res) => {
@@ -32,32 +68,38 @@ export const GetPersonnelResponsibleByemail = async (req, res) => {
 };
 
 export const PostsearchPersonnelResponsible = async (req, res) => {
-    const {search} = req.body;
+    const { search } = req.body;
     try {
         const response = await PersonnelResponsible.findAll({
             where: Sequelize.and(
-                Sequelize.literal(`CONCAT(Name, ' ', Lastname,' ',Phone,' ',Country,' ',Yypedocument,' ',Document,' ',burden,' ',email) LIKE '%${search}%'`)
-            )
+                Sequelize.literal(`CONCAT(PersonnelResponsible.Name, ' ', PersonnelResponsible.Lastname, ' ', PersonnelResponsible.Phone, ' ', PersonnelResponsible.Country, ' ', PersonnelResponsible.Typedocument, ' ', PersonnelResponsible.Document, ' ', PersonnelResponsible.burden, ' ', PersonnelResponsible.email) LIKE '%${search}%'`)
+            ),
+            include: [
+                {
+                    model: Campus,
+                },
+            ],
         });
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.message});
+        res.status(500).json({ msg: error.message });
     }
 };
 
+
 export const CreatePersonnelResponsible = async (req, res) => {
-    const {name, lastname, document_type,ducument,country, phone_number,email,charge,campus} = req.body;
+    const {name, lastname, document_type, ducument, country, phone_number, email, charge, campus} = req.body;
     try {
-        const response= await PersonnelResponsible.create({
+        const response = await PersonnelResponsible.create({
             Name: name,
             Lastname: lastname,
-            Phone:phone_number,
-            Country:country,
-            Typedocument:document_type,
-            Document:ducument,
-            burden:charge,
+            Phone: phone_number,
+            Country: country,
+            Typedocument: document_type,
+            Document: ducument,
+            burden: charge,
             email: email,
-            campusId:campus,
+            campusId: campus,
         });
 
     } catch (error) {
@@ -73,16 +115,16 @@ export const UpdatePersonnelResponsible = async (req, res) => {
         }
     });
     if (!user) return res.status(404).json({msg: "User tidak ditemukan"});
-    const {name, lastname, document_type,ducument,country, phone_number,email,charge} = req.body;
+    const {name, lastname, document_type, ducument, country, phone_number, email, charge} = req.body;
     try {
-        await User.update({
+        await PersonnelResponsible.update({
             Name: name,
             Lastname: lastname,
-            Phone:phone_number,
-            Country:country,
-            Typedocument:document_type,
-            Document:ducument,
-            burden:charge,
+            Phone: phone_number,
+            Country: country,
+            Typedocument: document_type,
+            Document: ducument,
+            burden: charge,
             email: email,
         }, {
             where: {
@@ -103,7 +145,7 @@ export const DeletePersonnelResponsible = async (req, res) => {
     });
     if (!user) return res.status(404).json({msg: "User tidak ditemukan"});
     try {
-        await User.destroy({
+        await PersonnelResponsible.destroy({
             where: {
                 Id: user.Id
             }

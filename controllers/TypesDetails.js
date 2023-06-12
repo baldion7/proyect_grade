@@ -6,7 +6,7 @@ export const CreatTypesDetails =async(req, res)=>{
         const respuesta =await TypesDetails.create({
             Name:Name,
             Description:Description,
-            typesEquipmentId:1
+            userId: req.session.userId
         });
         res.status(201).json(respuesta);
     } catch (error) {

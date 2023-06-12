@@ -1,9 +1,11 @@
+import Sequelize from 'sequelize';
 import {Building} from "../models/BuildingModel.js";
 import {User} from "../models/UserModel.js";
 import {Campus} from "../models/CampusModel.js";
 import {Floor} from "../models/FloorModel.js";
 import {Area} from "../models/AreaModel.js";
-import  {TypesArea} from "../models/TypesAreaModel.js";
+import {TypesArea} from "../models/TypesAreaModel.js";
+import {TypesEquipment} from "../models/TypesEquipmentModel.js";
 
 export const PostbuildingsById = async (req, res) => {
     try {
@@ -79,6 +81,57 @@ export const Getbuildings = async (req, res) => {
         res.status(500).json({msg: error.message});
     }
 };
+export const searchBuilding = async (req, res) => {
+    const { search } = req.body;
+    try {
+        const buildings = await Building.findAll({
+            where: {
+                [Sequelize.Op.or]: [
+                    {
+                        Name: {
+                            [Sequelize.Op.like]: `%${search}%`,
+                        },
+                    },
+                    {
+                        Description: {
+                            [Sequelize.Op.like]: `%${search}%`,
+                        },
+                    },
+                    {
+                        Address: {
+                            [Sequelize.Op.like]: `%${search}%`,
+                        },
+                    },
+                    {
+                        Dateconstruction: {
+                            [Sequelize.Op.like]: `%${search}%`,
+                        },
+                    },
+                ],
+            },
+            include: [
+                {
+                    model: Campus,
+                },
+                {
+                    model: Floor,
+                },
+                {
+                    model:User
+                }
+            ],
+        });
+
+        res.status(200).json(buildings);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+};
+
+
+
+
 
 export const Getcampususerbuildings = async (req, res) => {
     try {
@@ -116,7 +169,11 @@ export const Getcampusbuildings = async (req, res) => {
                 {
                     model: Floor,
 
-                }
+                },
+                {
+                    model: User,
+
+                },
             ]
 
         });
@@ -135,7 +192,8 @@ export const CreateBuilding = async (req, res) => {
             Address: address,
             Description: description,
             Dateconstruction: dateconstruction,
-            campusId: campusId
+            campusId: campusId,
+            userId: req.session.userId
         });
 
         res.status(200).json(response);
@@ -183,12 +241,30 @@ export const GetbuildingareaById =async(req, res)=>{
                             include:[
                                 {
                                     model:TypesArea
-                                }
+                                },
+                                {
+                                    model: User,
+
+                                },
                             ]
                         }
                     ]
                 }
             ]
+        });
+
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({msg: error.message});
+    }
+};
+
+export const DeleteBuilding = async (req, res) => {
+    try {
+        const response = await Building.destroy({
+            where: {
+                Id: req.params.id
+            }
         });
 
         res.status(200).json(response);

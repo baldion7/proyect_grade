@@ -13,8 +13,8 @@ var array_tipesequipment_update = [];
 var indextemp;
 var cargar = 1;
 var id_tipesequipment = 0;
-var typesdetails = []
-typesdetailsid=[]
+var classificationj = []
+var typesdetailsid = []
 $(document).ready(function () {
     id_tipesequipment = $("#id_tipesequipment").val()
 
@@ -133,11 +133,11 @@ $(document).ready(function () {
 
     $(document).on("click", ".btn-edit-tipesequipment", function (e) {
         indextemp = $(e.currentTarget).attr("data-index");
-        $("#display_update_tipesequipment").show();
-        $("#content_tipesequipment").hide();
         let action = "update"
         detailsequipmen(action);
         consult_tipesequipment(action)
+        $("#display_update_tipesequipment").show();
+        $("#content_tipesequipment").hide();
     });
 
 
@@ -289,13 +289,13 @@ $(document).ready(function () {
         $(".btn-back-to").click()
     });
 
-    $('#search_tipesequipment').keyup(function () {
-        var search = $('#search_tipesequipment').val();
+    $('#search_typeequipment').keyup(function () {
+        var search = $('#search_typeequipment').val();
         if (search.length > 2) {
             searchtipesequipment(search);
             create_page();
         }
-        if ($('#search_tipesequipment').val().trim() == '') {
+        if ($('#search_typeequipment').val().trim() == '') {
             array_tipesequipment = arrar_temp_buildig;
             searchtipesequipment(search);
             create_page();
@@ -352,7 +352,8 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'><i class="fa-solid fa-tipesequipment"></i> ${item.Name}</label>
                           <BR>
-                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> ${item.Address} </label>
+                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> ${item.Description} </label>
+
                       <br>
                   </div>
               </div>
@@ -360,17 +361,17 @@ function create_page() {
       </div>
       <div id='user_data_personal_staff' >
           <div>
-              <label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrucion: <br>${formattedDatea}</label>
+              <label class='styles-cards-font'> <i class="fa-solid fa-arrow-up-wide-short"></i> Classificacion: ${item.classification.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${item.Description}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-file"></i> Descricion: ${item.classification.Description}</label>
           </div>
       </div>
       <div id='user_data_rol' >
           <div>
               <label class='label-spna-font'>Datos de ingreso</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> {item.user.Name} {item.user.Lastname}</label>
-              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> {formattedDate}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${item.user.Name} ${item.user.Lastname}</label>
+              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
           </div>
       </div>                                              
@@ -379,7 +380,7 @@ function create_page() {
                   <img src='img/drop.png' >
               </button>
               <div class='dropdown-content'>
-              <a type class='btn-view-tipesequipment cursor-pointer-styles' data-index="${item.Id}">
+              <a type class='btn-view-tipesequipment cursor-pointer-styles' data-index="${item.Id}" style="display: none">
               <i class="fa-solid fa-bullseye">
                       </i> Visualizar</a>
                   <a type class='btn-edit-tipesequipment cursor-pointer-styles' data-index="${item.Id}">
@@ -399,6 +400,8 @@ function create_page() {
     totalPages = $("#cards_content_tipesequipment").pagination("getTotalPage");
     $("#paginacion_all").html(totalPages);
     totapa = totalPages;
+    contpage = 1;
+    $("#input_pagination").val(contpage + "")
 }
 
 function chagetipesequipment() {
@@ -416,8 +419,9 @@ function chagetipesequipment() {
 
 function searchtipesequipment(search) {
     $.ajax({
-        url: "/api/tipesequipment/search", type: "post", data: {
-            search: search
+        url: "/api/TypesEquipment/search", type: "post", data: {
+            search: search,
+            Id:id_tipesequipment
         }, success: function (response) {
             array_tipesequipment = response;
             create_page();
@@ -446,8 +450,12 @@ function consult_tipesequipment(action) {
 function fill_inputup_date() {
     $("#description_update_tipesequipment").val(array_tipesequipment_update.Description);
     $("#input_update_tipesequipment_name").val(array_tipesequipment_update.Name);
-    var ruta=array_tipesequipment_update.allowstypesdetails;
-    ruta.forEach(function(value) {
+    var ruta = array_tipesequipment_update.allowstypesdetails;
+    ruta.forEach(function (value) {
+        $(".details" + value.typesDetailId).prop("checked", true);
+    });
+    var ruta = array_tipesequipment_update.allowstypesdetails;
+    ruta.forEach(function (value) {
         $(".details" + value.typesDetailId).prop("checked", true);
     });
 
@@ -455,7 +463,7 @@ function fill_inputup_date() {
 
 function deletetipesequipment() {
     $.ajax({
-        url: "/api/tipesequipment/" + indextemp, type: "delete", success: function (response) {
+        url: "/api/TypesEquipment/" + indextemp, type: "delete", success: function (response) {
         },
     });
 }
@@ -508,8 +516,8 @@ function carga() {
 }
 
 function detailsequipmen(action) {
-            $("#container-rol-existent-div").html(" ")
-            $("#container-rol-existent-div-update").html(" ")
+    $("#container-rol-existent-div").html(" ")
+    $("#container-rol-existent-div-update").html(" ")
     switch (action) {
         case "update":
             $.ajax({
@@ -529,7 +537,7 @@ function detailsequipmen(action) {
                         var nuevoObjeto = {
                             "Id": "details" + opcion.Id,
                         };
-                        typesdetails.push(nuevoObjeto);
+                        classificationj.push(nuevoObjeto);
 
                     });
                     $("#container-rol-existent-div-update").html(imprimi)
@@ -557,7 +565,7 @@ function detailsequipmen(action) {
                         var nuevoObjeto = {
                             "Id": "details" + opcion.Id,
                         };
-                        typesdetails.push(nuevoObjeto);
+                        classificationj.push(nuevoObjeto);
 
                     });
                     $("#container-rol-existent-div").html(imprimi)
@@ -571,7 +579,7 @@ function detailsequipmen(action) {
 }
 
 function addtypesdetails() {
-    typesdetails.forEach(function (opcion) {
+    classificationj.forEach(function (opcion) {
         var checkboxSeleccionado = $('#' + opcion.Id).prop('checked');
         if (checkboxSeleccionado) {
             var valorCheckbox = $('#' + opcion.Id).val();
@@ -581,13 +589,14 @@ function addtypesdetails() {
             typesdetailsid.push(nuevoObjeto);
         }
     })
-    typesdetailsid.sort(function(a, b) {
+    typesdetailsid.sort(function (a, b) {
         return a.Iddetails - b.Iddetails;
     });
 
 }
 
 function createallowstypesdetails(respuesta) {
+    typesdetailsid = eliminarObjetosRepetidos(typesdetailsid, "Iddetails");
     typesdetailsid.forEach(function (opcion) {
         if (opcion.Iddetails != null) {
             $.ajax({
@@ -607,12 +616,12 @@ function createallowstypesdetails(respuesta) {
 
         }
     })
-    typesdetailsid=null;
+    typesdetailsid = [];
 }
 
-function  new_details() {
-    let name =$("#input_new_name_details").val();
-    let description =$("#input_new_description_details").val();
+function new_details() {
+    let name = $("#input_new_name_details").val();
+    let description = $("#input_new_description_details").val();
     $.ajax({
         url: "/api/typesDetails", type: "post", data: {
             Name: name,
@@ -632,13 +641,22 @@ function  new_details() {
 
 function deleteallowstypesdetails() {
     $.ajax({
-        url: "/api/allowstypesdetails/"+array_tipesequipment_update.Id, type: "delete", data: {
+        url: "/api/allowstypesdetails/" + array_tipesequipment_update.Id,
+        type: "delete",
+        data: {},
+        success: function () {
 
-        }, success: function () {
-
-        }, error: function (error) {
+        },
+        error: function (error) {
             console.log(error)
         }
 
+    });
+}
+
+function eliminarObjetosRepetidos(array, atributo) {
+    return array.filter((objeto, indice, self) => {
+        const valor = objeto[atributo];
+        return self.findIndex((o) => o[atributo] === valor) === indice;
     });
 }

@@ -13,10 +13,11 @@ export const verifyUser= async (req,res,next)=>{
         },
     });
     if (!user) {
-        res.render('pages/register', { title: 'Mi aplicación Node.js' });
+        res.render('pages/login', { title: 'Mi aplicación Node.js' });
     }
     req.userId=user.Id;
     req.role=user.role.Name;
+
     next();
 }
 
@@ -32,10 +33,10 @@ export const adminOnly= async (req,res,next)=>{
         },
     });
     if (!user) {
-        return res.redirect('/register');
+        return res.redirect('/login');
     };
     if (user.role.Name!=="admin"){
-        return res.redirect('/user');
+        return res.redirect('/');
     }
     req.userId=user.id;
     req.role=user.role.Name;
@@ -54,7 +55,7 @@ export const requireLogin = async (req, res, next) => {
     });
 
     if (!user) {
-        return res.redirect('/register');
+        return res.redirect('/login');
     }
 
     req.userId = user.id;
@@ -76,7 +77,7 @@ export const AtchUser= async (req,res,next)=>{
         }
     });
     if (!user) {
-        return res.redirect('/register');
+        return res.redirect('/login');
     };
     if (user.role!=="admin"){
         return res.redirect('/user');

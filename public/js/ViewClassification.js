@@ -15,7 +15,7 @@ var cargar = 1;
 var id_campus = 0;
 $(document).ready(function () {
     id_campus = $("#id_campus").val()
-
+    $("#menu_classification").addClass("seccionmenusi");
     setTimeout(function () {
         var intervalinicial = setInterval(function () {
             chageclassification();
@@ -137,13 +137,6 @@ $(document).ready(function () {
         $("#delete_display_classification").modal("show");
     });
 
-    $(document).on("click", ".btn-view-classification", function (e) {
-        indextemp = $(e.currentTarget).attr("data-index");
-        $("#content_classification").hide();
-        $("#display_classification_view").show();
-        let action = "view"
-        consult_classification(action)
-    });
 
     $("#btn_new_classification").click(function () {
         $("#display_new_classification").show();
@@ -207,8 +200,6 @@ $(document).ready(function () {
                 required: true, minlength: 3,
             }, description_new_classification: {
                 required: true, minlength: 3,
-            }, Classification_criteria_new_classification: {
-                required: true, minlength: 3,
             },
         }, errorElement: "span", submitHandler: function () {
             $("#modal_new_classification").modal("show");
@@ -223,8 +214,6 @@ $(document).ready(function () {
                 required: true, minlength: 3,
             }, date_construction_update: {
                 required: true, minlength: 3,
-            }, description_update_classification: {
-                required: true,
             },
         }, errorElement: "span", submitHandler: function () {
             $("#modal_update_classification").modal("show");
@@ -234,12 +223,10 @@ $(document).ready(function () {
     $("#modal_create_classification").click(function () {
         let Name = $("#input_new_classification_name").val();
         let Description = $("#description_new_classification").val();
-        let ClassificationCriteria = $("#Classification_criteria_new_classification").val();
         $.ajax({
             url: "/api/classification", type: "post", data: {
                 name: Name,
                 descripcion: Description,
-                classificationcriteria: ClassificationCriteria,
             }, success: function (respuesta) {
             }, error: function (error) {
                 console.log(error)
@@ -252,12 +239,10 @@ $(document).ready(function () {
     $("#modal-edit-classification").click(function () {
         let Name = $("#input_update_classification_name").val();
         let Description = $("#description_update_classification").val();
-        let ClassificationCriteria = $("#Classification_criteria_update_classification").val();
         $.ajax({
             url: "/api/classification/" + array_classification_update.Id, type: "patch", data: {
                 name: Name,
                 descripcion: Description,
-                classificationcriteria: ClassificationCriteria,
             }, success: function (respuesta) {
             }, error: function (error) {
                 console.log(error)
@@ -266,25 +251,22 @@ $(document).ready(function () {
         });
         $(".btn-back-to").click()
     });
-    $("#close_modal_form_floor").click( function () {
-        $("#new_floor").trigger("reset");
-    })
 
-    $('#search_campus').keyup(function () {
-        var search = $('#search_campus').val();
+    $('#search_classification').keyup(function () {
+        var search = $('#search_classification').val();
         if (search.length > 2) {
             searchcampus(search);
             create_page();
         }
-        if ($('#search_campus').val().trim() == '') {
+        if ($('#search_classification').val().trim() == '') {
             array_classification = arrar_temp_classification;
             searchcampus(search);
             create_page();
         }
     })
 
-    $("#modal_delete_campus").click(function () {
-        deletecampus()
+    $("#modal_delete_classification").click(function () {
+        deleteclassifications()
     })
 
     $("#logout").click(function () {
@@ -335,8 +317,6 @@ function create_page() {
                           <BR>
                              <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${item.Description}</label>
                              <br>
-                              <label class='styles-cards-font'><i class="fa-solid fa-file-prescription"></i> ${item.ClassificationCriteria}</label>
-                      <br>
                   </div>
               </div>
           </div>
@@ -346,7 +326,8 @@ function create_page() {
               <label class='label-spna-font'>Datos de ingreso</label>
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-user"></i> {item.user.Name} {item.user.Lastname}</label>
-              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> {formattedDate}</label>
+              <br>
+              <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
           </div>
       </div>                                              
@@ -355,9 +336,6 @@ function create_page() {
                   <img src='img/drop.png' >
               </button>
               <div class='dropdown-content'>
-              <a type class='btn-view-classification cursor-pointer-styles' data-index="${item.Id}">
-              <i class="fa-solid fa-bullseye">
-                      </i> Visualizar</a>
                   <a type class='btn-edit-classification cursor-pointer-styles' data-index="${item.Id}">
                       <i class="fas fa-pencil-alt">
                       </i> Editar</a>
@@ -378,6 +356,8 @@ function create_page() {
     totalPages = $("#cards_content_classification").pagination("getTotalPage");
     $("#paginacion_all").html(totalPages);
     totapa = totalPages;
+    contpage=1;
+    $("#input_pagination").val(contpage + "")
 }
 
 function chageclassification() {
@@ -395,7 +375,7 @@ function chageclassification() {
 
 function searchcampus(search) {
     $.ajax({
-        url: "/api/campus/search", type: "post", data: {
+        url: "/api/classification/search", type: "post", data: {
             search: search
         }, success: function (response) {
             array_classification = response;
@@ -414,9 +394,7 @@ function consult_classification(action) {
                 case "update":
                     fill_inputup_date()
                     break;
-                default:
-                    fill_view_classification()
-                    break;
+
             }
         },
     });
@@ -425,48 +403,20 @@ function consult_classification(action) {
 function fill_inputup_date() {
     console.log(array_classification_update)
     $("#input_update_classification_name").val(array_classification_update.Name);
-    $("#Classification_criteria_update_classification").val(array_classification_update.ClassificationCriteria);
     $("#description_update_classification").val(array_classification_update.Description);
 
 
 }
 
-function deletecampus() {
+function deleteclassifications() {
     $.ajax({
-        url: "/api/campus/" + indextemp, type: "delete", success: function (response) {
+        url: "/api/classification/" + indextemp, type: "delete", success: function (response) {
         },
     });
 }
 
-function fill_view_classification() {
-    console.log(array_classification_update)
-    let isoDateStringa = array_classification_update.Dateconstruction;
-    let datea = new Date(isoDateStringa);
-    let formattedDatea = `${datea.getDate()}/${datea.getMonth() + 1}/${datea.getFullYear().toString().slice(-2)}`;
-    $("#view-campus-name").html(array_classification_update.Name);
-    $("#view-campus-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${array_classification_update.Address} </label>`);
-    $("#view-campus-phone").html(` <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${array_classification_update.Description}</label>`);
-    $("#view-campus-email").html(`<label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrucion: <br>${formattedDatea}</label>`);
-
-    let ruta = array_classification_update.floors
-    $(".roles-view-name").html(" ")
-    ruta.sort(function(a, b) {
-        return a.Floornumber - b.Floornumber;
-    });
-    ruta.forEach(function(item) {
-        $(".roles-view-name").append(`
-    <div class="buildins-view-campus">
-      <label for="">Numero de piso ${item.Floornumber}</label>
-    </div>
-  `);
-    });
-
-    $("#view-campus-rol-date").html(array_classification_update.updatedAt);
-}
-
 function carga() {
     if (cargar == 1) {
-        console.log("hola")
         $("#cards_content_users").html(`<div style="display:flex;justify-content:center;align-items:center">
                             <div style="height:100%;width:auto; display:flex;">
                                 <div class="sk-cube-grid">
@@ -485,34 +435,4 @@ function carga() {
         cargar = 12;
     }
 
-}
-
-function new_floor(indextemp) {
-    let numberfloor = $("#input_new_floor_name").val()
-    $.ajax({
-        url: "/api/floors", type: "post", data: {
-            classificationid: indextemp,
-            floornumber: numberfloor,
-
-        }, success: function (respuesta) {
-        }, error: function (error) {
-            console.log(error)
-        }
-
-    });
-    $("#modal_new_floor").modal("hide");
-    $("#new_floor").trigger("reset");
-}
-
-function floorget(indextemp) {
-    $.ajax({
-        url: "/api/classification/floors/" + indextemp,
-        type: "get",
-        success: function (respuesta) {
-            array_floor = respuesta
-        }, error: function (error) {
-            console.log(error)
-        }
-
-    });
 }
