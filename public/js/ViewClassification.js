@@ -323,9 +323,7 @@ function create_page() {
       </div>
       <div id='user_data_rol' >
           <div>
-              <label class='label-spna-font'>Datos de ingreso</label>
-              <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-user"></i> {item.user.Name} {item.user.Lastname}</label>
+              <label class='label-spna-font'>Fecha de creacion</label>
               <br>
               <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
