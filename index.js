@@ -92,5 +92,5 @@ app.use((req, res, next) => {
 
 store.sync();
 app.listen(process.env.APP_PORT,()=>{
-    console.log('prendio esta monda')
+    console.log('prendio ')
 });

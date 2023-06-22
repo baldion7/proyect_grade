@@ -314,7 +314,7 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'><i class="fa-solid fa-building-columns"></i> ${item.Name}</label>
                           <BR>
-                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${item.Address} </label>
+                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Direccion: ${item.Address} </label>
                       <br>
                   </div>
               </div>
@@ -324,9 +324,9 @@ function create_page() {
           <div>
               <label class='styles-cards-font'><i class="fa-solid fa-clock fa-spin-pulse"></i> ${item.Schedules}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-envelope" ></i>  ${item.Email}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-envelope" ></i> ${item.Email}</label>
               <br>
-              <label class='styles-cards-font'><i class="fa-solid fa-mobile-screen icon-movilc-ampus" ></i>${item.Phone}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-mobile-screen icon-movilc-ampus" ></i> ${item.Phone}</label>
           </div>
       </div>
       <div id='user_data_rol' >

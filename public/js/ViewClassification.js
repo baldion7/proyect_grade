@@ -340,7 +340,7 @@ function create_page() {
                   <a data-index="${item.Id}"class='ps-delete-btn cursor-pointer-styles'>
                       <i class="fa-solid fa-trash-can"></i> Eliminar</a>
                       <a data-index="${item.Id}"class='ps-new-typesepquipment-btn cursor-pointer-styles'>
-                     <i class="fa-solid fa-arrow-up-short-wide"></i> Tipo de equipos</a>
+                     <i class="fa-solid fa-arrow-up-short-wide"></i> Categorias</a>
                       
               </div>
           </div>

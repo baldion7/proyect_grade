@@ -263,6 +263,7 @@ $(document).ready(function () {
         let Functionn = $("#fuction_new_equipment").val();
         let TypesEquipmentId = $("#input_new_equipment_types").val();
         let ImgEquipment = img_base64;
+
         $.ajax({
             url: "/api/equipment", type: "post", data: {
                 name: Named,
@@ -295,7 +296,6 @@ $(document).ready(function () {
         let Functionn = $("#fuction_update_equipment").val();
         let TypesEquipmentId = $("#input_update_equipment_types").val();
         let ImgEquipment = img_base64;
-
         $.ajax({
             url: "/api/equipment/" + indextemp, type: "patch", data: {
                 name: Named,
@@ -603,7 +603,7 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'>Datos tecnicos</label>
                              <br>
-                             <label class='styles-cards-font'>Clasificacion: ${item.typesEquipment.classification.Name}</label>
+                             <label class='styles-cards-font'>Clasificación: ${item.typesEquipment.classification.Name}</label>
                              <br>
                              <label class='styles-cards-font'>Categoria: ${item.typesEquipment.Name}</label>
                              <br>
@@ -622,15 +622,15 @@ function create_page() {
           <div>
           <label class='label-spna-font'>Ubicacion del equipo</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${item.space.area.floor.building.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> Regional: ${item.space.area.floor.building.campus.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> </i>Edificio: ${item.space.area.floor.building.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${item.space.area.floor.building.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-elevator"></i> </i>Piso: ${item.space.area.floor.Floornumber}</label>
+              <label class='styles-cards-font'><i class="fas fa-elevator"></i> Piso: ${item.space.area.floor.Floornumber}</label>
               <BR>
-               <label class='styles-cards-font'><i class="fas fa-map-marker"></i> </i>Area: ${item.space.area.Name}</label>
+               <label class='styles-cards-font'><i class="fas fa-map-marker"></i> Área: ${item.space.area.Name}</label>
                <BR>
-               <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${item.space.Location}</label>
+               <label class='styles-cards-font'><i class="fas fa-layer-group"></i> Espacio: ${item.space.Location}</label>
          </div>
      </div>
        <div id='user_data_rol' >
@@ -764,27 +764,27 @@ function fill_view_equipment() {
     let isoDateString = array_equipment_update.createdAt;
     let date = new Date(isoDateString);
     let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
-    $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificacion: ${array_equipment_update.typesEquipment.classification.Name}`);
-    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Typo de equipo: ${array_equipment_update.typesEquipment.Name}`);
+    $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificación: ${array_equipment_update.typesEquipment.classification.Name}`);
+    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Tipo de equipo: ${array_equipment_update.typesEquipment.Name}`);
     $("#view-equipment-Name").html(`<i class="fas fa-cog"></i> Nombre:  ${array_equipment_update.Name}`);
     $("#view-equipment-Model").html(`<i class="fas fa-cogs"></i> Modelo: ${array_equipment_update.Model}`);
     $("#view-equipment-Brand").html(`<i class="fa-brands fa-bandcamp"></i> Marca: ${array_equipment_update.Brand}`);
     $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Funcion: ${array_equipment_update.Function}`);
-    $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usario</label>
+    $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usuario</label>
     <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${array_equipment_update.user.Name} ${array_equipment_update.user.Lastname}</label>
     <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>`)
     $("#equipment-img-profile").html(`<img class="img-view-equipment" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
-    $(".conatiner-info-user-equipmente-ubications").html(`<label class='label-spna-font'>Ubicacion del equipo</label>
+    $(".conatiner-info-user-equipmente-ubications").html(`<label class='label-spna-font'>Ubicación del equipo</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${array_equipment_update.space.area.floor.building.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> Regional: ${array_equipment_update.space.area.floor.building.campus.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> </i>Edificio: ${array_equipment_update.space.area.floor.building.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${array_equipment_update.space.area.floor.building.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-elevator"></i> </i>Piso: ${array_equipment_update.space.area.floor.Floornumber}</label>
+              <label class='styles-cards-font'><i class="fas fa-elevator"></i> Piso: ${array_equipment_update.space.area.floor.Floornumber}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-map-marker"></i> </i>Area: ${array_equipment_update.space.area.Name}</label>
+              <label class='styles-cards-font'><i class="fas fa-map-marker"></i> Área: ${array_equipment_update.space.area.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${array_equipment_update.space.Location}</label>`)
+              <label class='styles-cards-font'><i class="fas fa-layer-group"></i> Espacio: ${array_equipment_update.space.Location}</label>`)
     viewdetailsequipment(array_equipment_update.Id)
     partsview(array_equipment_update.parts)
 

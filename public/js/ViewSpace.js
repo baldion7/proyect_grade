@@ -365,7 +365,7 @@ function create_page() {
                         <br>
                              <label class='styles-cards-font'>Tipo de espacio: ${item.typesSpace.Name} </label>
                               <BR>
-                             <label class='styles-cards-font'>Decsripcion: ${item.typesSpace.Description} </label>
+                             <label class='styles-cards-font'>Descripción: ${item.typesSpace.Description} </label>
                               <BR>
                               <label class='label-spna-font'>Personal responsable</label>
                               <br>
@@ -377,13 +377,13 @@ function create_page() {
       </div>
       <div id='user_data_personal_staff' >
           <div>
-          <label class='label-spna-font'>Ubicacion del spacio</label>
+          <label class='label-spna-font'>Ubicacion del espacio</label>
                           <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-area"></i> Edificio: ${item.area.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${item.area.floor.building.Name}</label>
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-elevator"></i> Piso ${item.area.floor.Floornumber}</label>
               <br>
-               <label class='styles-cards-font'><i class="fa-solid fa-location-dot"></i> Area ${item.area.Name}</label>
+               <label class='styles-cards-font'><i class="fa-solid fa-location-dot"></i> Área ${item.area.Name}</label>
                <br>
                <label class='styles-cards-font'><i class="fa-solid fa-layer-group"></i> Espacio ${item.Location}</label>
                

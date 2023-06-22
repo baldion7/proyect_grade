@@ -330,7 +330,6 @@ $(document).ready(function () {
             $("#modal_update").modal("show");
         },
     });
-
     $("#modal_create_user").click(function () {
         let name_user = $("#input_new_users_name").val();
         let lastname = $("#input_new_users_lastname").val();
@@ -395,7 +394,7 @@ $(document).ready(function () {
                 phone_number: phone_number,
                 email: email,
                 charge: charge,
-                campus:campus,
+                campus: campus,
                 rol: rol,
             },
             success: function (respuesta) {
@@ -533,7 +532,7 @@ function create_page() {
     totalPages = $("#cards_content_users").pagination("getTotalPage");
     $("#paginacion_all").html(totalPages);
     totapa = totalPages;
-    contpage=1;
+    contpage = 1;
     $("#input_pagination").val(contpage + "")
 }
 
@@ -564,8 +563,8 @@ function searchuser(search) {
             array_users = response;
             create_page();
         },
-        error: function (xhr, status, error) {
-
+        error: function (error) {
+            console.log(error)
         }
     });
 }

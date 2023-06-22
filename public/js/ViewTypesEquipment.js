@@ -361,9 +361,9 @@ function create_page() {
       </div>
       <div id='user_data_personal_staff' >
           <div>
-              <label class='styles-cards-font'> <i class="fa-solid fa-arrow-up-wide-short"></i> Classificacion: ${item.classification.Name}</label>
+              <label class='styles-cards-font'> <i class="fa-solid fa-arrow-up-wide-short"></i> Clasificación: ${item.classification.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-file"></i> Descricion: ${item.classification.Description}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-file"></i> Descripción: ${item.classification.Description}</label>
           </div>
       </div>
       <div id='user_data_rol' >
