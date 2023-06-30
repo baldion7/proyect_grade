@@ -495,7 +495,7 @@ function create_page() {
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-envelope" id="user_data_personal_staff_icon_envelope"></i> ${item.email}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${item.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Regional: ${item.campus.Name}</label>
           </div>
       </div>
       
@@ -611,14 +611,16 @@ function deleteuser() {
 }
 
 function fill_view_user() {
-
+    let isoDateString = array_users_update.updatedAt;
+    let date = new Date(isoDateString);
+    let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
     $("#view-user-name").html(array_users_update.Name + " " + array_users_update.Lastname);
     $("#view-user-document").html(array_users_update.Typedocument + " " + array_users_update.Document);
     $("#view-user-burden").html(array_users_update.burden);
     $("#view-user-phone").html(`<i class="fa-solid fa-mobile-screen" id="user_data_personal_staff_icon_mobil"></i>(+` + array_users_update.Country + ")" + " " + array_users_update.Phone);
     $("#view-user-email").html(`<i class="fa-solid fa-envelope" id="user_data_personal_staff_icon_envelope"></i>` + " " + array_users_update.email);
-    $("#view-user-rol").html(array_users_update.roleId);
-    $("#view-user-rol-date").html(array_users_update.updatedAt);
+    $("#view-user-rol").html(array_users_update.role.Name);
+    $("#view-user-rol-date").html(formattedDate);
 }
 
 function consult_extra_update() {

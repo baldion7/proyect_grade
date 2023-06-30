@@ -377,7 +377,7 @@ function create_page() {
       </div>
       <div id='user_data_personal_staff' >
           <div>
-          <label class='label-spna-font'>Ubicacion del espacio</label>
+          <label class='label-spna-font'>Ubicación del espacio</label>
                           <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${item.area.floor.building.Name}</label>
               <BR>

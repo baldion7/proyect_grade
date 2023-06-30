@@ -473,9 +473,9 @@ function fill_view_tipesequipment() {
     let datea = new Date(isoDateStringa);
     let formattedDatea = `${datea.getDate()}/${datea.getMonth() + 1}/${datea.getFullYear().toString().slice(-2)}`;
     $("#view-tipesequipment-name").html(array_tipesequipment_update.Name);
-    $("#view-tipesequipment-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${array_tipesequipment_update.Address} </label>`);
+    $("#view-tipesequipment-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirección: ${array_tipesequipment_update.Address} </label>`);
     $("#view-tipesequipment-phone").html(` <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${array_tipesequipment_update.Description}</label>`);
-    $("#view-tipesequipment-email").html(`<label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrucion: <br>${formattedDatea}</label>`);
+    $("#view-tipesequipment-email").html(`<label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrición: <br>${formattedDatea}</label>`);
 
     let ruta = array_tipesequipment_update.floors
     $(".roles-view-name").html(" ")

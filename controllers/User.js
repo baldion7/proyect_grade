@@ -28,6 +28,9 @@ export const GetUserByid = async (req, res) => {
         const response = await User.findOne({
             where: {
                 Id: req.params.id
+            },
+            include:{
+                model:Role
             }
         });
         res.status(200).json(response);

@@ -475,7 +475,7 @@ function create_page() {
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-envelope" id="user_data_personal_staff_icon_envelope"></i> ${item.email}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${item.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Regional: ${item.campus.Name}</label>
           </div>
       </div>
       

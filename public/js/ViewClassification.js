@@ -323,7 +323,7 @@ function create_page() {
       </div>
       <div id='user_data_rol' >
           <div>
-              <label class='label-spna-font'>Fecha de creacion</label>
+              <label class='label-spna-font'>Fecha de creación</label>
               <br>
               <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>
                 
@@ -340,7 +340,7 @@ function create_page() {
                   <a data-index="${item.Id}"class='ps-delete-btn cursor-pointer-styles'>
                       <i class="fa-solid fa-trash-can"></i> Eliminar</a>
                       <a data-index="${item.Id}"class='ps-new-typesepquipment-btn cursor-pointer-styles'>
-                     <i class="fa-solid fa-arrow-up-short-wide"></i> Categorias</a>
+                     <i class="fa-solid fa-arrow-up-short-wide"></i> Categorías</a>
                       
               </div>
           </div>

@@ -244,7 +244,8 @@ export const CreateEquiment = async (req, res) => {
                                                     {Name: {[Op.like]: '%Bodega%'}},
                                                     {Name: {[Op.like]: '%BODEGA%'}},
                                                     {Name: {[Op.like]: '%Almacen%'}},
-                                                    {Name: {[Op.like]: '%almacen%'}}
+                                                    {Name: {[Op.like]: '%almacen%'}},
+                                                    {Name: {[Op.like]: '%ALMACEN%'}}
                                                 ]
                                             }
                                         },
@@ -258,7 +259,8 @@ export const CreateEquiment = async (req, res) => {
                                                         {Name: {[Op.like]: '%Bodega%'}},
                                                         {Name: {[Op.like]: '%BODEGA%'}},
                                                         {Name: {[Op.like]: '%Almacen%'}},
-                                                        {Name: {[Op.like]: '%almacen%'}}
+                                                        {Name: {[Op.like]: '%almacen%'}},
+                                                        {Name: {[Op.like]: '%ALMACEN%'}}
                                                     ]
                                                 },
                                             }
@@ -274,7 +276,7 @@ export const CreateEquiment = async (req, res) => {
         });
         var spaces = extractAttributes(bodega)
         var space = spaces[0].Id
-        const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid} = req.body;
+        const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid,stock} = req.body;
         const respuesta = await Equipment.create({
             Name: name,
             Price: price,
@@ -285,7 +287,8 @@ export const CreateEquiment = async (req, res) => {
             ImgEquipment: imgequipment,
             spaceId: space,
             typesEquipmentId: typesequipmentid,
-            userId: req.session.userId
+            userId: req.session.userId,
+            num_Inventory:stock,
         });
         res.status(201).json(respuesta);
     } catch (error) {
@@ -299,7 +302,7 @@ export const UpdateEquiment = async (req, res) => {
         }
     });
     if (!product) return res.status(404).json({msg: "Datos no encontrados"});
-    const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid, spaceid} = req.body;
+    const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid, spaceid,stock} = req.body;
     try {
         await Equipment.update({
             Name: name,
@@ -311,6 +314,7 @@ export const UpdateEquiment = async (req, res) => {
             ImgEquipment: imgequipment,
             spaceId: spaceid,
             typesEquipmentId: typesequipmentid,
+            num_Inventory:stock,
         }, {
             where: {
                 Id: product.Id
@@ -350,7 +354,7 @@ export const Postsearchequipment = async (req, res) => {
 
     try {
         const response = await Equipment.findAll({
-            where: Sequelize.and(Sequelize.literal(`CONCAT(Equipment.Name, ' ', Equipment.Price, ' ', Equipment.Model, ' ', Equipment.Brand, ' ', Equipment.DateShoping, ' ', Equipment.Function) LIKE '%${search}%'`),),
+            where: Sequelize.and(Sequelize.literal(`CONCAT(Equipment.Name, ' ', Equipment.Price, ' ', Equipment.Model, ' ', Equipment.Brand, ' ', Equipment.DateShoping, ' ', Equipment.Function, ' ', Equipment.num_Inventory) LIKE '%${search}%'`),),
             include: [{
                 model: Space, include: [{
                     model: Area, include: [{

@@ -205,6 +205,8 @@ $(document).ready(function () {
                 required: true,
             }, img_new_equipment_name: {
                 required: true,
+            },num_stock_equipment_new:{
+                required: true,
             }
         }, errorElement: "span",
 
@@ -242,7 +244,9 @@ $(document).ready(function () {
                 required: true,
             }, img_update_equipment_name: {
                 required: true,
-            }
+            },num_stock_equipment_update:{
+            required: true,
+        }
         }, errorElement: "span",
 
         submitHandler: function () {
@@ -263,7 +267,7 @@ $(document).ready(function () {
         let Functionn = $("#fuction_new_equipment").val();
         let TypesEquipmentId = $("#input_new_equipment_types").val();
         let ImgEquipment = img_base64;
-
+        let num_stock= $("#input_new_equipment_num_stock").val();
         $.ajax({
             url: "/api/equipment", type: "post", data: {
                 name: Named,
@@ -274,7 +278,8 @@ $(document).ready(function () {
                 fuction: Functionn,
                 imgequipment: ImgEquipment,
                 classificationid: ClassificationId,
-                typesequipmentid: TypesEquipmentId
+                typesequipmentid: TypesEquipmentId,
+                stock:num_stock,
             }, success: function (respuesta) {
                 id_equipment = respuesta.Id
             }, error: function (error) {
@@ -296,6 +301,7 @@ $(document).ready(function () {
         let Functionn = $("#fuction_update_equipment").val();
         let TypesEquipmentId = $("#input_update_equipment_types").val();
         let ImgEquipment = img_base64;
+        let num_stock= $("#input_update_equipment_num_stock").val();
         $.ajax({
             url: "/api/equipment/" + indextemp, type: "patch", data: {
                 name: Named,
@@ -306,7 +312,8 @@ $(document).ready(function () {
                 fuction: Functionn,
                 imgequipment: ImgEquipment,
                 spaceid: spaceId,
-                typesequipmentid: TypesEquipmentId
+                typesequipmentid: TypesEquipmentId,
+                stock:num_stock,
             }, success: function (respuesta) {
             }, error: function (error) {
                 console.log(error)
@@ -544,7 +551,6 @@ $(document).ready(function () {
 
 
     $("#modal_create_equipment_details").click(function () {
-
         id_input_details.forEach(function (item) {
             var nuevoObjeto = {
                 "Id": item.Id,
@@ -605,7 +611,7 @@ function create_page() {
                              <br>
                              <label class='styles-cards-font'>Clasificación: ${item.typesEquipment.classification.Name}</label>
                              <br>
-                             <label class='styles-cards-font'>Categoria: ${item.typesEquipment.Name}</label>
+                             <label class='styles-cards-font'>Categoría: ${item.typesEquipment.Name}</label>
                              <br>
                              <label class='styles-cards-font'>Nombre: ${item.Name}</label>
                              <br>
@@ -722,7 +728,6 @@ function consult_equipment(action) {
 }
 
 function fill_inputup_date() {
-    console.log(array_equipment_update.space.area.floor.building.Id)
     $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
     $("#input_update_equipment_name").val(array_equipment_update.Name);
     $("#input_update_equipment_classification").val(array_equipment_update.typesEquipment.classificationId);
@@ -730,6 +735,7 @@ function fill_inputup_date() {
     $("#input_update_equipment_Model").val(array_equipment_update.Model);
     $("#input_update_equipment_brand").val(array_equipment_update.Brand);
     $("#input_update_users_price").val(array_equipment_update.Price);
+    $("#input_update_equipment_num_stock").val(array_equipment_update.num_Inventory);
     $('#input_update_equipment_campus').val(array_equipment_update.space.area.floor.building.campus.Id);
     $('#input_update_equipment_campus').trigger('change');
     setTimeout(function () {
@@ -749,7 +755,6 @@ function fill_inputup_date() {
     }, 250);
     setTimeout(function () {
         $("#input_update_equipment_space").val(array_equipment_update.spaceId);
-        console.log(array_equipment_update.spaceId)
     }, 290);
     $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
     $("#fuction_update_equipment").val(array_equipment_update.Function);
@@ -765,11 +770,12 @@ function fill_view_equipment() {
     let date = new Date(isoDateString);
     let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
     $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificación: ${array_equipment_update.typesEquipment.classification.Name}`);
-    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Tipo de equipo: ${array_equipment_update.typesEquipment.Name}`);
+    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Categoría: ${array_equipment_update.typesEquipment.Name}`);
     $("#view-equipment-Name").html(`<i class="fas fa-cog"></i> Nombre:  ${array_equipment_update.Name}`);
     $("#view-equipment-Model").html(`<i class="fas fa-cogs"></i> Modelo: ${array_equipment_update.Model}`);
     $("#view-equipment-Brand").html(`<i class="fa-brands fa-bandcamp"></i> Marca: ${array_equipment_update.Brand}`);
-    $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Funcion: ${array_equipment_update.Function}`);
+    $("#view-equipment-Stock").html(`<i class="fa-solid fa-barcode"></i> Numero de inventario: ${array_equipment_update.num_Inventory}`);
+    $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Función: ${array_equipment_update.Function}`);
     $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usuario</label>
     <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${array_equipment_update.user.Name} ${array_equipment_update.user.Lastname}</label>
     <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>`)
@@ -848,7 +854,7 @@ function detailsequipment(response) {
         var nuevoObjeto = {
             "Id": item.typesDetail.Id,
             "Name": item.typesDetail.Name.replace(/\s+/g, "-"),
-            "IdInput": "id_details_" + item.typesDetail.Name
+            "IdInput": "id_details_" + item.typesDetail.Name.replace(/\s+/g, "-")
         };
         id_input_details.push(nuevoObjeto);
     });
@@ -894,7 +900,7 @@ function viewdetailsequipment(id) {
                 imprimi += `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.typesDetail.Name}: ${item.Details}</label>`
             })
             $("#conteiner-equipment-view-details-equipment").html("")
-            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Detalles del equipo</label>` + imprimi)
+            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Parámetros del equipo</label>` + imprimi)
         }, error: function (error) {
             console.log(error)
         }

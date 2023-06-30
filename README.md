@@ -1,4 +1,4 @@
-# Proyecto Kevin Quiñones y Jhonsy Moreno
+# Proyecto Kevin Quiñones , Jhonsy Moreno y Andres Luna
 
 This template should help get you started developing with Vue 3 in Vite.
 
