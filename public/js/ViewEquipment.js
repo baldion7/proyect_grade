@@ -195,8 +195,6 @@ $(document).ready(function () {
                 required: true,
             }, price_equipment_new: {
                 required: true, minlength: 3, number: true, digits: true,
-            }, area_new_equipment: {
-                required: true,
             }, typesequipmente_new_equipment: {
                 required: true,
             }, date_shoping_new_equipment: {
@@ -207,7 +205,18 @@ $(document).ready(function () {
                 required: true,
             },num_stock_equipment_new:{
                 required: true,
-            }
+            },campus_new_equipment:{
+                required: true,
+            },building_new_equipment:{
+                required: true,
+            },floor_new_equipment:{
+                required: true,
+            },area_new_equipment:{
+                required: true,
+            },space_new_equipment:{
+                required: true,
+            },
+
         }, errorElement: "span",
 
         submitHandler: function () {
@@ -264,6 +273,7 @@ $(document).ready(function () {
         let Brand = $("#input_new_equipment_brand").val();
         let Price = $("#input_new_users_price").val();
         let DataShoping = $("#date_shoping_new_equipment").val();
+        let spaceId = $("#input_new_equipment_space").val();
         let Functionn = $("#fuction_new_equipment").val();
         let TypesEquipmentId = $("#input_new_equipment_types").val();
         let ImgEquipment = img_base64;
@@ -279,6 +289,7 @@ $(document).ready(function () {
                 imgequipment: ImgEquipment,
                 classificationid: ClassificationId,
                 typesequipmentid: TypesEquipmentId,
+                spaceid: spaceId,
                 stock:num_stock,
             }, success: function (respuesta) {
                 id_equipment = respuesta.Id
@@ -496,6 +507,25 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_campus").change(function () {
+        let imprimi = " ";
+        $.ajax({
+            url: "/api/building/campus/user", type: "get", success: function (response) {
+                response.forEach(function (opcion) {
+                    var opcions = opcion.campus.buildings;
+                    opcions.forEach(function (opciont) {
+                        imprimi += `<option value=${opciont.id}>${opciont.name}</option>`;
+                    })
+                });
+                $("#input_new_equipment_building").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_building").append(imprimi)
+
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
     $("#input_update_equipment_building").change(function () {
         let id = $("#input_update_equipment_building").val()
         $.ajax({
@@ -513,6 +543,23 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_building").change(function () {
+        let id = $("#input_new_equipment_building").val()
+        $.ajax({
+            url: "/api/floors/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+
+                    imprimi += `<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
+                });
+                $("#input_new_equipment_floor").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_floor").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
     $("#input_update_equipment_floor").change(function () {
         let id = $("#input_update_equipment_floor").val()
         $.ajax({
@@ -523,6 +570,22 @@ $(document).ready(function () {
                 });
                 $("#input_update_equipment_area").html(`<option selected disabled></option>`);
                 $("#input_update_equipment_area").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_new_equipment_floor").change(function () {
+        let id = $("#input_new_equipment_floor").val()
+        $.ajax({
+            url: "/api/area/floor/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Name}</option>`;
+                });
+                $("#input_new_equipment_area").html(`<option selected disabled></option>`);
+                $("#input_new_equipment_area").append(imprimi)
             }, error: function (error) {
                 console.log(error)
             }
@@ -549,6 +612,27 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_area").change(function () {
+        let TypesEquipmentId = $("#input_new_equipment_types").val();
+        let SpaceId = $("#input_new_equipment_area").val();
+        let id = $("#input_new_equipment_area").val();
+        let imprimi
+        $.ajax({
+            url: "/api/allowsclassifications/space/", type: "post", data: {
+                classificationid:TypesEquipmentId  ,
+                spaceid: SpaceId
+            }, success: function (response) {
+                const result = Array.from(new Set(response.map(item => item.space)));
+                result.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Location}</option>`;
+                });
+                $("#input_new_equipment_space").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_space").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
 
     $("#modal_create_equipment_details").click(function () {
         id_input_details.forEach(function (item) {
@@ -908,7 +992,6 @@ function viewdetailsequipment(id) {
     });
 }
 
-
 function newparts(num) {
     parts=[]
 
@@ -988,7 +1071,6 @@ function valueparts() {
 
     addparts();
 }
-
 
 function addparts() {
     value_parts.forEach(function (item) {

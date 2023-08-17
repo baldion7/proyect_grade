@@ -79,15 +79,15 @@
                 <div class="conteiner_form_div">
                     <div class="conteiner_form_module">
                         <div>
-                        <div class="user-img-profile">
-                            <div class="user-img-profile-icon" id="user_img_profile_icon-new">
-                                <i class="fas fa-file-image fa-1x"></i>
+                            <div class="user-img-profile">
+                                <div class="user-img-profile-icon" id="user_img_profile_icon-new">
+                                    <i class="fas fa-file-image fa-1x"></i>
+                                </div>
+                                <button id="btn_activate_modal_new_equipment_img myBtn" class="img-active-modal"
+                                        type="button" data-bs-toggle="modal"
+                                        data-bs-target="#modal_img_profile_container">
+                                    <i class="fa-solid fa-pencil"></i></button>
                             </div>
-                            <button id="btn_activate_modal_new_equipment_img myBtn" class="img-active-modal"
-                                    type="button" data-bs-toggle="modal"
-                                    data-bs-target="#modal_img_profile_container">
-                                <i class="fa-solid fa-pencil"></i></button>
-                        </div>
                             <input type="hidden"  id="input_img_new_equipment" name="img_new_equipment_name">
                         </div>
                         <div class="user-information">
@@ -135,12 +135,51 @@
                                        name="price_equipment_new" id="input_new_users_price" placeholder="Precio">
                                 <label for="input_new_users_price">Precio del equipo</label>
                             </div>
-                            <div class="form-floating mb-3">
+                            <div class="container-two-input-styles mb-3">
+                                <div class="form-floating styles_container_input_document_type">
+                                    <select class="form-select styles-font-input" name="campus_new_equipment"
+                                            id="input_new_equipment_campus">
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_new_equipment_campus">Sede de locacion del equipo</label>
+                                </div>
+                                <div class="form-floating styles_container_input_number_ducumnet">
                                     <input type="datetime-local" class="form-control styles-font-input"
                                            name="date_shoping_new_equipment" id="date_shoping_new_equipment" >
                                     <label for="date_shoping_new_equipment">Fecha de compra del equipo</label>
+                                </div>
                             </div>
-
+                            <div class="container-two-select-styles mb-3">
+                                <div class="form-floating styles_container_input_number_ducumnet">
+                                    <select class="form-select styles-font-input" name="building_new_equipment" id="input_new_equipment_building">
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_new_equipment_building">Edificio de locación del equipo</label>
+                                </div>
+                                <div class="form-floating styles_container_input_number_ducumnet">
+                                    <select class="form-select styles-font-input right" name="floor_new_equipment"
+                                            id="input_new_equipment_floor">
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_new_equipment_floor">Piso de locación del equipo</label>
+                                </div>
+                            </div>
+                            <div class="container-two-select-styles mb-3">
+                                <div class="form-floating styles_container_input_number_ducumnet">
+                                    <select class="form-select styles-font-input" name="area_new_equipment"
+                                            id="input_new_equipment_area">
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_new_equipment_area">Area de locación del equipo</label>
+                                </div>
+                                <div class="form-floating styles_container_input_number_ducumnet">
+                                    <select class="form-select styles-font-input right" name="space_new_equipment"
+                                            id="input_new_equipment_space">
+                                    </select>
+                                    <label class="form-control-placeholder"
+                                           for="input_new_equipment_space">Espacio de locación del equipo</label>
+                                </div>
+                            </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="fuction_new_equipment" name="fuction_new_equipment" style="height: 100px"></textarea>
                                 <label for="floatingTextarea2">Funcionamiento del equipo</label>
@@ -148,12 +187,12 @@
                         </div>
                     </div>
                 </div>
-                    <div>
-                        <div class="creator">
-                            <br/>
-                            <button type="submit" class="btn-save ">Continuar</button>
-                        </div>
+                <div>
+                    <div class="creator">
+                        <br/>
+                        <button type="submit" class="btn-save ">Continuar</button>
                     </div>
+                </div>
             </form>
             <form id="for_new_paremters">
                 <br />

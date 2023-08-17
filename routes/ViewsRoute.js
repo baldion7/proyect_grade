@@ -9,13 +9,13 @@ router.get('/login',LoginView,adminOnly);
 router.get('/',LoginView);
 router.get('/error',ErrorView)
 router.delete('/AtchUser',AtchUser);
-router.get('/usuarios',prueba)
-router.get('/equipment',EquipmentView)
-router.get('/campus',CampusView)
-router.post('/bulding',BuldingView)
-router.post('/typesequipment',TypesEquipmentView)
-router.post('/area',AreaView)
-router.get('/classification',ClassificationView)
-router.post('/space',SpaceView)
-router.get('/personnelresponsible',PersonnelResponsibleView)
+router.get('/usuarios',verifyUser,prueba)
+router.get('/equipment',verifyUser,EquipmentView)
+router.get('/campus',verifyUser,CampusView)
+router.post('/bulding',verifyUser,BuldingView)
+router.post('/typesequipment',verifyUser,TypesEquipmentView)
+router.post('/area',verifyUser,AreaView)
+router.get('/classification',verifyUser,ClassificationView)
+router.post('/space',verifyUser,SpaceView)
+router.get('/personnelresponsible',verifyUser,PersonnelResponsibleView)
 export default router;
