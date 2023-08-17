@@ -1,6 +1,6 @@
 import express from "express";
 import {verifyUser} from "../middleware/AuthUser.js";
-import {GetareafloorsById,Createarea,GetareaById,Updatearea,SearchArea} from "../controllers/Area.js"
+import {GetareafloorsById,Createarea,GetareaById,Updatearea,SearchArea,} from "../controllers/Area.js"
 const router = express.Router();
 router.get('/api/area/floor/:id',verifyUser,GetareafloorsById);
 router.get('/api/area/:id',verifyUser,GetareaById);

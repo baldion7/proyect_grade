@@ -4,10 +4,7 @@ import {User} from "../models/UserModel.js";
 export const GetClassification = async (req, res) => {
     try {
         const response = await Classification.findAll({
-           //include: {
-             //       model: User
-               // }
-
+         
         });
         res.status(200).json(response);
     } catch (error) {

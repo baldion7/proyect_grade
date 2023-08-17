@@ -20,6 +20,7 @@ import { User } from "../models/UserModel.js";
 import { Uts } from "../models/UtsModel.js";
 
 const db = new Sequelize("auth_db", "root", "", {
+    port:"3306",
     host: "localhost",
     dialect: "mysql",
     freezeTableName: true
@@ -111,13 +112,13 @@ db.TypesEquipment.hasMany(db.AllowsTypesDetails, {
 });
 
 db.AllowsTypesDetails.belongsTo(db.TypesEquipment);
-
+//borrar
 db.TypesEquipment.hasMany(db.TypesDetails,{
     onDelete: 'CASCADE'
 });
 
 db.TypesDetails.belongsTo(db.TypesEquipment);
-
+//
 db.TypesDetails.hasMany(db.AllowsTypesDetails, {
     onDelete: 'CASCADE'
 });

@@ -37,6 +37,10 @@ export class Equipment extends Model {
                 ImgEquipment:  {
                     type: DataTypes.TEXT('long'),
                     allowNull: false,
+                },
+                num_Inventory:{
+                    type: DataTypes.STRING,
+                    allowNull: false,
                 }
             },
             {

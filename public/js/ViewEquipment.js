@@ -195,8 +195,6 @@ $(document).ready(function () {
                 required: true,
             }, price_equipment_new: {
                 required: true, minlength: 3, number: true, digits: true,
-            }, area_new_equipment: {
-                required: true,
             }, typesequipmente_new_equipment: {
                 required: true,
             }, date_shoping_new_equipment: {
@@ -205,7 +203,20 @@ $(document).ready(function () {
                 required: true,
             }, img_new_equipment_name: {
                 required: true,
-            }
+            },num_stock_equipment_new:{
+                required: true,
+            },campus_new_equipment:{
+                required: true,
+            },building_new_equipment:{
+                required: true,
+            },floor_new_equipment:{
+                required: true,
+            },area_new_equipment:{
+                required: true,
+            },space_new_equipment:{
+                required: true,
+            },
+
         }, errorElement: "span",
 
         submitHandler: function () {
@@ -242,7 +253,9 @@ $(document).ready(function () {
                 required: true,
             }, img_update_equipment_name: {
                 required: true,
-            }
+            },num_stock_equipment_update:{
+            required: true,
+        }
         }, errorElement: "span",
 
         submitHandler: function () {
@@ -260,9 +273,11 @@ $(document).ready(function () {
         let Brand = $("#input_new_equipment_brand").val();
         let Price = $("#input_new_users_price").val();
         let DataShoping = $("#date_shoping_new_equipment").val();
+        let spaceId = $("#input_new_equipment_space").val();
         let Functionn = $("#fuction_new_equipment").val();
         let TypesEquipmentId = $("#input_new_equipment_types").val();
         let ImgEquipment = img_base64;
+        let num_stock= $("#input_new_equipment_num_stock").val();
         $.ajax({
             url: "/api/equipment", type: "post", data: {
                 name: Named,
@@ -273,7 +288,9 @@ $(document).ready(function () {
                 fuction: Functionn,
                 imgequipment: ImgEquipment,
                 classificationid: ClassificationId,
-                typesequipmentid: TypesEquipmentId
+                typesequipmentid: TypesEquipmentId,
+                spaceid: spaceId,
+                stock:num_stock,
             }, success: function (respuesta) {
                 id_equipment = respuesta.Id
             }, error: function (error) {
@@ -295,7 +312,7 @@ $(document).ready(function () {
         let Functionn = $("#fuction_update_equipment").val();
         let TypesEquipmentId = $("#input_update_equipment_types").val();
         let ImgEquipment = img_base64;
-
+        let num_stock= $("#input_update_equipment_num_stock").val();
         $.ajax({
             url: "/api/equipment/" + indextemp, type: "patch", data: {
                 name: Named,
@@ -306,7 +323,8 @@ $(document).ready(function () {
                 fuction: Functionn,
                 imgequipment: ImgEquipment,
                 spaceid: spaceId,
-                typesequipmentid: TypesEquipmentId
+                typesequipmentid: TypesEquipmentId,
+                stock:num_stock,
             }, success: function (respuesta) {
             }, error: function (error) {
                 console.log(error)
@@ -489,6 +507,25 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_campus").change(function () {
+        let imprimi = " ";
+        $.ajax({
+            url: "/api/building/campus/user", type: "get", success: function (response) {
+                response.forEach(function (opcion) {
+                    var opcions = opcion.campus.buildings;
+                    opcions.forEach(function (opciont) {
+                        imprimi += `<option value=${opciont.id}>${opciont.name}</option>`;
+                    })
+                });
+                $("#input_new_equipment_building").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_building").append(imprimi)
+
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
     $("#input_update_equipment_building").change(function () {
         let id = $("#input_update_equipment_building").val()
         $.ajax({
@@ -506,6 +543,23 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_building").change(function () {
+        let id = $("#input_new_equipment_building").val()
+        $.ajax({
+            url: "/api/floors/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+
+                    imprimi += `<option value=${opcion.Id}>${opcion.Floornumber}</option>`;
+                });
+                $("#input_new_equipment_floor").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_floor").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
     $("#input_update_equipment_floor").change(function () {
         let id = $("#input_update_equipment_floor").val()
         $.ajax({
@@ -516,6 +570,22 @@ $(document).ready(function () {
                 });
                 $("#input_update_equipment_area").html(`<option selected disabled></option>`);
                 $("#input_update_equipment_area").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
+
+    $("#input_new_equipment_floor").change(function () {
+        let id = $("#input_new_equipment_floor").val()
+        $.ajax({
+            url: "/api/area/floor/" + id, type: "get", success: function (response) {
+                let imprimi;
+                response.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Name}</option>`;
+                });
+                $("#input_new_equipment_area").html(`<option selected disabled></option>`);
+                $("#input_new_equipment_area").append(imprimi)
             }, error: function (error) {
                 console.log(error)
             }
@@ -542,9 +612,29 @@ $(document).ready(function () {
         });
     })
 
+    $("#input_new_equipment_area").change(function () {
+        let TypesEquipmentId = $("#input_new_equipment_types").val();
+        let SpaceId = $("#input_new_equipment_area").val();
+        let id = $("#input_new_equipment_area").val();
+        let imprimi
+        $.ajax({
+            url: "/api/allowsclassifications/space/", type: "post", data: {
+                classificationid:TypesEquipmentId  ,
+                spaceid: SpaceId
+            }, success: function (response) {
+                const result = Array.from(new Set(response.map(item => item.space)));
+                result.forEach(function (opcion) {
+                    imprimi += `<option value=${opcion.Id}>${opcion.Location}</option>`;
+                });
+                $("#input_new_equipment_space").html(`<option  selected disabled></option>`);
+                $("#input_new_equipment_space").append(imprimi)
+            }, error: function (error) {
+                console.log(error)
+            }
+        });
+    })
 
     $("#modal_create_equipment_details").click(function () {
-
         id_input_details.forEach(function (item) {
             var nuevoObjeto = {
                 "Id": item.Id,
@@ -603,9 +693,9 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'>Datos tecnicos</label>
                              <br>
-                             <label class='styles-cards-font'>Clasificacion: ${item.typesEquipment.classification.Name}</label>
+                             <label class='styles-cards-font'>Clasificación: ${item.typesEquipment.classification.Name}</label>
                              <br>
-                             <label class='styles-cards-font'>Categoria: ${item.typesEquipment.Name}</label>
+                             <label class='styles-cards-font'>Categoría: ${item.typesEquipment.Name}</label>
                              <br>
                              <label class='styles-cards-font'>Nombre: ${item.Name}</label>
                              <br>
@@ -622,15 +712,15 @@ function create_page() {
           <div>
           <label class='label-spna-font'>Ubicacion del equipo</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${item.space.area.floor.building.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> Regional: ${item.space.area.floor.building.campus.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> </i>Edificio: ${item.space.area.floor.building.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${item.space.area.floor.building.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-elevator"></i> </i>Piso: ${item.space.area.floor.Floornumber}</label>
+              <label class='styles-cards-font'><i class="fas fa-elevator"></i> Piso: ${item.space.area.floor.Floornumber}</label>
               <BR>
-               <label class='styles-cards-font'><i class="fas fa-map-marker"></i> </i>Area: ${item.space.area.Name}</label>
+               <label class='styles-cards-font'><i class="fas fa-map-marker"></i> Área: ${item.space.area.Name}</label>
                <BR>
-               <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${item.space.Location}</label>
+               <label class='styles-cards-font'><i class="fas fa-layer-group"></i> Espacio: ${item.space.Location}</label>
          </div>
      </div>
        <div id='user_data_rol' >
@@ -722,7 +812,6 @@ function consult_equipment(action) {
 }
 
 function fill_inputup_date() {
-    console.log(array_equipment_update.space.area.floor.building.Id)
     $("#user_img_profile_icon-update").html(`<img class="img_input_equiment_previous" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
     $("#input_update_equipment_name").val(array_equipment_update.Name);
     $("#input_update_equipment_classification").val(array_equipment_update.typesEquipment.classificationId);
@@ -730,6 +819,7 @@ function fill_inputup_date() {
     $("#input_update_equipment_Model").val(array_equipment_update.Model);
     $("#input_update_equipment_brand").val(array_equipment_update.Brand);
     $("#input_update_users_price").val(array_equipment_update.Price);
+    $("#input_update_equipment_num_stock").val(array_equipment_update.num_Inventory);
     $('#input_update_equipment_campus').val(array_equipment_update.space.area.floor.building.campus.Id);
     $('#input_update_equipment_campus').trigger('change');
     setTimeout(function () {
@@ -749,7 +839,6 @@ function fill_inputup_date() {
     }, 250);
     setTimeout(function () {
         $("#input_update_equipment_space").val(array_equipment_update.spaceId);
-        console.log(array_equipment_update.spaceId)
     }, 290);
     $("#date_shoping_update_equipment").val(array_equipment_update.DateShoping);
     $("#fuction_update_equipment").val(array_equipment_update.Function);
@@ -764,27 +853,28 @@ function fill_view_equipment() {
     let isoDateString = array_equipment_update.createdAt;
     let date = new Date(isoDateString);
     let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear().toString().slice(-2)}`;
-    $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificacion: ${array_equipment_update.typesEquipment.classification.Name}`);
-    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Typo de equipo: ${array_equipment_update.typesEquipment.Name}`);
+    $("#view-equipment-Clasification").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Clasificación: ${array_equipment_update.typesEquipment.classification.Name}`);
+    $("#view-equipment-TypesEquipment").html(`<i class="fa-solid fa-arrow-up-wide-short"></i> Categoría: ${array_equipment_update.typesEquipment.Name}`);
     $("#view-equipment-Name").html(`<i class="fas fa-cog"></i> Nombre:  ${array_equipment_update.Name}`);
     $("#view-equipment-Model").html(`<i class="fas fa-cogs"></i> Modelo: ${array_equipment_update.Model}`);
     $("#view-equipment-Brand").html(`<i class="fa-brands fa-bandcamp"></i> Marca: ${array_equipment_update.Brand}`);
-    $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Funcion: ${array_equipment_update.Function}`);
-    $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usario</label>
+    $("#view-equipment-Stock").html(`<i class="fa-solid fa-barcode"></i> Numero de inventario: ${array_equipment_update.num_Inventory}`);
+    $("#view-equipment-fuction").html(`<i class="fa-solid fa-screwdriver-wrench"></i> Función: ${array_equipment_update.Function}`);
+    $(".container-info-user-equipment").html(` <label class='label-spna-font'>Datos de ingreso por el usuario</label>
     <label class='styles-cards-font'><i class="fa-solid fa-user"></i> ${array_equipment_update.user.Name} ${array_equipment_update.user.Lastname}</label>
     <label class='styles-cards-font'><i class="fa-regular fa-calendar-plus"></i> ${formattedDate}</label>`)
     $("#equipment-img-profile").html(`<img class="img-view-equipment" src="data:image/png;base64,${array_equipment_update.ImgEquipment}" alt="">`)
-    $(".conatiner-info-user-equipmente-ubications").html(`<label class='label-spna-font'>Ubicacion del equipo</label>
+    $(".conatiner-info-user-equipmente-ubications").html(`<label class='label-spna-font'>Ubicación del equipo</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> </i>Sede: ${array_equipment_update.space.area.floor.building.campus.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building-columns"></i> Regional: ${array_equipment_update.space.area.floor.building.campus.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> </i>Edificio: ${array_equipment_update.space.area.floor.building.Name}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-building"></i> Edificio: ${array_equipment_update.space.area.floor.building.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-elevator"></i> </i>Piso: ${array_equipment_update.space.area.floor.Floornumber}</label>
+              <label class='styles-cards-font'><i class="fas fa-elevator"></i> Piso: ${array_equipment_update.space.area.floor.Floornumber}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-map-marker"></i> </i>Area: ${array_equipment_update.space.area.Name}</label>
+              <label class='styles-cards-font'><i class="fas fa-map-marker"></i> Área: ${array_equipment_update.space.area.Name}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fas fa-layer-group"></i> </i>Espacio: ${array_equipment_update.space.Location}</label>`)
+              <label class='styles-cards-font'><i class="fas fa-layer-group"></i> Espacio: ${array_equipment_update.space.Location}</label>`)
     viewdetailsequipment(array_equipment_update.Id)
     partsview(array_equipment_update.parts)
 
@@ -848,7 +938,7 @@ function detailsequipment(response) {
         var nuevoObjeto = {
             "Id": item.typesDetail.Id,
             "Name": item.typesDetail.Name.replace(/\s+/g, "-"),
-            "IdInput": "id_details_" + item.typesDetail.Name
+            "IdInput": "id_details_" + item.typesDetail.Name.replace(/\s+/g, "-")
         };
         id_input_details.push(nuevoObjeto);
     });
@@ -894,14 +984,13 @@ function viewdetailsequipment(id) {
                 imprimi += `<label class='styles-cards-font'><i class="fa-brands fa-searchengin"></i> ${item.typesDetail.Name}: ${item.Details}</label>`
             })
             $("#conteiner-equipment-view-details-equipment").html("")
-            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Detalles del equipo</label>` + imprimi)
+            $("#conteiner-equipment-view-details-equipment").append(`<label class='label-spna-font'>Parámetros del equipo</label>` + imprimi)
         }, error: function (error) {
             console.log(error)
         }
 
     });
 }
-
 
 function newparts(num) {
     parts=[]
@@ -982,7 +1071,6 @@ function valueparts() {
 
     addparts();
 }
-
 
 function addparts() {
     value_parts.forEach(function (item) {

@@ -96,8 +96,8 @@
                                 <div class="form-floating styles_container_input_document_type">
                                     <select class="form-select styles-font-input" name="document_user_new" id="input_new_users_document_type">
                                         <option value="1" id="input_new_users_rol" selected disabled></option>
-                                        <option value="C.C.">C.C. Cedula de ciudadanía</option>
-                                        <option value="C.E.">C.E. Cedula de extranjería</option>
+                                        <option value="C.C.">C.C. Cédula de ciudadanía</option>
+                                        <option value="C.E.">C.E. Cédula de extranjería</option>
                                     </select>
                                     <label class="form-control-placeholder" for="input_new_users_document_type">Tipo de
                                         documento</label>
@@ -114,7 +114,7 @@
                                         <option title="Argentina" value="54">Argentina (+54)</option>
                                         <option title="Ecuador" value="593">Ecuador (+593)</option>
                                         <option title="Chile" value="56">Chile (+56)</option>
-                                        <option title="Venezuela" value="58"> (+58)</option>
+                                        <option title="Venezuela" value="58">Venezuela (+58)</option>
                                         <option title="Uruguay" value="595">Uruguay (+595)</option>
                                         <option title="Paraguay" value="598">Paraguay (+598)</option>
                                         <option title="Brasil" value="55">Brasil (+55)</option>
@@ -136,7 +136,7 @@
                                     <option value="1" id="input_new_users_rol" selected disabled></option>
 
                                 </select>
-                                <label class="form-control-placeholder" for="input_new_users_campus">Sede de la universida </label>
+                                <label class="form-control-placeholder" for="input_new_users_campus">Sede de la universidad </label>
                                 </div>
                                 <div class="form-floating styles_container_input_phone_number">
                                     <input type="text" class="form-control styles-font-input" name="charge_user_new" id="input_new_users_charge" placeholder="Cargo">
@@ -188,7 +188,7 @@
         </div>
         <div  class="display_new" id="display_update_users">
             <button class="btn-back-to">VOLVER</button>
-            <form action="" method="post" id="form_update_users">
+            <form id="form_update_users">
                 <br/>
                 <br/>
                 <br/>
@@ -213,8 +213,8 @@
                             <div class="container-two-input-styles mb-3">
                                 <div class="form-floating styles_container_input_document_type">
                                     <select class="form-select styles-font-input" name="document_user_update" id="input_update_users_document_type">
-                                        <option value="C.C.">C.C. Cedula de ciudadanía</option>
-                                        <option value="C.E.">C.E. Cedula de extranjería</option>
+                                        <option value="C.C.">C.C. Cédula de ciudadanía</option>
+                                        <option value="C.E.">C.E. Cédula de extranjería</option>
                                     </select>
                                     <label class="form-control-placeholder" for="input_update_users_document_type">Tipo
                                         de documento</label>
@@ -252,7 +252,7 @@
                                             id="input_update_users_campus">
 
                                     </select>
-                                    <label class="form-control-placeholder" for="input_update_users_campus">Sede de la universida </label>
+                                    <label class="form-control-placeholder" for="input_update_users_campus">Sede de la universidad </label>
                                 </div>
                                 <div class="form-floating styles_container_input_phone_number">
                                     <input type="text" class="form-control styles-font-input" name="charge_user_update" id="input_update_users_charge" placeholder="Cargo">
@@ -267,7 +267,7 @@
                                 <div class="container-choose-role">
                                     <div class="d-flex justify-content-between">
                                         <label class="titles_on_view">Asignar roles</label>
-                                        <button class="btn-new-rol"><i class="fa-solid fa-plus fa-1x"></i> Nuevo
+                                        <button type="button" class="btn-new-rol"><i class="fa-solid fa-plus fa-1x"></i> Nuevo
                                             Rol
                                         </button>
                                     </div>
@@ -289,7 +289,7 @@
                 </div>
                     <div class="creator">
                         <div>
-                            <button type="submit" class="btn-save ">Actualizar Usuario</button>
+                            <button type="submit" class="btn-save " id="submit-update-user">Actualizar Usuario</button>
                         </div>
                     </div>
             </form>
@@ -364,9 +364,9 @@
                         <div class="color_degraded">
                             <i class="fas fa-plus fa-8x"></i>
                         </div>
-                        <label for="">¿Estas seguro/a?</label>
+                        <label for="">¿Estás seguro/a?</label>
                         <div class="container-finish-modal">
-                            <label>¿Estas seguro que deseas crear este nuevo usuario?</label>
+                            <label>¿Estás seguro/a que deseas crear este nuevo usuario?</label>
                         </div>
                     </div>
                     <div id="btn-close-modal">
@@ -385,9 +385,9 @@
                         <div class="color_degraded">
                             <i class="fas fa-trash-alt fa-8x"></i>
                         </div>
-                        <label for="">¿Estas seguro/a?</label>
+                        <label for="">¿Estás seguro/a?</label>
                         <div class="container-finish-modal">
-                            <label>¿Estas seguro/a que deseas eliminar este usuario?</label>
+                            <label>¿Estás seguro/a que deseas eliminar este usuario?</label>
                         </div>
                     </div>
                     <div id="btn-close-modal">
@@ -408,7 +408,7 @@
                         </div>
                         <label for="">¿Terminaste tu edición?</label>
                         <div class="container-finish-modal">
-                            <label>¿Estas seguro/a que deseas guardar los cambios realizados sobre este usuario?</label>
+                            <label>¿Estás seguro/a que deseas guardar los cambios realizados sobre este usuario?</label>
                         </div>
                     </div>
                     <div id="btn-close-modal">

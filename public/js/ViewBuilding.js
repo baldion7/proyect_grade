@@ -368,7 +368,7 @@ function create_page() {
       </div>
       <div id='user_data_personal_staff' >
           <div>
-              <label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrucion: <br>${formattedDatea}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrición: <br>${formattedDatea}</label>
               <BR>
               <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${item.Description}</label>
           </div>
@@ -398,7 +398,7 @@ function create_page() {
                       <a data-index="${item.Id}"class='ps-new-floor-btn cursor-pointer-styles'>
                       <i class="fa-solid fa-plus"></i> Agregar piso</a>
                       <a data-index="${item.Id}" data-name="${item.Name}" class='ps-area-btn  cursor-pointer-styles'>
-                      <i class="fa-solid fa-location-dot"></i> Revisar areas</a>
+                      <i class="fa-solid fa-location-dot"></i> Revisar áreas</a>
                       
               </div>
           </div>
@@ -481,7 +481,7 @@ function fill_view_building() {
     $("#view-campus-name").html(array_building_update.Name);
     $("#view-campus-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${array_building_update.Address} </label>`);
     $("#view-campus-phone").html(` <label class='styles-cards-font'><i class="fa-solid fa-file"></i> ${array_building_update.Description}</label>`);
-    $("#view-campus-email").html(`<label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrucion: <br>${formattedDatea}</label>`);
+    $("#view-campus-email").html(`<label class='styles-cards-font'><i class="fa-solid fa-calendar-days"></i> Fecha de contrición: <br>${formattedDatea}</label>`);
 
     let ruta = array_building_update.floors
     $(".roles-view-name").html(" ")

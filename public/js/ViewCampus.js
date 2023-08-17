@@ -314,7 +314,7 @@ function create_page() {
                       <label class='label-spna-font'>
                           <label class='label-spna-font'><i class="fa-solid fa-building-columns"></i> ${item.Name}</label>
                           <BR>
-                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${item.Address} </label>
+                             <label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirección: ${item.Address} </label>
                       <br>
                   </div>
               </div>
@@ -324,9 +324,9 @@ function create_page() {
           <div>
               <label class='styles-cards-font'><i class="fa-solid fa-clock fa-spin-pulse"></i> ${item.Schedules}</label>
               <BR>
-              <label class='styles-cards-font'><i class="fa-solid fa-envelope" ></i>  ${item.Email}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-envelope" ></i> ${item.Email}</label>
               <br>
-              <label class='styles-cards-font'><i class="fa-solid fa-mobile-screen icon-movilc-ampus" ></i>${item.Phone}</label>
+              <label class='styles-cards-font'><i class="fa-solid fa-mobile-screen icon-movilc-ampus" ></i> ${item.Phone}</label>
           </div>
       </div>
       <div id='user_data_rol' >
@@ -428,7 +428,7 @@ function deletecampus() {
 function fill_view_campus() {
 
     $("#view-campus-name").html(array_campus_update.Name);
-    $("#view-campus-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirrecion: ${array_campus_update.Address} </label>`);
+    $("#view-campus-Address").html(`<label class='styles-cards-font'> <i class="fa-solid fa-location-dot"></i> Dirección: ${array_campus_update.Address} </label>`);
     $("#view-campus-phone").html(`<i class="fa-solid fa-mobile-screen" id="campus_data_personal_staff_icon_mobil"></i> ${array_campus_update.Phone}`);
     $("#view-campus-email").html(`<i class="fa-solid fa-envelope" id="campus_data_personal_staff_icon_envelope"></i> ${array_campus_update.Email}`);
     $("#view-campus-Schedules").html(`<i class="fa-solid fa-clock fa-spin-pulse" id="campus_data_personal_staff_icon_envelope"></i> ${array_campus_update.Schedules}`);

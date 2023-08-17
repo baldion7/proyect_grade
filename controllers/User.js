@@ -28,6 +28,9 @@ export const GetUserByid = async (req, res) => {
         const response = await User.findOne({
             where: {
                 Id: req.params.id
+            },
+            include:{
+                model:Role
             }
         });
         res.status(200).json(response);
@@ -52,19 +55,29 @@ export const GetUserByemail = async (req, res) => {
     }
 };
 
-export const Postsearchuser = async (req, res) => {
-    const {search} = req.body;
+export const searchUser = async (req, res) => {
+    const { search } = req.body;
     try {
         const response = await User.findAll({
             where: Sequelize.and(
-                Sequelize.literal(`CONCAT(Name, ' ', Lastname,' ',Phone,' ',Country,' ',Yypedocument,' ',Document,' ',burden,' ',email) LIKE '%${search}%'`)
-            )
+                Sequelize.literal(`CONCAT(User.Name, ' ', User.Lastname, ' ', User.Phone, ' ', User.Country, ' ', User.Typedocument, ' ', User.Document, ' ', User.burden, ' ', User.email) LIKE '%${search}%'`)
+            ),
+            include: [
+                {
+                    model: Role,
+                },
+                {
+                    model: Campus,
+                },
+            ],
         });
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({msg: error.message});
+        res.status(500).json({ msg: error.message });
     }
 };
+
+
 
 export const CreateUser = async (req, res) => {
     const {name, lastname, document_type,ducument,country, phone_number,email,charge,campus, rol,password} = req.body;
