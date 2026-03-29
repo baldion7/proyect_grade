@@ -112,18 +112,18 @@ nav {
     height: 100vh;
 }
 
-#cogs {
-    align-items: center;
-    justify-content: center;
-    padding-left: 0.938rem;
-    border: transparent;
-    background-color: transparent;
-}
+    #cogs {
+        align-items: center;
+        justify-content: center;
+        padding-left: 0.938rem;
+        border: transparent;
+        background-color: transparent;
+    }
 
-#cogs i {
-    color: #023F87;
-    font-size: 2rem;
-}
+    #cogs i {
+        color: #023F87;
+        font-size: 2rem;
+    }
 
 #div_user i {
     padding-right: 0.625rem;

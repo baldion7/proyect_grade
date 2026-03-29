@@ -221,62 +221,7 @@ export const CreateEq = async (req, res) => {
 
 export const CreateEquiment = async (req, res) => {
     try {
-        const bodega = await User.findOne({
-            where: {
-                Id: req.session.userId
-            },
-            include: [
-                {
-                    model: Campus,
-                    include: {
-                        model: Building,
-                        include: {
-                            model: Floor,
-                            include: [
-                                {
-                                    model: Area,
-                                    include: [
-                                        {
-                                            model: TypesArea,
-                                            where: {
-                                                [Op.or]: [
-                                                    {Name: {[Op.like]: '%bodega%'}},
-                                                    {Name: {[Op.like]: '%Bodega%'}},
-                                                    {Name: {[Op.like]: '%BODEGA%'}},
-                                                    {Name: {[Op.like]: '%Almacen%'}},
-                                                    {Name: {[Op.like]: '%almacen%'}},
-                                                    {Name: {[Op.like]: '%ALMACEN%'}}
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            model: Space,
-                                            include: {
-                                                model: TypesSpace,
-                                                where: {
-                                                    [Op.or]: [
-                                                        {Name: {[Op.like]: '%bodega%'}},
-                                                        {Name: {[Op.like]: '%Bodega%'}},
-                                                        {Name: {[Op.like]: '%BODEGA%'}},
-                                                        {Name: {[Op.like]: '%Almacen%'}},
-                                                        {Name: {[Op.like]: '%almacen%'}},
-                                                        {Name: {[Op.like]: '%ALMACEN%'}}
-                                                    ]
-                                                },
-                                            }
-                                        }
-
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                }
-            ]
-        });
-        var spaces = extractAttributes(bodega)
-        var space = spaces[0].Id
-        const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid,stock} = req.body;
+        const {name, price, model, brand, imgequipment, fuction, datashoping, typesequipmentid,stock,spaceid} = req.body;
         const respuesta = await Equipment.create({
             Name: name,
             Price: price,
@@ -285,7 +230,7 @@ export const CreateEquiment = async (req, res) => {
             DateShoping: datashoping,
             Function: fuction,
             ImgEquipment: imgequipment,
-            spaceId: space,
+            spaceId: spaceid,
             typesEquipmentId: typesequipmentid,
             userId: req.session.userId,
             num_Inventory:stock,

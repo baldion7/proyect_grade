@@ -55,6 +55,10 @@ app.use(cors({
     credentials:true,
     origins: 'http://localhost:5000'
 }));
+app.use(cors({
+    credentials:true,
+    origins: 'http://localhost:5173'
+}));
 app.use(bodyParser.json({ limit: '5gb' }));
 app.use(bodyParser.urlencoded({ limit: '5gb', extended: true }));
 app.use(AllowsTypesDetails)
